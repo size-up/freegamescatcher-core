@@ -1,8 +1,13 @@
-console.log("project started");
+import { readFileSync } from "fs";
 
-function funtest(params: string) {
-    const foo = { ok:"nope",arg:params };
-    return foo;
-}
+import packageJson from "../package.json";
 
-console.log(funtest("muphin"));
+const banner = readFileSync("assets/banner.txt", { encoding: "utf8" });
+
+console.log(banner);
+console.log(`Version: [${packageJson.version}]\n`);
+console.log(`${packageJson.description}\n`);
+
+setInterval(() => {
+    console.log(`${packageJson.displayName} is running.`);
+}, 5_000);
