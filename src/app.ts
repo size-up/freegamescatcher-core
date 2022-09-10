@@ -10,4 +10,4 @@ console.log(`${packageJson.description}\n`);
 
 setInterval(() => {
     console.log(`${packageJson.displayName} is running.`);
-}, 5_000);
+}, 10_000); // print this message each 10 secondes.
