@@ -9,6 +9,9 @@ on:
   pull_request:
     branches: ["main"]
 
+env:
+  APPLICATION_NAME: "freegamescatcher"
+
 jobs:
   build:
     name: ⚙️ Build application
@@ -96,9 +99,6 @@ jobs:
 
     needs: release
 
-    env:
-      APPLICATION_NAME: "freegamescatcher"
-
     steps:
       - name: 📥 Checkout repository
         uses: actions/checkout@v3
@@ -135,3 +135,27 @@ jobs:
           platforms: linux/amd64,linux/arm64
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/${{ env.APPLICATION_NAME }}:${{ needs.release.outputs.version }}
+
+  deploy:
+    name: 📲 Deploy production
+
+    runs-on: ubuntu-latest
+
+    needs: [release, push]
+
+    if: ${{ needs.release.outputs.version }} # deploy only if there is a new published version
+
+    steps:
+      - name: ⚙️ Set tag image
+        uses: actions-hub/kubectl@master
+        env:
+          KUBE_CONFIG: ${{ secrets.OCI_KUBE_CONFIG }}
+        with:
+          args: set image -n ${{ env.APPLICATION_NAME }} deployment/${{ env.APPLICATION_NAME }}-prod ${{ env.APPLICATION_NAME }}-prod=${{ secrets.DOCKERHUB_USERNAME }}/${{ env.APPLICATION_NAME }}:${{ needs.release.outputs.version }}
+
+      - name: 📲 Deploy production
+        uses: actions-hub/kubectl@master
+        env:
+          KUBE_CONFIG: ${{ secrets.OCI_KUBE_CONFIG }}
+        with:
+          args: rollout -n ${{ env.APPLICATION_NAME }} restart deployment ${{ env.APPLICATION_NAME }}-prod
