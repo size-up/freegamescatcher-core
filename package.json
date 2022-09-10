@@ -1,0 +1,45 @@
+{
+  "name": "freegamescatcher",
+  "version": "1.0.0",
+  "description": "This program will run every week to catch free epic games and send notification by email to followers.",
+  "main": "app.ts",
+  "scripts": {
+    "start": "tsc --build && node ./dist/src/app.js",
+    "dev": "nodemon",
+    "build": "tsc --build",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": {
+    "name": "Size Up",
+    "email": "noreply@anthonypillot.com",
+    "url": "https://sizeup.eu.com"
+  },
+  "contributors": [
+    {
+      "name": "Francisco Fernandez",
+      "email": "francisco59553@gmail.com",
+      "url": "https://francisco-fernandez.fr"
+    },
+    {
+      "name": "Anthony Pillot",
+      "email": "pillot.anthony@gmail.com",
+      "url": "https://anthonypillot.com"
+    }
+  ],
+  "license": "ISC",
+  "devDependencies": {
+    "@types/express": "^4.17.13",
+    "@types/node": "^18.7.14",
+    "@typescript-eslint/eslint-plugin": "^5.36.0",
+    "@typescript-eslint/parser": "^5.36.0",
+    "eslint": "^8.23.0",
+    "eslint-config-prettier": "^8.5.0",
+    "nodemon": "^2.0.19",
+    "ts-node": "^10.9.1",
+    "typescript": "^4.8.2"
+  },
+  "dependencies": {
+    "express": "^4.18.1"
+  }
+}
