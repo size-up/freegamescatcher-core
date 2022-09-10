@@ -23,7 +23,6 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: lts/*
-          cache: "yarn"
 
       - name: 🗂 Cache "node_modules"
         uses: actions/cache@v3
@@ -35,13 +34,13 @@ jobs:
             ${{ runner.arch }}-${{ runner.os }}-yarn-
 
       - name: ⬇️ Install dependencies
-        if: ${{ steps.yarn-cache.outputs.cache-hit == 'false' }}
+        if: steps.yarn-cache.outputs.cache-hit == 'false'
         run: yarn install --frozen-lockfile
 
       - name: ⚙️ Build application
         run: yarn run build
 
-      - if: ${{ steps.yarn-cache.outputs.cache-hit == 'false' }}
+      - if: steps.yarn-cache.outputs.cache-hit == 'false'
         name: 🗃 List the state of node modules
         continue-on-error: true
         run: yarn list
@@ -61,7 +60,6 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: lts/*
-          cache: "yarn"
 
       - name: 🗂 Cache "node_modules"
         uses: actions/cache@v3
