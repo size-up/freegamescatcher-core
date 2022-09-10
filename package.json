@@ -1,12 +1,16 @@
 {
   "name": "freegamescatcher",
+  "displayName": "Free Games Catcher",
   "version": "1.0.0",
-  "description": "This program will run every week to catch free epic games and send notification by email to followers.",
+  "description": "Free Games Catcher is an application that aims to search for game sites, trigger an alert and send it to users to notify them when a free game is available.",
   "main": "app.ts",
   "scripts": {
-    "start": "tsc --build && node ./dist/src/app.js",
+    "clean": "rm -rf ./build",
+    "build": "yarn clean && yarn copy-assets && tsc --build",
+    "start": "yarn build && node ./build/src/app.js",
+    "start:prod": "node ./build/src/app.js",
     "dev": "nodemon",
-    "build": "tsc --build",
+    "copy-assets": "cp -r ./assets/ ./build/",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],

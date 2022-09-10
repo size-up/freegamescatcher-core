@@ -1,18 +1,18 @@
 {
-	"compilerOptions": {
-		"experimentalDecorators": true,
-		"target": "es2016",
-		"lib": ["ES6"],
-		"module": "commonjs",
-		"rootDir": "./",
-		"resolveJsonModule": true,
-		"allowJs": true,
-		"outDir": "./dist",
-		"esModuleInterop": true,
-		"forceConsistentCasingInFileNames": true,
-		"strict": true,
-		"noImplicitAny": true,
-		"noImplicitThis": false,
-		"skipLibCheck": true
-	}
+  "compilerOptions": {
+    "experimentalDecorators": true,
+    "target": "es2016",
+    "lib": ["ES6"],
+    "module": "commonjs",
+    "rootDir": "./",
+    "resolveJsonModule": true,
+    "allowJs": true,
+    "outDir": "./build",
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "strict": true,
+    "noImplicitAny": true,
+    "noImplicitThis": false,
+    "skipLibCheck": true
+  }
 }
