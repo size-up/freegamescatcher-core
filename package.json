@@ -6,12 +6,12 @@
   "main": "app.ts",
   "scripts": {
     "clean": "rm -rf ./build",
-    "build": "yarn clean && yarn copy-assets && tsc --build",
+    "build": "yarn clean && tsc --build && yarn copy-assets",
     "start": "yarn build && node ./build/src/app.js",
     "start:prod": "node ./build/src/app.js",
     "dev": "nodemon",
     "release": "semantic-release",
-    "copy-assets": "cp -r ./assets/ ./build/",
+    "copy-assets": "cp -r ./src/assets/ ./build/src/assets/",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
