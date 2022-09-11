@@ -1,4 +1,6 @@
-# Free Games Catcher
+# 🎮 Free Games Catcher
+
+[![CI/CD and release](https://github.com/size-up/freegamescatcher/actions/workflows/onPushMainPrMain.yaml/badge.svg)](https://github.com/size-up/freegamescatcher/actions/workflows/onPushMainPrMain.yaml)
 
 Free Games Catcher is an application that aims to search for game sites, trigger an alert and send it to users to notify them when a free game is available.
 
@@ -29,5 +31,5 @@ This command generates static content into the `build` directory and can be serv
 ## Start built application
 
 ```
-yarn run build
+yarn run start
 ```

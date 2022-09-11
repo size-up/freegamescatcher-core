@@ -137,7 +137,7 @@ jobs:
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/${{ env.APPLICATION_NAME }}:${{ needs.release.outputs.version }}
 
   deploy:
-    name: 📲 Deploy production
+    name: 📲 Deploy to production
 
     runs-on: ubuntu-latest
 
