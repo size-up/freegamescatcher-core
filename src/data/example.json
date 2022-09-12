@@ -1,0 +1,1501 @@
+{
+  "data": {
+    "Catalog": {
+      "searchStore": {
+        "elements": [
+          {
+            "title": "Hundred Days - Simulation viticole",
+            "id": "141eee80fbe041d48e16e7b998829295",
+            "namespace": "4d8b727a49144090b103f6b6ba471e71",
+            "description": "La vinification pourrait être votre plus grande aventure. Produisez le meilleur vin en interagissant avec le sol et la nature et élevez votre vignoble jusqu'au sommet. Votre beau voyage dans la tradition viticole commence maintenant.",
+            "effectiveDate": "2021-05-13T14:00:00.000Z",
+            "offerType": "BASE_GAME",
+            "expiryDate": null,
+            "status": "ACTIVE",
+            "isCodeRedemptionOnly": false,
+            "keyImages": [
+              {
+                "type": "OfferImageWide",
+                "url": "https://cdn1.epicgames.com/4d8b727a49144090b103f6b6ba471e71/offer/EGS_HundredDaysWinemakingSimulatorDEMO_BrokenArmsGames_Demo_G1C_00-1920x1080-0ffeb0645f0badb615627b481b4a913e.jpg"
+              },
+              {
+                "type": "OfferImageTall",
+                "url": "https://cdn1.epicgames.com/4d8b727a49144090b103f6b6ba471e71/offer/EGS_HundredDaysWinemakingSimulatorDEMO_BrokenArmsGames_Demo_S2-1200x1600-35531ec1fa868e3876fac76471a24017.jpg"
+              },
+              {
+                "type": "Thumbnail",
+                "url": "https://cdn1.epicgames.com/4d8b727a49144090b103f6b6ba471e71/offer/EGS_HundredDaysWinemakingSimulatorDEMO_BrokenArmsGames_Demo_S2-1200x1600-35531ec1fa868e3876fac76471a24017.jpg"
+              },
+              {
+                "type": "CodeRedemption_340x440",
+                "url": "https://cdn1.epicgames.com/4d8b727a49144090b103f6b6ba471e71/offer/EGS_HundredDaysWinemakingSimulatorDEMO_BrokenArmsGames_Demo_S2-1200x1600-35531ec1fa868e3876fac76471a24017.jpg"
+              },
+              {
+                "type": "DieselStoreFrontWide",
+                "url": "https://cdn1.epicgames.com/4d8b727a49144090b103f6b6ba471e71/offer/EGS_HundredDaysWinemakingSimulatorDEMO_BrokenArmsGames_Demo_S1-2560x1440-8f0dd95b6027cd1243361d430b3bf552.jpg"
+              },
+              {
+                "type": "DieselStoreFrontTall",
+                "url": "https://cdn1.epicgames.com/4d8b727a49144090b103f6b6ba471e71/offer/EGS_HundredDaysWinemakingSimulatorDEMO_BrokenArmsGames_Demo_S2-1200x1600-35531ec1fa868e3876fac76471a24017.jpg"
+              }
+            ],
+            "seller": {
+              "id": "o-ty5rvlnsbgdnfffytsywat86gcedkm",
+              "name": "Broken Arms Games srls"
+            },
+            "productSlug": "hundred-days-winemaking-simulator",
+            "urlSlug": "hundred-days-winemaking-simulator",
+            "url": null,
+            "items": [
+              {
+                "id": "03cacb8754f243bfbc536c9dda0eb32e",
+                "namespace": "4d8b727a49144090b103f6b6ba471e71"
+              }
+            ],
+            "customAttributes": [
+              {
+                "key": "com.epicgames.app.blacklist",
+                "value": "[]"
+              },
+              {
+                "key": "developerName",
+                "value": "Broken Arms Games"
+              },
+              {
+                "key": "com.epicgames.app.productSlug",
+                "value": "hundred-days-winemaking-simulator"
+              }
+            ],
+            "categories": [
+              {
+                "path": "freegames"
+              },
+              {
+                "path": "games"
+              },
+              {
+                "path": "games/edition"
+              },
+              {
+                "path": "games/edition/base"
+              },
+              {
+                "path": "applications"
+              }
+            ],
+            "tags": [
+              {
+                "id": "19242"
+              },
+              {
+                "id": "9547"
+              },
+              {
+                "id": "16011"
+              },
+              {
+                "id": "1263"
+              },
+              {
+                "id": "15375"
+              },
+              {
+                "id": "18607"
+              },
+              {
+                "id": "1393"
+              },
+              {
+                "id": "16979"
+              },
+              {
+                "id": "17493"
+              },
+              {
+                "id": "18777"
+              },
+              {
+                "id": "1370"
+              },
+              {
+                "id": "18778"
+              },
+              {
+                "id": "1115"
+              },
+              {
+                "id": "10719"
+              }
+            ],
+            "catalogNs": {
+              "mappings": [
+                {
+                  "pageSlug": "hundred-days-winemaking-simulator",
+                  "pageType": "productHome"
+                }
+              ]
+            },
+            "offerMappings": [
+
+            ],
+            "price": {
+              "totalPrice": {
+                "discountPrice": 0,
+                "originalPrice": 1999,
+                "voucherDiscount": 0,
+                "discount": 1999,
+                "currencyCode": "EUR",
+                "currencyInfo": {
+                  "decimals": 2
+                },
+                "fmtPrice": {
+                  "originalPrice": "19,99 €",
+                  "discountPrice": "0",
+                  "intermediatePrice": "0"
+                }
+              },
+              "lineOffers": [
+                {
+                  "appliedRules": [
+                    {
+                      "id": "6125acb8161f4fd6a80f70feae84d0c4",
+                      "endDate": "2022-09-15T15:00:00.000Z",
+                      "discountSetting": {
+                        "discountType": "PERCENTAGE"
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            "promotions": {
+              "promotionalOffers": [
+                {
+                  "promotionalOffers": [
+                    {
+                      "startDate": "2022-09-08T15:00:00.000Z",
+                      "endDate": "2022-09-15T15:00:00.000Z",
+                      "discountSetting": {
+                        "discountType": "PERCENTAGE",
+                        "discountPercentage": 0
+                      }
+                    }
+                  ]
+                }
+              ],
+              "upcomingPromotionalOffers": [
+
+              ]
+            }
+          },
+          {
+            "title": "The Captain",
+            "id": "80fb2028e27b489988bcd2c242b8caf0",
+            "namespace": "301980d060324bb29202677f468c6c44",
+            "description": "Race back home across the galaxy.  Collect new friends.  Make new enemies.  You won't be able to save everyone.  Who will you leave behind?  Which civilizations will you save - or destroy - along the way?  The decisions are up to you.  You are... The Captain!",
+            "effectiveDate": "2021-12-03T17:00:00.000Z",
+            "offerType": "BASE_GAME",
+            "expiryDate": null,
+            "status": "ACTIVE",
+            "isCodeRedemptionOnly": false,
+            "keyImages": [
+              {
+                "type": "DieselStoreFrontWide",
+                "url": "https://cdn1.epicgames.com/salesEvent/salesEvent/EGS_TheCaptain_Sysiacgames_S1_2560x1440-b58c40c02e67f0e2317a62c4b51d5c9f"
+              },
+              {
+                "type": "DieselStoreFrontTall",
+                "url": "https://cdn1.epicgames.com/salesEvent/salesEvent/EGS_TheCaptain_Sysiacgames_S2_1200x1600-9cd565d837478e8e9015ccdd86f56f33"
+              },
+              {
+                "type": "OfferImageWide",
+                "url": "https://cdn1.epicgames.com/salesEvent/salesEvent/EGS_TheCaptain_Sysiacgames_S1_2560x1440-b58c40c02e67f0e2317a62c4b51d5c9f"
+              },
+              {
+                "type": "OfferImageTall",
+                "url": "https://cdn1.epicgames.com/salesEvent/salesEvent/EGS_TheCaptain_Sysiacgames_S2_1200x1600-9cd565d837478e8e9015ccdd86f56f33"
+              },
+              {
+                "type": "CodeRedemption_340x440",
+                "url": "https://cdn1.epicgames.com/salesEvent/salesEvent/EGS_TheCaptain_Sysiacgames_S2_1200x1600-9cd565d837478e8e9015ccdd86f56f33"
+              },
+              {
+                "type": "Thumbnail",
+                "url": "https://cdn1.epicgames.com/salesEvent/salesEvent/EGS_TheCaptain_Sysiacgames_S2_1200x1600-9cd565d837478e8e9015ccdd86f56f33"
+              }
+            ],
+            "seller": {
+              "id": "o-46fvj3lpt7r9n79axbrl8tkgfbe2j8",
+              "name": "Tomorrow Corporation"
+            },
+            "productSlug": "the-captain",
+            "urlSlug": "the-captain",
+            "url": null,
+            "items": [
+              {
+                "id": "ca7aad0a87b74799b6729441b71d6e25",
+                "namespace": "301980d060324bb29202677f468c6c44"
+              }
+            ],
+            "customAttributes": [
+              {
+                "key": "com.epicgames.app.blacklist",
+                "value": "[]"
+              },
+              {
+                "key": "com.epicgames.app.productSlug",
+                "value": "the-captain"
+              }
+            ],
+            "categories": [
+              {
+                "path": "freegames"
+              },
+              {
+                "path": "games"
+              },
+              {
+                "path": "games/edition"
+              },
+              {
+                "path": "games/edition/base"
+              },
+              {
+                "path": "applications"
+              }
+            ],
+            "tags": [
+              {
+                "id": "22485"
+              },
+              {
+                "id": "1370"
+              },
+              {
+                "id": "19242"
+              },
+              {
+                "id": "9547"
+              },
+              {
+                "id": "16011"
+              },
+              {
+                "id": "1117"
+              },
+              {
+                "id": "1263"
+              },
+              {
+                "id": "10719"
+              },
+              {
+                "id": "15375"
+              }
+            ],
+            "catalogNs": {
+              "mappings": [
+                {
+                  "pageSlug": "the-captain",
+                  "pageType": "productHome"
+                }
+              ]
+            },
+            "offerMappings": [
+
+            ],
+            "price": {
+              "totalPrice": {
+                "discountPrice": 1599,
+                "originalPrice": 1599,
+                "voucherDiscount": 0,
+                "discount": 0,
+                "currencyCode": "EUR",
+                "currencyInfo": {
+                  "decimals": 2
+                },
+                "fmtPrice": {
+                  "originalPrice": "15,99 €",
+                  "discountPrice": "15,99 €",
+                  "intermediatePrice": "15,99 €"
+                }
+              },
+              "lineOffers": [
+                {
+                  "appliedRules": [
+
+                  ]
+                }
+              ]
+            },
+            "promotions": {
+              "promotionalOffers": [
+
+              ],
+              "upcomingPromotionalOffers": [
+                {
+                  "promotionalOffers": [
+                    {
+                      "startDate": "2022-09-15T15:00:00.000Z",
+                      "endDate": "2022-09-22T15:00:00.000Z",
+                      "discountSetting": {
+                        "discountType": "PERCENTAGE",
+                        "discountPercentage": 0
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          {
+            "title": "Shadow of the Tomb Raider: Definitive Edition",
+            "id": "ee7f3c6725fd4fd4b8aeab8622cb770e",
+            "namespace": "4b5461ca8d1c488787b5200b420de066",
+            "description": "Prenez part au moment décisif où Lara Croft devient pilleuse de tombeaux. Dans Shadow of the Tomb Raider: Definitive Edition, vous découvrirez les derniers secrets des origines de Lara.",
+            "effectiveDate": "2021-12-30T16:00:00.000Z",
+            "offerType": "BASE_GAME",
+            "expiryDate": null,
+            "status": "ACTIVE",
+            "isCodeRedemptionOnly": false,
+            "keyImages": [
+              {
+                "type": "CodeRedemption_340x440",
+                "url": "https://cdn1.epicgames.com/offer/4b5461ca8d1c488787b5200b420de066/egs-shadowofthetombraiderdefinitiveedition-eidosmontralcrystaldynamicsnixxessoftware-s4-1200x1600-7ee40d6fa744_1200x1600-950cdb624cc75d04fe3c8c0b62ce98de"
+              },
+              {
+                "type": "OfferImageTall",
+                "url": "https://cdn1.epicgames.com/offer/4b5461ca8d1c488787b5200b420de066/egs-shadowofthetombraiderdefinitiveedition-eidosmontralcrystaldynamicsnixxessoftware-s4-1200x1600-7ee40d6fa744_1200x1600-950cdb624cc75d04fe3c8c0b62ce98de"
+              },
+              {
+                "type": "OfferImageWide",
+                "url": "https://cdn1.epicgames.com/offer/4b5461ca8d1c488787b5200b420de066/egs-shadowofthetombraiderdefinitiveedition-eidosmontralcrystaldynamicsnixxessoftware-s1-2560x1440-eca6506e95a1_2560x1440-193582a5fd76a593804e0171d6395cf4"
+              },
+              {
+                "type": "Thumbnail",
+                "url": "https://cdn1.epicgames.com/offer/4b5461ca8d1c488787b5200b420de066/egs-shadowofthetombraiderdefinitiveedition-eidosmontralcrystaldynamicsnixxessoftware-s4-1200x1600-7ee40d6fa744_1200x1600-950cdb624cc75d04fe3c8c0b62ce98de"
+              },
+              {
+                "type": "DieselStoreFrontTall",
+                "url": "https://cdn1.epicgames.com/offer/4b5461ca8d1c488787b5200b420de066/egs-shadowofthetombraiderdefinitiveedition-eidosmontralcrystaldynamicsnixxessoftware-s4-1200x1600-7ee40d6fa744_1200x1600-950cdb624cc75d04fe3c8c0b62ce98de"
+              },
+              {
+                "type": "DieselStoreFrontWide",
+                "url": "https://cdn1.epicgames.com/offer/4b5461ca8d1c488787b5200b420de066/egs-shadowofthetombraiderdefinitiveedition-eidosmontralcrystaldynamicsnixxessoftware-s1-2560x1440-eca6506e95a1_2560x1440-193582a5fd76a593804e0171d6395cf4"
+              }
+            ],
+            "seller": {
+              "id": "o-7petn7mrlk8g86ktqm7uglcr7lfaja",
+              "name": "Square Enix"
+            },
+            "productSlug": "shadow-of-the-tomb-raider",
+            "urlSlug": "shadow-of-the-tomb-raider",
+            "url": null,
+            "items": [
+              {
+                "id": "e7f90759e0544e42be9391d10a5c6000",
+                "namespace": "4b5461ca8d1c488787b5200b420de066"
+              }
+            ],
+            "customAttributes": [
+              {
+                "key": "com.epicgames.app.blacklist",
+                "value": "[]"
+              },
+              {
+                "key": "com.epicgames.app.productSlug",
+                "value": "shadow-of-the-tomb-raider"
+              }
+            ],
+            "categories": [
+              {
+                "path": "freegames"
+              },
+              {
+                "path": "games"
+              },
+              {
+                "path": "games/edition"
+              },
+              {
+                "path": "games/edition/base"
+              },
+              {
+                "path": "applications"
+              }
+            ],
+            "tags": [
+              {
+                "id": "1216"
+              },
+              {
+                "id": "21122"
+              },
+              {
+                "id": "1188"
+              },
+              {
+                "id": "21127"
+              },
+              {
+                "id": "9547"
+              },
+              {
+                "id": "20237"
+              },
+              {
+                "id": "9549"
+              },
+              {
+                "id": "21138"
+              },
+              {
+                "id": "21139"
+              },
+              {
+                "id": "21140"
+              },
+              {
+                "id": "21109"
+              },
+              {
+                "id": "21141"
+              },
+              {
+                "id": "22485"
+              },
+              {
+                "id": "1370"
+              },
+              {
+                "id": "21146"
+              },
+              {
+                "id": "1117"
+              },
+              {
+                "id": "21149"
+              },
+              {
+                "id": "21119"
+              }
+            ],
+            "catalogNs": {
+              "mappings": [
+                {
+                  "pageSlug": "shadow-of-the-tomb-raider",
+                  "pageType": "productHome"
+                }
+              ]
+            },
+            "offerMappings": [
+
+            ],
+            "price": {
+              "totalPrice": {
+                "discountPrice": 3999,
+                "originalPrice": 3999,
+                "voucherDiscount": 0,
+                "discount": 0,
+                "currencyCode": "EUR",
+                "currencyInfo": {
+                  "decimals": 2
+                },
+                "fmtPrice": {
+                  "originalPrice": "39,99 €",
+                  "discountPrice": "39,99 €",
+                  "intermediatePrice": "39,99 €"
+                }
+              },
+              "lineOffers": [
+                {
+                  "appliedRules": [
+
+                  ]
+                }
+              ]
+            },
+            "promotions": null
+          },
+          {
+            "title": "Spirit of the North",
+            "id": "4460a8fcdc3e4f48a11f3174656f8a96",
+            "namespace": "6098a8c7375c43458a22163a637c0c2f",
+            "description": "Spirit of the North is a single-player 3rd-person adventure game inspired by the breathtaking and mysterious landscapes of Iceland. The story takes root from various pieces of Nordic folklore.",
+            "effectiveDate": "2022-04-19T12:00:00.000Z",
+            "offerType": "BASE_GAME",
+            "expiryDate": null,
+            "status": "ACTIVE",
+            "isCodeRedemptionOnly": false,
+            "keyImages": [
+              {
+                "type": "OfferImageWide",
+                "url": "https://cdn1.epicgames.com/spt-assets/177dc72233934ac487abd83b01587086/spirit-of-the-north-offer-mznb7.jpg"
+              },
+              {
+                "type": "OfferImageTall",
+                "url": "https://cdn1.epicgames.com/spt-assets/177dc72233934ac487abd83b01587086/download-spirit-of-the-north-offer-wr44c.jpg"
+              },
+              {
+                "type": "Thumbnail",
+                "url": "https://cdn1.epicgames.com/spt-assets/177dc72233934ac487abd83b01587086/download-spirit-of-the-north-offer-wr44c.jpg"
+              }
+            ],
+            "seller": {
+              "id": "o-a48yz3k54qmrtbupltgrvubuprkf3x",
+              "name": "Merge Games"
+            },
+            "productSlug": null,
+            "urlSlug": "c9e146fa85d74402a2989001508ecd16",
+            "url": null,
+            "items": [
+              {
+                "id": "155422ed57f64c928c8f7a1f6a9a0936",
+                "namespace": "6098a8c7375c43458a22163a637c0c2f"
+              }
+            ],
+            "customAttributes": [
+              {
+                "key": "autoGeneratedPrice",
+                "value": "false"
+              }
+            ],
+            "categories": [
+              {
+                "path": "freegames"
+              },
+              {
+                "path": "games/edition/base"
+              },
+              {
+                "path": "games/edition"
+              },
+              {
+                "path": "games"
+              }
+            ],
+            "tags": [
+              {
+                "id": "1370"
+              },
+              {
+                "id": "9547"
+              },
+              {
+                "id": "16011"
+              },
+              {
+                "id": "1117"
+              }
+            ],
+            "catalogNs": {
+              "mappings": [
+                {
+                  "pageSlug": "spirit-of-the-north-f58a66",
+                  "pageType": "productHome"
+                }
+              ]
+            },
+            "offerMappings": [
+              {
+                "pageSlug": "spirit-of-the-north-f58a66",
+                "pageType": "productHome"
+              }
+            ],
+            "price": {
+              "totalPrice": {
+                "discountPrice": 1599,
+                "originalPrice": 1599,
+                "voucherDiscount": 0,
+                "discount": 0,
+                "currencyCode": "EUR",
+                "currencyInfo": {
+                  "decimals": 2
+                },
+                "fmtPrice": {
+                  "originalPrice": "15,99 €",
+                  "discountPrice": "15,99 €",
+                  "intermediatePrice": "15,99 €"
+                }
+              },
+              "lineOffers": [
+                {
+                  "appliedRules": [
+
+                  ]
+                }
+              ]
+            },
+            "promotions": {
+              "promotionalOffers": [
+
+              ],
+              "upcomingPromotionalOffers": [
+                {
+                  "promotionalOffers": [
+                    {
+                      "startDate": "2022-09-15T15:00:00.000Z",
+                      "endDate": "2022-09-22T15:00:00.000Z",
+                      "discountSetting": {
+                        "discountType": "PERCENTAGE",
+                        "discountPercentage": 0
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          {
+            "title": "Terraforming Mars",
+            "id": "f2496286331e405793d69807755b7b23",
+            "namespace": "25d726130e6c4fe68f88e71933bda955",
+            "description": "Dans Terraforming Mars, vous dirigez une corporation qui présente des caractéristiques particulières. Jouez des cartes Projet, renforcez la production, placez vos villes et vos espaces verts sur la carte, et disputez des récompenses et des objectifs !",
+            "effectiveDate": "2022-05-05T15:00:00.000Z",
+            "offerType": "BASE_GAME",
+            "expiryDate": null,
+            "status": "ACTIVE",
+            "isCodeRedemptionOnly": false,
+            "keyImages": [
+              {
+                "type": "OfferImageWide",
+                "url": "https://cdn1.epicgames.com/spt-assets/5199b206e46947ebad5e5c282e95776f/terraforming-mars-offer-1j70f.jpg"
+              },
+              {
+                "type": "OfferImageTall",
+                "url": "https://cdn1.epicgames.com/spt-assets/5199b206e46947ebad5e5c282e95776f/download-terraforming-mars-offer-13t2e.jpg"
+              },
+              {
+                "type": "Thumbnail",
+                "url": "https://cdn1.epicgames.com/spt-assets/5199b206e46947ebad5e5c282e95776f/download-terraforming-mars-offer-13t2e.jpg"
+              }
+            ],
+            "seller": {
+              "id": "o-4x4bpaww55p5g3f6xpyqe2cneqxd5d",
+              "name": "Asmodee"
+            },
+            "productSlug": null,
+            "urlSlug": "24cdfcde68bf4a7e8b8618ac2c0c460b",
+            "url": null,
+            "items": [
+              {
+                "id": "ee49486d7346465dba1f1dec85725aee",
+                "namespace": "25d726130e6c4fe68f88e71933bda955"
+              }
+            ],
+            "customAttributes": [
+              {
+                "key": "autoGeneratedPrice",
+                "value": "false"
+              },
+              {
+                "key": "isManuallySetPCReleaseDate",
+                "value": "true"
+              }
+            ],
+            "categories": [
+              {
+                "path": "freegames"
+              },
+              {
+                "path": "games/edition/base"
+              },
+              {
+                "path": "games/edition"
+              },
+              {
+                "path": "games"
+              }
+            ],
+            "tags": [
+              {
+                "id": "1188"
+              },
+              {
+                "id": "21125"
+              },
+              {
+                "id": "1386"
+              },
+              {
+                "id": "9547"
+              },
+              {
+                "id": "21138"
+              },
+              {
+                "id": "1203"
+              },
+              {
+                "id": "1299"
+              },
+              {
+                "id": "21139"
+              },
+              {
+                "id": "21140"
+              },
+              {
+                "id": "21141"
+              },
+              {
+                "id": "1370"
+              },
+              {
+                "id": "1115"
+              },
+              {
+                "id": "21148"
+              },
+              {
+                "id": "21149"
+              },
+              {
+                "id": "10719"
+              }
+            ],
+            "catalogNs": {
+              "mappings": [
+                {
+                  "pageSlug": "terraforming-mars-18c3ad",
+                  "pageType": "productHome"
+                }
+              ]
+            },
+            "offerMappings": [
+              {
+                "pageSlug": "terraforming-mars-18c3ad",
+                "pageType": "productHome"
+              }
+            ],
+            "price": {
+              "totalPrice": {
+                "discountPrice": 1999,
+                "originalPrice": 1999,
+                "voucherDiscount": 0,
+                "discount": 0,
+                "currencyCode": "EUR",
+                "currencyInfo": {
+                  "decimals": 2
+                },
+                "fmtPrice": {
+                  "originalPrice": "19,99 €",
+                  "discountPrice": "19,99 €",
+                  "intermediatePrice": "19,99 €"
+                }
+              },
+              "lineOffers": [
+                {
+                  "appliedRules": [
+
+                  ]
+                }
+              ]
+            },
+            "promotions": null
+          },
+          {
+            "title": "Car Mechanic Simulator 2018",
+            "id": "5eb27cf1747c40b5a0d4f5492774678d",
+            "namespace": "226306adde104c9092247dcd4bfa1499",
+            "description": "Build and expand your repair service empire in this incredibly detailed and highly realistic simulation game, where attention to car detail is astonishing. Find classic, unique cars in the new Barn Find module and Junkyard module.",
+            "effectiveDate": "2022-06-23T15:00:00.000Z",
+            "offerType": "BASE_GAME",
+            "expiryDate": null,
+            "status": "ACTIVE",
+            "isCodeRedemptionOnly": false,
+            "keyImages": [
+              {
+                "type": "OfferImageTall",
+                "url": "https://cdn1.epicgames.com/offer/226306adde104c9092247dcd4bfa1499/EGS_CarMechanicSimulator2018_RedDotGames_S2_1200x1600-f285924f9144353f57ac4631f0c689e6"
+              },
+              {
+                "type": "OfferImageWide",
+                "url": "https://cdn1.epicgames.com/offer/226306adde104c9092247dcd4bfa1499/EGS_CarMechanicSimulator2018_RedDotGames_S1_2560x1440-3489ef1499e64c168fdf4b14926d2c23"
+              },
+              {
+                "type": "Thumbnail",
+                "url": "https://cdn1.epicgames.com/offer/226306adde104c9092247dcd4bfa1499/EGS_CarMechanicSimulator2018_RedDotGames_S2_1200x1600-f285924f9144353f57ac4631f0c689e6"
+              }
+            ],
+            "seller": {
+              "id": "o-5n5cbrasl5yzexjc529rypg8eh8lfb",
+              "name": "PlayWay"
+            },
+            "productSlug": "car-mechanic-simulator-2018",
+            "urlSlug": "car-mechanic-simulator-2018",
+            "url": null,
+            "items": [
+              {
+                "id": "49a3a8597c4240ecaf1f9068106c9869",
+                "namespace": "226306adde104c9092247dcd4bfa1499"
+              }
+            ],
+            "customAttributes": [
+              {
+                "key": "com.epicgames.app.blacklist",
+                "value": "[]"
+              },
+              {
+                "key": "com.epicgames.app.productSlug",
+                "value": "car-mechanic-simulator-2018"
+              }
+            ],
+            "categories": [
+              {
+                "path": "freegames"
+              },
+              {
+                "path": "games"
+              },
+              {
+                "path": "games/edition"
+              },
+              {
+                "path": "games/edition/base"
+              },
+              {
+                "path": "applications"
+              }
+            ],
+            "tags": [
+              {
+                "id": "21120"
+              },
+              {
+                "id": "1188"
+              },
+              {
+                "id": "21127"
+              },
+              {
+                "id": "9547"
+              },
+              {
+                "id": "1393"
+              },
+              {
+                "id": "21138"
+              },
+              {
+                "id": "21139"
+              },
+              {
+                "id": "21140"
+              },
+              {
+                "id": "21141"
+              },
+              {
+                "id": "1370"
+              },
+              {
+                "id": "21146"
+              },
+              {
+                "id": "21148"
+              },
+              {
+                "id": "21149"
+              },
+              {
+                "id": "21119"
+              }
+            ],
+            "catalogNs": {
+              "mappings": [
+                {
+                  "pageSlug": "car-mechanic-simulator-2018",
+                  "pageType": "productHome"
+                }
+              ]
+            },
+            "offerMappings": [
+
+            ],
+            "price": {
+              "totalPrice": {
+                "discountPrice": 1599,
+                "originalPrice": 1599,
+                "voucherDiscount": 0,
+                "discount": 0,
+                "currencyCode": "EUR",
+                "currencyInfo": {
+                  "decimals": 2
+                },
+                "fmtPrice": {
+                  "originalPrice": "15,99 €",
+                  "discountPrice": "15,99 €",
+                  "intermediatePrice": "15,99 €"
+                }
+              },
+              "lineOffers": [
+                {
+                  "appliedRules": [
+
+                  ]
+                }
+              ]
+            },
+            "promotions": null
+          },
+          {
+            "title": "A Game Of Thrones: The Board Game Digital Edition",
+            "id": "a125d72a47a1490aba78c4e79a40395d",
+            "namespace": "1b737464d3c441f8956315433be02d3b",
+            "description": "A Game of Thrones: The Board Game est l'adaptation numérique du jeu de plateau stratégique à succès créé par Fantasy Flight Games.",
+            "effectiveDate": "2022-06-23T15:00:00.000Z",
+            "offerType": "BASE_GAME",
+            "expiryDate": null,
+            "status": "ACTIVE",
+            "isCodeRedemptionOnly": false,
+            "keyImages": [
+              {
+                "type": "OfferImageWide",
+                "url": "https://cdn1.epicgames.com/spt-assets/61c1413e3db0423f9ddd4a5edbee717e/a-game-of-thrones-offer-11gxu.jpg"
+              },
+              {
+                "type": "OfferImageTall",
+                "url": "https://cdn1.epicgames.com/spt-assets/61c1413e3db0423f9ddd4a5edbee717e/download-a-game-of-thrones-offer-1q8ei.jpg"
+              },
+              {
+                "type": "Thumbnail",
+                "url": "https://cdn1.epicgames.com/spt-assets/61c1413e3db0423f9ddd4a5edbee717e/download-a-game-of-thrones-offer-1q8ei.jpg"
+              }
+            ],
+            "seller": {
+              "id": "o-4x4bpaww55p5g3f6xpyqe2cneqxd5d",
+              "name": "Asmodee"
+            },
+            "productSlug": null,
+            "urlSlug": "ce6f7ab4edab4cc2aa7e0ff4c19540e2",
+            "url": null,
+            "items": [
+              {
+                "id": "dc6ae31efba7401fa72ed93f0bd37c6a",
+                "namespace": "1b737464d3c441f8956315433be02d3b"
+              }
+            ],
+            "customAttributes": [
+              {
+                "key": "autoGeneratedPrice",
+                "value": "false"
+              },
+              {
+                "key": "isManuallySetPCReleaseDate",
+                "value": "true"
+              }
+            ],
+            "categories": [
+              {
+                "path": "freegames"
+              },
+              {
+                "path": "games/edition/base"
+              },
+              {
+                "path": "games/edition"
+              },
+              {
+                "path": "games"
+              }
+            ],
+            "tags": [
+              {
+                "id": "21138"
+              },
+              {
+                "id": "1203"
+              },
+              {
+                "id": "1299"
+              },
+              {
+                "id": "21139"
+              },
+              {
+                "id": "1188"
+              },
+              {
+                "id": "21140"
+              },
+              {
+                "id": "21125"
+              },
+              {
+                "id": "21141"
+              },
+              {
+                "id": "1370"
+              },
+              {
+                "id": "1115"
+              },
+              {
+                "id": "9547"
+              },
+              {
+                "id": "21149"
+              }
+            ],
+            "catalogNs": {
+              "mappings": [
+                {
+                  "pageSlug": "a-game-of-thrones-5858a3",
+                  "pageType": "productHome"
+                }
+              ]
+            },
+            "offerMappings": [
+              {
+                "pageSlug": "a-game-of-thrones-5858a3",
+                "pageType": "productHome"
+              }
+            ],
+            "price": {
+              "totalPrice": {
+                "discountPrice": 1999,
+                "originalPrice": 1999,
+                "voucherDiscount": 0,
+                "discount": 0,
+                "currencyCode": "EUR",
+                "currencyInfo": {
+                  "decimals": 2
+                },
+                "fmtPrice": {
+                  "originalPrice": "19,99 €",
+                  "discountPrice": "19,99 €",
+                  "intermediatePrice": "19,99 €"
+                }
+              },
+              "lineOffers": [
+                {
+                  "appliedRules": [
+
+                  ]
+                }
+              ]
+            },
+            "promotions": null
+          },
+          {
+            "title": "Realm Royale Reforged - Pack de lancement Epic",
+            "id": "27e46df77139498889af4d0ee9ed7303",
+            "namespace": "5fcf6f3031c547f789e29c18b422ca67",
+            "description": "Realm Royale est de retour avec Realm Royale Reforged ! Profitez de ce pack exclusif Epic Games gratuit pour une durée limitée ! Le pack Epic déverrouille instantanément le skin Assassin Tranche-mort, le skin Poulet Volaille viking et la monture Nogard le dragon.",
+            "effectiveDate": "2022-09-08T15:00:00.000Z",
+            "offerType": "DLC",
+            "expiryDate": "2022-09-15T15:00:00.000Z",
+            "status": "ACTIVE",
+            "isCodeRedemptionOnly": false,
+            "keyImages": [
+              {
+                "type": "OfferImageTall",
+                "url": "https://cdn1.epicgames.com/offer/5fcf6f3031c547f789e29c18b422ca67/PortraitOfferIMG-1200x1600_1200x1600-593253571c16f4e9720a349ac11d9381"
+              },
+              {
+                "type": "OfferImageWide",
+                "url": "https://cdn1.epicgames.com/offer/5fcf6f3031c547f789e29c18b422ca67/LandscapeOfferIMG-2560x1440_2560x1440-fcac17efbfeba5298a67d3869d9f8dd0"
+              },
+              {
+                "type": "Thumbnail",
+                "url": "https://cdn1.epicgames.com/offer/5fcf6f3031c547f789e29c18b422ca67/PortraitOfferIMG-1200x1600_1200x1600-593253571c16f4e9720a349ac11d9381"
+              },
+              {
+                "type": "featuredMedia",
+                "url": "https://cdn1.epicgames.com/offer/5fcf6f3031c547f789e29c18b422ca67/RRR_EGS_HeroCarousel_1920x1080_french_1920x1080-3d0272abe9644dcbcbb39dd167c595b0"
+              },
+              {
+                "type": "featuredMedia",
+                "url": "https://cdn1.epicgames.com/offer/5fcf6f3031c547f789e29c18b422ca67/1920x1080_french_1920x1080-03d727fda049adf608f34432a2898b96"
+              },
+              {
+                "type": "ProductLogo",
+                "url": "https://cdn1.epicgames.com/offer/5fcf6f3031c547f789e29c18b422ca67/Logo_200x200_200x200-fa8a930c5bf76daf512774492faa9a3a"
+              },
+              {
+                "type": "featuredMedia",
+                "url": "https://cdn1.epicgames.com/offer/5fcf6f3031c547f789e29c18b422ca67/1Screenshot_envmounts_1920x1080_1920x1080-754f5b2132d7625f9f7374b74d0e41e8"
+              },
+              {
+                "type": "featuredMedia",
+                "url": "https://cdn1.epicgames.com/offer/5fcf6f3031c547f789e29c18b422ca67/2Screenshot_MageIceball_1920x1080_1920x1080-62df32d34ba28ee68c84e8f050c81cdf"
+              },
+              {
+                "type": "featuredMedia",
+                "url": "https://cdn1.epicgames.com/offer/5fcf6f3031c547f789e29c18b422ca67/3Screenshot_ChickenRunning_1920x1080_1920x1080-3e1cc3bacdd23a7ac3fbdefb14055882"
+              },
+              {
+                "type": "featuredMedia",
+                "url": "https://cdn1.epicgames.com/offer/5fcf6f3031c547f789e29c18b422ca67/4Screenshot_mount_1920x1080_1920x1080-801329d432336e463c1bd1102c7a5367"
+              },
+              {
+                "type": "featuredMedia",
+                "url": "https://cdn1.epicgames.com/offer/5fcf6f3031c547f789e29c18b422ca67/5Screenshot_MageOpeningChest_1920x1080_1920x1080-3ef6799468eb9ce4c216ae8ab372bc8e"
+              },
+              {
+                "type": "featuredMedia",
+                "url": "https://cdn1.epicgames.com/offer/5fcf6f3031c547f789e29c18b422ca67/6Screenshot_AssassinSpecialChest_1920x1080_1920x1080-11effcf881f4dcbb55687ea4575c8856"
+              },
+              {
+                "type": "featuredMedia",
+                "url": "https://cdn1.epicgames.com/offer/5fcf6f3031c547f789e29c18b422ca67/7Screenshot_WarriorForging_1920x1080_1920x1080-bf7ff4d4bf22f30868ff55c1390fb236"
+              },
+              {
+                "type": "featuredMedia",
+                "url": "https://cdn1.epicgames.com/offer/5fcf6f3031c547f789e29c18b422ca67/8Screenshot_TurretFight_1920x1080_1920x1080-4146664d757fc9c705722cbf850358da"
+              },
+              {
+                "type": "featuredMedia",
+                "url": "https://cdn1.epicgames.com/offer/5fcf6f3031c547f789e29c18b422ca67/9Screenshot_ShieldAbility_1920x1080_1920x1080-44e1959eea483b67d31f3508852ecad6"
+              },
+              {
+                "type": "featuredMedia",
+                "url": "https://cdn1.epicgames.com/offer/5fcf6f3031c547f789e29c18b422ca67/10Screenshot_envshot_1920x1080_1920x1080-07f2dc2894baa5e841e26371243d2448"
+              }
+            ],
+            "seller": {
+              "id": "o-7aklpapnk74p66sqs6hm5byt29wp66",
+              "name": "Hi-Rez Studios"
+            },
+            "productSlug": null,
+            "urlSlug": "realm-royale-reforged--epic-launch-bundle",
+            "url": null,
+            "items": [
+              {
+                "id": "3acaea4b5cb04cf4af2e40dde4640066",
+                "namespace": "5fcf6f3031c547f789e29c18b422ca67"
+              },
+              {
+                "id": "108898ec1857463e97f291365c5a4df8",
+                "namespace": "5fcf6f3031c547f789e29c18b422ca67"
+              }
+            ],
+            "customAttributes": [
+
+            ],
+            "categories": [
+              {
+                "path": "addons"
+              },
+              {
+                "path": "freegames"
+              },
+              {
+                "path": "addons/durable"
+              },
+              {
+                "path": "applications"
+              }
+            ],
+            "tags": [
+
+            ],
+            "catalogNs": {
+              "mappings": [
+                {
+                  "pageSlug": "realm-royale-reforged",
+                  "pageType": "productHome"
+                }
+              ]
+            },
+            "offerMappings": [
+              {
+                "pageSlug": "realm-royale-reforged--epic-launch-bundle",
+                "pageType": "addon--cms-hybrid"
+              }
+            ],
+            "price": {
+              "totalPrice": {
+                "discountPrice": 0,
+                "originalPrice": 2399,
+                "voucherDiscount": 0,
+                "discount": 2399,
+                "currencyCode": "EUR",
+                "currencyInfo": {
+                  "decimals": 2
+                },
+                "fmtPrice": {
+                  "originalPrice": "23,99 €",
+                  "discountPrice": "0",
+                  "intermediatePrice": "0"
+                }
+              },
+              "lineOffers": [
+                {
+                  "appliedRules": [
+                    {
+                      "id": "e0c345c001394da7a260bf8c7fbe6ae2",
+                      "endDate": "2022-09-15T15:00:00.000Z",
+                      "discountSetting": {
+                        "discountType": "PERCENTAGE"
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            "promotions": {
+              "promotionalOffers": [
+                {
+                  "promotionalOffers": [
+                    {
+                      "startDate": "2022-09-08T15:00:00.000Z",
+                      "endDate": "2022-09-15T15:00:00.000Z",
+                      "discountSetting": {
+                        "discountType": "PERCENTAGE",
+                        "discountPercentage": 0
+                      }
+                    }
+                  ]
+                }
+              ],
+              "upcomingPromotionalOffers": [
+
+              ]
+            }
+          },
+          {
+            "title": "Maneater",
+            "id": "a22a7af179c54b86a93f3193ace8f7f4",
+            "namespace": "d5241c76f178492ea1540fce45616757",
+            "description": "Maneater",
+            "effectiveDate": "2099-01-01T00:00:00.000Z",
+            "offerType": "OTHERS",
+            "expiryDate": null,
+            "status": "ACTIVE",
+            "isCodeRedemptionOnly": true,
+            "keyImages": [
+              {
+                "type": "VaultClosed",
+                "url": "https://cdn1.epicgames.com/offer/d5241c76f178492ea1540fce45616757/egs-vault-tease-generic-promo-1920x1080_1920x1080-f7742c265e217510835ed14e04c48b4b"
+              },
+              {
+                "type": "DieselStoreFrontTall",
+                "url": "https://cdn1.epicgames.com/offer/d5241c76f178492ea1540fce45616757/egs-vault-tease-generic-promo-1920x1080_1920x1080-f7742c265e217510835ed14e04c48b4b"
+              },
+              {
+                "type": "OfferImageTall",
+                "url": "https://cdn1.epicgames.com/offer/d5241c76f178492ea1540fce45616757/egs-vault-carousel-mobile-thumbnail-1200x1600_1200x1600-1f45bf1ceb21c1ca2947f6df5ece5346"
+              },
+              {
+                "type": "VaultOpened",
+                "url": "https://cdn1.epicgames.com/offer/d5241c76f178492ea1540fce45616757/egs-vault-w4-1920x1080_1920x1080-2df36fe63c18ff6fcb5febf3dd7ed06e"
+              },
+              {
+                "type": "DieselStoreFrontWide",
+                "url": "https://cdn1.epicgames.com/offer/d5241c76f178492ea1540fce45616757/egs-vault-w4-1920x1080_1920x1080-2df36fe63c18ff6fcb5febf3dd7ed06e"
+              },
+              {
+                "type": "OfferImageWide",
+                "url": "https://cdn1.epicgames.com/offer/d5241c76f178492ea1540fce45616757/egs-vault-w4-1920x1080_1920x1080-2df36fe63c18ff6fcb5febf3dd7ed06e"
+              }
+            ],
+            "seller": {
+              "id": "o-ufmrk5furrrxgsp5tdngefzt5rxdcn",
+              "name": "Epic Dev Test Account"
+            },
+            "productSlug": "maneater",
+            "urlSlug": "game-4",
+            "url": null,
+            "items": [
+              {
+                "id": "8341d7c7e4534db7848cc428aa4cbe5a",
+                "namespace": "d5241c76f178492ea1540fce45616757"
+              }
+            ],
+            "customAttributes": [
+              {
+                "key": "com.epicgames.app.freegames.vault.close",
+                "value": "[]"
+              },
+              {
+                "key": "com.epicgames.app.freegames.vault.slug",
+                "value": "free-games"
+              },
+              {
+                "key": "com.epicgames.app.freegames.vault.open",
+                "value": "[]"
+              },
+              {
+                "key": "com.epicgames.app.productSlug",
+                "value": "maneater"
+              }
+            ],
+            "categories": [
+              {
+                "path": "freegames/vaulted"
+              },
+              {
+                "path": "freegames"
+              },
+              {
+                "path": "games"
+              },
+              {
+                "path": "applications"
+              }
+            ],
+            "tags": [
+
+            ],
+            "catalogNs": {
+              "mappings": [
+
+              ]
+            },
+            "offerMappings": [
+
+            ],
+            "price": {
+              "totalPrice": {
+                "discountPrice": 0,
+                "originalPrice": 0,
+                "voucherDiscount": 0,
+                "discount": 0,
+                "currencyCode": "EUR",
+                "currencyInfo": {
+                  "decimals": 2
+                },
+                "fmtPrice": {
+                  "originalPrice": "0",
+                  "discountPrice": "0",
+                  "intermediatePrice": "0"
+                }
+              },
+              "lineOffers": [
+                {
+                  "appliedRules": [
+
+                  ]
+                }
+              ]
+            },
+            "promotions": null
+          },
+          {
+            "title": "Wolfenstein: The New Order",
+            "id": "1d41b93230e54bdd80c559d72adb7f4f",
+            "namespace": "d5241c76f178492ea1540fce45616757",
+            "description": "Wolfenstein: The New Order",
+            "effectiveDate": "2099-01-01T00:00:00.000Z",
+            "offerType": "OTHERS",
+            "expiryDate": null,
+            "status": "ACTIVE",
+            "isCodeRedemptionOnly": true,
+            "keyImages": [
+              {
+                "type": "VaultClosed",
+                "url": "https://cdn1.epicgames.com/offer/d5241c76f178492ea1540fce45616757/egs-vault-tease-generic-promo-1920x1080_1920x1080-f7742c265e217510835ed14e04c48b4b"
+              },
+              {
+                "type": "OfferImageTall",
+                "url": "https://cdn1.epicgames.com/offer/d5241c76f178492ea1540fce45616757/egs-vault-carousel-mobile-thumbnail-1200x1600_1200x1600-1f45bf1ceb21c1ca2947f6df5ece5346"
+              },
+              {
+                "type": "OfferImageWide",
+                "url": "https://cdn1.epicgames.com/offer/d5241c76f178492ea1540fce45616757/egs-vault-w3-1920x1080_1920x1080-4a501d33fb4ac641e3e1e290dcc0e6c1"
+              },
+              {
+                "type": "DieselStoreFrontWide",
+                "url": "https://cdn1.epicgames.com/offer/d5241c76f178492ea1540fce45616757/egs-vault-w3-1920x1080_1920x1080-4a501d33fb4ac641e3e1e290dcc0e6c1"
+              },
+              {
+                "type": "VaultOpened",
+                "url": "https://cdn1.epicgames.com/offer/d5241c76f178492ea1540fce45616757/egs-vault-w3-1920x1080_1920x1080-4a501d33fb4ac641e3e1e290dcc0e6c1"
+              }
+            ],
+            "seller": {
+              "id": "o-ufmrk5furrrxgsp5tdngefzt5rxdcn",
+              "name": "Epic Dev Test Account"
+            },
+            "productSlug": "wolfenstein-the-new-order",
+            "urlSlug": "game-3",
+            "url": null,
+            "items": [
+              {
+                "id": "8341d7c7e4534db7848cc428aa4cbe5a",
+                "namespace": "d5241c76f178492ea1540fce45616757"
+              }
+            ],
+            "customAttributes": [
+              {
+                "key": "com.epicgames.app.freegames.vault.close",
+                "value": "[]"
+              },
+              {
+                "key": "com.epicgames.app.freegames.vault.slug",
+                "value": "free-games"
+              },
+              {
+                "key": "com.epicgames.app.freegames.vault.open",
+                "value": "[]"
+              },
+              {
+                "key": "com.epicgames.app.productSlug",
+                "value": "wolfenstein-the-new-order"
+              }
+            ],
+            "categories": [
+              {
+                "path": "freegames/vaulted"
+              },
+              {
+                "path": "freegames"
+              },
+              {
+                "path": "games"
+              },
+              {
+                "path": "applications"
+              }
+            ],
+            "tags": [
+
+            ],
+            "catalogNs": {
+              "mappings": [
+
+              ]
+            },
+            "offerMappings": [
+
+            ],
+            "price": {
+              "totalPrice": {
+                "discountPrice": 0,
+                "originalPrice": 0,
+                "voucherDiscount": 0,
+                "discount": 0,
+                "currencyCode": "EUR",
+                "currencyInfo": {
+                  "decimals": 2
+                },
+                "fmtPrice": {
+                  "originalPrice": "0",
+                  "discountPrice": "0",
+                  "intermediatePrice": "0"
+                }
+              },
+              "lineOffers": [
+                {
+                  "appliedRules": [
+
+                  ]
+                }
+              ]
+            },
+            "promotions": null
+          }
+        ],
+        "paging": {
+          "count": 1000,
+          "total": 11
+        }
+      }
+    }
+  },
+  "extensions": {
+
+  }
+}
