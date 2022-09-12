@@ -1,4 +1,3 @@
-export interface ServiceInterface {
+export interface GameServiceInterface {
     getGames(): Promise<string>
-    getPrices(): Promise<string>;
 }
