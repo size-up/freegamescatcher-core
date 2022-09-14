@@ -4,8 +4,8 @@ FROM node:lts-alpine
 WORKDIR /app
 
 # Install app dependencies
-COPY package.json ./
-COPY yarn.lock ./
+COPY package.json .
+COPY yarn.lock .
 
 RUN yarn install --frozen-lockfile
 
