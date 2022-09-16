@@ -20,8 +20,8 @@ export interface ElementToSendInterface {
     
 }
 interface Promotion {
-    startDate: Date,
-    endDate: Date
+    startDate: string,
+    endDate: string
 }
 
 

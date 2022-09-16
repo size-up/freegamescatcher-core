@@ -4,6 +4,7 @@ import { readFileSync } from "fs";
 import packageJson from "../package.json";
 import ReceiverRouter from "./inputs/http/receiver.controller";
 import DefaultMiddleware from "./middlewares/default.middleware";
+import { EmailSenderService } from "./services/emailSender.service";
 
 class Application {
     private http: Express = express();
@@ -88,3 +89,6 @@ class Application {
  * Start the application.
  */
 const app = new Application();
+
+const emailSenderService = new EmailSenderService();
+emailSenderService.sendMail();

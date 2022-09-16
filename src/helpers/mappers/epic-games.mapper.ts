@@ -14,11 +14,11 @@ export class EpicGamesMapperHelper {
                         urlSlug: game.urlSlug,
                         promotion: {
                             startDate: game.promotions.promotionalOffers.length ? 
-                                game.promotions.promotionalOffers[0].promotionalOffers[0].startDate : 
-                                game.promotions.upcomingPromotionalOffers[0].promotionalOffers[0].startDate,
+                                game.promotions.promotionalOffers[0].promotionalOffers[0].startDate.toString() : 
+                                game.promotions.upcomingPromotionalOffers[0].promotionalOffers[0].startDate.toString(),
                             endDate: game.promotions.promotionalOffers.length ? 
-                                game.promotions.promotionalOffers[0].promotionalOffers[0].endDate : 
-                                game.promotions.upcomingPromotionalOffers[0].promotionalOffers[0].endDate,
+                                game.promotions.promotionalOffers[0].promotionalOffers[0].endDate.toString() : 
+                                game.promotions.upcomingPromotionalOffers[0].promotionalOffers[0].endDate.toString(),
                         },
                         imageUrl: game.keyImages[1].url
                     };

@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TITLE</title>
+</head>
+
+<body style="color: whitesmoke; font-family: sans-serif;">
+    <center>
+        <table style="background-color: #1e1e1e; width: 550px;" role="presentation">
+            <tr>
+                <td align="center">
+                    <h1>Des jeux Epic Games sont disponibles 😉</h1>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <hr>
+                </td>
+            </tr>
+        </table>
+        <table style="background-color: #1e1e1e; width: 550px;" role="presentation">
+            <tbody>
+                {{#each availableGames}}
+                <tr>
+                    <td style="padding: 20px;">
+                        <table role="presentation">
+                            <tbody>
+                                <td>
+                                    <tr>
+                                        <td align="center">
+                                            <img width="500px" src="{{ this.imageUrl }}" alt="NOPE">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <p style="text-align: justify;">
+                                                {{ this.description }}
+                                            </p>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <div style="display: table; height: 110px;">
+                                                <p style="display: table-cell; vertical-align: bottom;">Disponible
+                                                    jusqu'au : 
+                                                    <b>{{ this.promotion.endDate }}</b>
+                                                </p>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <hr>
+                                        </td>
+                                    </tr>
+                                </td>
+                            </tbody>
+                        </table>
+                    </td>
+                </tr>
+                {{/each}}
+            </tbody>
+        </table>
+        <table style="background-color: #1e1e1e; width: 550px;" role="presentation">
+            <tr>
+                <td align="center">
+                    <h1>Prochainnement</h1>
+                </td>
+            </tr>
+        </table>
+        <table style="background-color: #1e1e1e; width: 550px;" role="presentation">
+            <tbody>
+                {{#each nextGames}}
+                <tr>
+                    <td style="padding: 20px;">
+                        <table role="presentation">
+                            <tbody>
+                                <td>
+                                    <tr>
+                                        <td align="center">
+                                            <img width="500px" src="{{ this.imageUrl }}" alt="NOPE">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <p style="text-align: justify;">
+                                                {{ this.description }}
+                                            </p>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <div style="display: table; height: 110px;">
+                                                <p style="display: table-cell; vertical-align: bottom;">Disponible
+                                                    à partir du : 
+                                                    <b>{{ this.promotion.startDate }}</b>
+                                                </p>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <hr>
+                                        </td>
+                                    </tr>
+                                </td>
+                            </tbody>
+                        </table>
+                    </td>
+                </tr>
+                {{/each}}
+            </tbody>
+        </table>
+    </center>
+</body>
+
+</html>
