@@ -5,13 +5,15 @@
   "version": "0.2.0",
   "configurations": [
     {
+      "preLaunchTask": "install",
       "command": "yarn run dev",
       "name": "Launch [development]",
       "request": "launch",
       "type": "node-terminal"
     },
     {
-      "command": "yarn run start:prod",
+      "preLaunchTask": "install",
+      "command": "yarn run start",
       "name": "Launch [production]",
       "request": "launch",
       "type": "node-terminal"
