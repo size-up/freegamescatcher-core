@@ -1,7 +1,7 @@
 import axios from "axios";
 import { EpicGamesMapperHelper } from "../../helpers/mappers/epic-games.mapper";
 import { ClientInterface, ElementToSendInterface, EpicGamesDatasInterface } from "../../interfaces/client.interface";
-import clientInformations from "./../../data/client.json";
+import clientInformations from "./../../../data/client.json";
 import fs from "fs";
 
 export default class ClientEpicGames {

@@ -135,9 +135,7 @@
                 }
               ]
             },
-            "offerMappings": [
-
-            ],
+            "offerMappings": [],
             "price": {
               "totalPrice": {
                 "discountPrice": 0,
@@ -183,9 +181,7 @@
                   ]
                 }
               ],
-              "upcomingPromotionalOffers": [
-
-              ]
+              "upcomingPromotionalOffers": []
             }
           },
           {
@@ -301,9 +297,7 @@
                 }
               ]
             },
-            "offerMappings": [
-
-            ],
+            "offerMappings": [],
             "price": {
               "totalPrice": {
                 "discountPrice": 1599,
@@ -322,16 +316,12 @@
               },
               "lineOffers": [
                 {
-                  "appliedRules": [
-
-                  ]
+                  "appliedRules": []
                 }
               ]
             },
             "promotions": {
-              "promotionalOffers": [
-
-              ],
+              "promotionalOffers": [],
               "upcomingPromotionalOffers": [
                 {
                   "promotionalOffers": [
@@ -488,9 +478,7 @@
                 }
               ]
             },
-            "offerMappings": [
-
-            ],
+            "offerMappings": [],
             "price": {
               "totalPrice": {
                 "discountPrice": 3999,
@@ -509,9 +497,7 @@
               },
               "lineOffers": [
                 {
-                  "appliedRules": [
-
-                  ]
+                  "appliedRules": []
                 }
               ]
             },
@@ -620,16 +606,12 @@
               },
               "lineOffers": [
                 {
-                  "appliedRules": [
-
-                  ]
+                  "appliedRules": []
                 }
               ]
             },
             "promotions": {
-              "promotionalOffers": [
-
-              ],
+              "promotionalOffers": [],
               "upcomingPromotionalOffers": [
                 {
                   "promotionalOffers": [
@@ -786,9 +768,7 @@
               },
               "lineOffers": [
                 {
-                  "appliedRules": [
-
-                  ]
+                  "appliedRules": []
                 }
               ]
             },
@@ -910,9 +890,7 @@
                 }
               ]
             },
-            "offerMappings": [
-
-            ],
+            "offerMappings": [],
             "price": {
               "totalPrice": {
                 "discountPrice": 1599,
@@ -931,9 +909,7 @@
               },
               "lineOffers": [
                 {
-                  "appliedRules": [
-
-                  ]
+                  "appliedRules": []
                 }
               ]
             },
@@ -1070,9 +1046,7 @@
               },
               "lineOffers": [
                 {
-                  "appliedRules": [
-
-                  ]
+                  "appliedRules": []
                 }
               ]
             },
@@ -1171,9 +1145,7 @@
                 "namespace": "5fcf6f3031c547f789e29c18b422ca67"
               }
             ],
-            "customAttributes": [
-
-            ],
+            "customAttributes": [],
             "categories": [
               {
                 "path": "addons"
@@ -1188,9 +1160,7 @@
                 "path": "applications"
               }
             ],
-            "tags": [
-
-            ],
+            "tags": [],
             "catalogNs": {
               "mappings": [
                 {
@@ -1250,9 +1220,7 @@
                   ]
                 }
               ],
-              "upcomingPromotionalOffers": [
-
-              ]
+              "upcomingPromotionalOffers": []
             }
           },
           {
@@ -1336,17 +1304,11 @@
                 "path": "applications"
               }
             ],
-            "tags": [
-
-            ],
+            "tags": [],
             "catalogNs": {
-              "mappings": [
-
-              ]
+              "mappings": []
             },
-            "offerMappings": [
-
-            ],
+            "offerMappings": [],
             "price": {
               "totalPrice": {
                 "discountPrice": 0,
@@ -1365,9 +1327,7 @@
               },
               "lineOffers": [
                 {
-                  "appliedRules": [
-
-                  ]
+                  "appliedRules": []
                 }
               ]
             },
@@ -1450,17 +1410,11 @@
                 "path": "applications"
               }
             ],
-            "tags": [
-
-            ],
+            "tags": [],
             "catalogNs": {
-              "mappings": [
-
-              ]
+              "mappings": []
             },
-            "offerMappings": [
-
-            ],
+            "offerMappings": [],
             "price": {
               "totalPrice": {
                 "discountPrice": 0,
@@ -1479,9 +1433,7 @@
               },
               "lineOffers": [
                 {
-                  "appliedRules": [
-
-                  ]
+                  "appliedRules": []
                 }
               ]
             },
@@ -1495,7 +1447,5 @@
       }
     }
   },
-  "extensions": {
-
-  }
+  "extensions": {}
 }
