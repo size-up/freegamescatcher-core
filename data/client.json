@@ -1,0 +1,14 @@
+{
+  "epicGames": {
+    "name": "Epic Games",
+    "website": "https://store.epicgames.com",
+    "trackedPage": "https://store.epicgames.com/fr/free-games",
+    "baseUrl": "https://store-site-backend-static-ipv4.ak.epicgames.com",
+    "endpoint": "freeGamesPromotions",
+    "params": {
+      "locale": "fr",
+      "country": "FR",
+      "allowCountries": "FR"
+    }
+  }
+}

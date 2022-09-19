@@ -1,0 +1,42 @@
+[
+  {
+    "title": "ARK: Survival Evolved",
+    "description": "Stranded on the shores of a mysterious island, you must learn to survive. Use your cunning to kill or tame the primeval creatures roaming the land, and encounter other players to survive, dominate... and escape!",
+    "urlSlug": "ark-survival-evolved",
+    "promotion": {
+      "startDate": "2022-09-22T15:00:00.000Z",
+      "endDate": "2022-09-29T15:00:00.000Z"
+    },
+    "imageUrl": "https://cdn1.epicgames.com/ark/offer/EGS_ARKSurvivalEvolved_StudioWildcard_S2-1200x1600-5b58fdefea9f885c7426e894a1034921.jpg"
+  },
+  {
+    "title": "The Captain",
+    "description": "Race back home across the galaxy.  Collect new friends.  Make new enemies.  You won't be able to save everyone.  Who will you leave behind?  Which civilizations will you save - or destroy - along the way?  The decisions are up to you.  You are... The Captain!",
+    "urlSlug": "the-captain",
+    "promotion": {
+      "startDate": "2022-09-15T15:00:00.000Z",
+      "endDate": "2022-09-22T15:00:00.000Z"
+    },
+    "imageUrl": "https://cdn1.epicgames.com/salesEvent/salesEvent/EGS_TheCaptain_Sysiacgames_S2_1200x1600-9cd565d837478e8e9015ccdd86f56f33"
+  },
+  {
+    "title": "Spirit of the North",
+    "description": "Spirit of the North is a single-player 3rd-person adventure game inspired by the breathtaking and mysterious landscapes of Iceland. The story takes root from various pieces of Nordic folklore.",
+    "urlSlug": "c9e146fa85d74402a2989001508ecd16",
+    "promotion": {
+      "startDate": "2022-09-15T15:00:00.000Z",
+      "endDate": "2022-09-22T15:00:00.000Z"
+    },
+    "imageUrl": "https://cdn1.epicgames.com/spt-assets/177dc72233934ac487abd83b01587086/download-spirit-of-the-north-offer-wr44c.jpg"
+  },
+  {
+    "title": "Gloomhaven",
+    "description": "Whether you are drawn to Gloomhaven by the call of adventure or by an avid desire for gold glimmering in the dark, your fate will surely be the same. Gloomhaven, the digital adaptation of the acclaimed board game, mixes Tactical-RPG and dungeon-crawling.",
+    "urlSlug": "0d48da287df14493a7415b560ec1bbb3",
+    "promotion": {
+      "startDate": "2022-09-22T15:00:00.000Z",
+      "endDate": "2022-09-29T15:00:00.000Z"
+    },
+    "imageUrl": "https://cdn1.epicgames.com/spt-assets/ef2777467a3c49059a076e42fd9b41f0/download-gloomhaven-offer-1ho2x.jpg"
+  }
+]
