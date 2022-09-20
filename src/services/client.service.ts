@@ -2,6 +2,8 @@ import { EpicGamesMapperHelper } from "../helpers/mappers/epic-games.mapper";
 import { ElementToSendInterface, EpicGamesDatasInterface } from "../interfaces/client.interface";
 import fs from "fs";
 
+import { logger } from "../config/logger";
+
 export class ClientService {
 
     /**
@@ -14,10 +16,10 @@ export class ClientService {
             
             if (elementsToSave.length) {
                 fs.writeFileSync("data/cache.epicgames.json", JSON.stringify(elementsToSave, null, 4));
-                console.log("EpicGames cache file was updated");
+                logger.info("EpicGames cache file was updated");
             }
         } catch (error) {
-            console.log("An error has occurred while update EpicGames cache file", error);
+            logger.error("An error has occurred while update EpicGames cache file", error);
         }        
     }
 }
