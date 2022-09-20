@@ -3,6 +3,8 @@ import { ClientInterface, EpicGamesDatasInterface } from "../../interfaces/clien
 import { ClientService } from "../../services/client.service";
 import clientInformations from "./../../../data/client.json";
 
+import { logger } from "../../config/logger";
+
 export class EpicGamesClient {
     private clientInformations = clientInformations.epicGames;
     private clientParamsConnection: ClientInterface; 
@@ -24,7 +26,7 @@ export class EpicGamesClient {
             const data: EpicGamesDatasInterface = await axios.get(this.clientParamsConnection.url, this.clientParamsConnection.params);
             this.clientService.updateCache(data);
         } catch (error) {
-            console.log("An error has occurred while fetching Epic Games datas or updating epic games cache", error);
+            logger.error("An error has occurred while fetching Epic Games datas or updating epic games cache", error);
         }
     }
 }
