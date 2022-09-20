@@ -7,6 +7,7 @@ import { ClientPlatformType, ElementToSendInterface } from "../interfaces/client
 import { DatasToCompileInterface } from "../interfaces/data.interface";
 
 import packageJson from "../../package.json";
+import { logger } from "../config/logger";
 
 export class EmailSenderService {
     private transporter: nodemailer.Transporter<SMTPTransport.SentMessageInfo>;
@@ -40,7 +41,7 @@ export class EmailSenderService {
      */
     sendMail(platform: ClientPlatformType, subject: string, receivers: string[]): void {
         this.checkEmailAvailability().then(res => {
-            console.log(res);
+            logger.info(res);
             const datas: ElementToSendInterface[] = JSON.parse(fs.readFileSync(`data/cache.${platform}.json`, { encoding: "utf8" }));
     
             const templateRead = fs.readFileSync(`src/templates/email.${platform}.template.hbs`, { encoding: "utf8" });
@@ -58,7 +59,7 @@ export class EmailSenderService {
             };
             
             this.transporter.sendMail(mailOptions, (error, data) => {
-                error ? console.log(`Error while sending emails: ${error}`) : console.log("Emails are sent correctly");
+                error ? logger.error(`Error while sending emails: ${error}`) : logger.info("Emails are sent correctly");
             });
         });
     }

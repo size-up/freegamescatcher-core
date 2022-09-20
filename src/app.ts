@@ -1,11 +1,11 @@
 import express, { NextFunction, Request, Response } from "express";
 import { Express } from "express-serve-static-core";
 import { readFileSync } from "fs";
+
 import ReceiverRouter from "./inputs/http/receiver.controller";
 import DefaultMiddleware from "./middlewares/default.middleware";
-import { EpicGamesClient } from "./outputs/epic-games/client";
-import { EmailSenderService } from "./services/emailSender.service";
 
+import { logger } from "./config/logger";
 import packageJson from "../package.json";
 
 class Application {
@@ -21,8 +21,8 @@ class Application {
 
     private welcome(): void {
         console.info(readFileSync("src/assets/banner.txt", { encoding: "utf8" }));
-        console.info(`🔖 Application version: [${packageJson.version}].\n`);
-        console.info(`${packageJson.description}\n`);
+        logger.info(`🔖 Application version: [${packageJson.version}].`);
+        logger.info(`${packageJson.description}`);
     }
     
     /**
@@ -33,23 +33,14 @@ class Application {
          * Log all API calls.
          */
         this.http.use((request: Request, response: Response, next: NextFunction) => {
-            const date = new Date().toISOString();
-            let message = `${date} - `;
-            
-            if (request.method) {
-                message += `${request.method} `;
-            }
-            if (request.originalUrl) {
-                message += `${request.originalUrl} - `;
-            }
-            if (request.ip) {
-                message += `IP: [${request.ip}] - `;
-            }
-            if (request.headers.host) {
-                message += `Host header: [${request.headers.host}]`;
-            }
+            const message = {
+                method: request.method,
+                url: request.originalUrl,
+                ip: request.ip,
+                headers: request.headers
+            };
 
-            console.info(message);
+            logger.info(message);
             next();
         });
         
@@ -73,8 +64,8 @@ class Application {
      */
     private start(port: number): void {
         this.http.listen(port, () => {
-            console.info(`${packageJson.displayName} is now listening on port [${port}].\n`);
-            console.info("--- --- --- --- --- --- --- --- --- --- --- --- ---\n");
+            logger.info(`${packageJson.displayName} is now listening on port [${port}].`);
+            logger.info("--- --- --- --- --- --- --- --- --- --- --- --- --");
         });
     }
     

@@ -13,6 +13,8 @@ RUN yarn install --frozen-lockfile
 COPY build .
 COPY data ./data
 
+ENV NODE_ENV=production
+
 EXPOSE 8080
 
 CMD [ "node", "./src/app.js" ]

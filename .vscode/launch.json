@@ -18,6 +18,9 @@
       "name": "Launch [production]",
       "request": "launch",
       "type": "node-terminal",
+      "env": {
+        "NODE_ENV": "production"
+      },
       "envFile": "${workspaceFolder}/.env"
     }
   ]
