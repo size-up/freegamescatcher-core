@@ -1,7 +1,7 @@
 import nodemailer from "nodemailer";
 import handlebars from "handlebars";
 import fs from "fs";
-import { ElementToSendInterface } from "../interfaces/client.interface";
+import { ClientPlatformType, ElementToSendInterface } from "../interfaces/client.interface";
 
 export class EmailSenderService {
     private transporter: nodemailer.Transporter<unknown>;
@@ -15,9 +15,7 @@ export class EmailSenderService {
                 pass: process.env.SMTP_PASSWORD
             }
         };
-        console.log("ETAPE 1");
         this.transporter = nodemailer.createTransport(config);
-        console.log("ETAPE 2");
     }
 
     private checkEmailAvailability(): Promise<unknown> {
@@ -27,8 +25,14 @@ export class EmailSenderService {
             });
         });
     }
-    
-    sendMail(platform: string, subject: string) {
+
+    /**
+     * Method to send notification emails to subscribers
+     * 
+     * @param {ClientPlatformType} platform Platform where the datas comming from 
+     * @param {string} subject Email's title
+     */
+    sendMail(platform: ClientPlatformType, subject: string) {
         this.checkEmailAvailability().then(res => {
             console.log(res);
             const datas: ElementToSendInterface[] = JSON.parse(fs.readFileSync(`data/cache.${platform}.json`, { encoding: "utf8" }));
@@ -39,7 +43,6 @@ export class EmailSenderService {
             const template = handlebars.compile(templateRead);
             const templateToSend = template(datasToCompile);
     
-            console.log("ETAPE 4");
             const mailOptions = {
                 sender: "Free Games Catcher",
                 from: "noreply@sizeup.cloud",
