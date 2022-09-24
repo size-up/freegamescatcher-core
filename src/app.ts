@@ -89,6 +89,3 @@ class Application {
  * Start the application.
  */
 const app = new Application();
-
-const emailSenderService = new EmailSenderService();
-emailSenderService.sendMail();

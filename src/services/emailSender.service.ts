@@ -7,6 +7,7 @@ export class EmailSenderService {
     private transporter: nodemailer.Transporter<unknown>;
     
     constructor() {
+        // TODO: Delocate this in env or config file
         const config = {
             host: process.env.SMTP_HOST,
             port: Number(process.env.SMTP_PORT),
@@ -32,7 +33,7 @@ export class EmailSenderService {
      * @param {ClientPlatformType} platform Platform where the datas comming from 
      * @param {string} subject Email's title
      */
-    sendMail(platform: ClientPlatformType, subject: string) {
+    sendMail(platform: ClientPlatformType, subject: string, receivers: string[]) {
         this.checkEmailAvailability().then(res => {
             console.log(res);
             const datas: ElementToSendInterface[] = JSON.parse(fs.readFileSync(`data/cache.${platform}.json`, { encoding: "utf8" }));
@@ -46,7 +47,7 @@ export class EmailSenderService {
             const mailOptions = {
                 sender: "Free Games Catcher",
                 from: "noreply@sizeup.cloud",
-                to: "francisco59553@gmail.com",
+                to: receivers,
                 subject: subject,
                 html: templateToSend,
             };

@@ -11,7 +11,7 @@ export class EpicGamesMapperHelper {
                     const newElement: ElementToSendInterface = {
                         title: game.title,
                         description: game.description,
-                        urlSlug: game.urlSlug,
+                        urlSlug: `https://store.epicgames.com/fr/p/${game.catalogNs.mappings[0].pageSlug}`,
                         promotion: {
                             startDate: game.promotions.promotionalOffers.length ? 
                                 game.promotions.promotionalOffers[0].promotionalOffers[0].startDate.toString() : 
