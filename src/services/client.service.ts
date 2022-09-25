@@ -8,18 +8,16 @@ export class ClientService {
      * Update `cache.json` with fresh datas from Epic Games
      * @param {EpicGamesDatasInterface} data Datas from Epic Games
      */
-    public async updateCache(data: EpicGamesDatasInterface): Promise<void> {
+    public updateCache(data: EpicGamesDatasInterface) {
         try {
             const elementsToSave: ElementToSendInterface[] = EpicGamesMapperHelper.map(data);
             
             if (elementsToSave.length) {
-                fs.writeFile("src/data/cache.json", JSON.stringify(elementsToSave, null, 4), () => {
-                    console.log("Cache Updated !");
-                });
-                // TODO: Send mail with `elementsToSave`
+                fs.writeFileSync("data/cache.epicgames.json", JSON.stringify(elementsToSave, null, 4));
+                console.log("EpicGames cache file was updated");
             }
-        } catch (err) {
-            console.log(err);
+        } catch (error) {
+            console.log("An error has occurred while update EpicGames cache file", error);
         }        
     }
 }

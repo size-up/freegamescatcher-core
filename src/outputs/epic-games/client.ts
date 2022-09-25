@@ -24,7 +24,7 @@ export class EpicGamesClient {
             const data: EpicGamesDatasInterface = await axios.get(this.clientParamsConnection.url, this.clientParamsConnection.params);
             this.clientService.updateCache(data);
         } catch (error) {
-            console.log(error);
+            console.log("An error has occurred while fetching Epic Games datas or updating epic games cache", error);
         }
     }
 }
