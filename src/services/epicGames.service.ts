@@ -1,12 +1,12 @@
-import { ClientEpicGames } from "../outputs/epic-games/client";
+import { EpicGamesClient } from "../outputs/epic-games/client";
 
 import { GameServiceInterface } from "../interfaces/service.interface";
 
 export class EpicGamesService implements GameServiceInterface {
     public async getGames(): Promise<string> {
         try {
-            const clientEpicGames = new ClientEpicGames();
-            const data = clientEpicGames.getDatas();
+            const epicGamesClient = new EpicGamesClient();
+            const data = epicGamesClient.getDatas();
 
             // TODO: change temporary return Promise to data from client
             return Promise.resolve("client data");

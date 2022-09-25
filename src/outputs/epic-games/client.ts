@@ -3,7 +3,7 @@ import { ClientInterface, EpicGamesDatasInterface } from "../../interfaces/clien
 import { ClientService } from "../../services/client.service";
 import clientInformations from "./../../../data/client.json";
 
-export class ClientEpicGames {
+export class EpicGamesClient {
     private clientInformations = clientInformations.epicGames;
     private clientParamsConnection: ClientInterface; 
     private clientService: ClientService;
