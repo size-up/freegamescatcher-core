@@ -9,14 +9,16 @@
       "command": "yarn run dev",
       "name": "Launch [development]",
       "request": "launch",
-      "type": "node-terminal"
+      "type": "node-terminal",
+      "envFile": "${workspaceFolder}/.env"
     },
     {
       "preLaunchTask": "install",
       "command": "yarn run start",
       "name": "Launch [production]",
       "request": "launch",
-      "type": "node-terminal"
+      "type": "node-terminal",
+      "envFile": "${workspaceFolder}/.env"
     }
   ]
 }
