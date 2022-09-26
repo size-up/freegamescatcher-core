@@ -1,38 +1,30 @@
 import axios from "axios";
-import { EpicGamesMapperHelper } from "../../helpers/mappers/epic-games.mapper";
-import { ClientInterface, ElementToSendInterface, EpicGamesDatasInterface } from "../../interfaces/client.interface";
+import { ClientInterface, EpicGamesDatasInterface } from "../../interfaces/client.interface";
+import { ClientService } from "../../services/client.service";
 import clientInformations from "./../../../data/client.json";
-import fs from "fs";
 
-export default class ClientEpicGames {
-    private static clientInformations = clientInformations.epicGames;
-    private static clientInterface: ClientInterface = {
-        url: `${this.clientInformations.baseUrl}/${this.clientInformations.endpoint}`,
-        params: this.clientInformations.params
-    };
-    private static data: EpicGamesDatasInterface;
+export class EpicGamesClient {
+    private clientInformations = clientInformations.epicGames;
+    private clientParamsConnection: ClientInterface; 
+    private clientService: ClientService;
 
-    static async getDatas() {
-        try {
-            this.data = await axios.get(this.clientInterface.url, this.clientInterface.params);
-            this.saveData();
-        } catch (error) {
-            console.log(error);
-        }
+    constructor() {
+        this.clientService = new ClientService();
+        this.clientParamsConnection = {
+            url: `${this.clientInformations.baseUrl}/${this.clientInformations.endpoint}`,
+            params: this.clientInformations.params
+        };
     }
 
-    private static saveData() {
+    /**
+     * Retrieve datas from Epic-Games store
+     */
+    async getDatas() {
         try {
-            const elementsToSave: ElementToSendInterface[] = EpicGamesMapperHelper.map(this.data);
-            
-            if (elementsToSave.length) {
-                fs.writeFile("src/data/cache.json", JSON.stringify(elementsToSave, null, 4), () => {
-                    console.log("Cache Updated !");
-                });
-                // TODO: Send mail with `elementsToSave`
-            }
-        } catch (err) {
-            console.log(err);
+            const data: EpicGamesDatasInterface = await axios.get(this.clientParamsConnection.url, this.clientParamsConnection.params);
+            this.clientService.updateCache(data);
+        } catch (error) {
+            console.log("An error has occurred while fetching Epic Games datas or updating epic games cache", error);
         }
     }
 }
