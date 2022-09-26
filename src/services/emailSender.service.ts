@@ -1,10 +1,15 @@
-import nodemailer from "nodemailer";
-import handlebars from "handlebars";
 import fs from "fs";
+import handlebars from "handlebars";
+import nodemailer from "nodemailer";
+import SMTPTransport from "nodemailer/lib/smtp-transport";
+
 import { ClientPlatformType, ElementToSendInterface } from "../interfaces/client.interface";
+import { DatasToCompileInterface } from "../interfaces/data.interface";
+
+import packageJson from "../../package.json";
 
 export class EmailSenderService {
-    private transporter: nodemailer.Transporter<unknown>;
+    private transporter: nodemailer.Transporter<SMTPTransport.SentMessageInfo>;
     
     constructor() {
         // TODO: Delocate this in env or config file
@@ -19,10 +24,10 @@ export class EmailSenderService {
         this.transporter = nodemailer.createTransport(config);
     }
 
-    private checkEmailAvailability(): Promise<unknown> {
-        return new Promise<unknown>((resolve, reject) => {
+    private checkEmailAvailability(): Promise<string | Error> {
+        return new Promise<string | Error>((resolve, reject) => {
             this.transporter.verify((error, success) => {
-                return error ? reject(error) : resolve(`Mailer is ready to take messages: ${success}`);
+                return error ? reject(`Error while verifying transporter. Error: ${error.message}`) : resolve(`Mailer is ready to take messages: ${success}`);
             });
         });
     }
@@ -33,7 +38,7 @@ export class EmailSenderService {
      * @param {ClientPlatformType} platform Platform where the datas comming from 
      * @param {string} subject Email's title
      */
-    sendMail(platform: ClientPlatformType, subject: string, receivers: string[]) {
+    sendMail(platform: ClientPlatformType, subject: string, receivers: string[]): void {
         this.checkEmailAvailability().then(res => {
             console.log(res);
             const datas: ElementToSendInterface[] = JSON.parse(fs.readFileSync(`data/cache.${platform}.json`, { encoding: "utf8" }));
@@ -45,30 +50,24 @@ export class EmailSenderService {
             const templateToSend = template(datasToCompile);
     
             const mailOptions = {
-                sender: "Free Games Catcher",
-                from: "noreply@sizeup.cloud",
+                sender: packageJson.displayName,
+                from: packageJson.author.email,
                 to: receivers,
                 subject: subject,
                 html: templateToSend,
             };
             
             this.transporter.sendMail(mailOptions, (error, data) => {
-                error ? console.log(`Error : ${error}`) : console.log("Email sent !");
+                error ? console.log(`Error while sending emails: ${error}`) : console.log("Emails are sent correctly");
             });
         });
     }
 
-    private filterDatasByDate(datas: ElementToSendInterface[]) {
-        interface datasToCompileInterface {
-            availableGames: ElementToSendInterface[]
-            nextGames: ElementToSendInterface[]
-        }
-        
-        const datasToCompile: datasToCompileInterface = {
+    private filterDatasByDate(datas: ElementToSendInterface[]): DatasToCompileInterface {
+        const datasToCompile: DatasToCompileInterface = {
             availableGames: [],
             nextGames: []
         };
-
 
         datas.forEach(element => {
             const gameStartDate = new Date(element.promotion.startDate);
@@ -89,5 +88,4 @@ export class EmailSenderService {
 
         return datasToCompile;
     }
-
 }
