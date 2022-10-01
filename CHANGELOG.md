@@ -1,3 +1,17 @@
+# [v1.1.0](https://github.com/size-up/freegamescatcher/compare/v1.0.0...v1.1.0) (2022-10-01)
+
+## ✨ Introduce new features
+- [`97cca3d`](https://github.com/size-up/freegamescatcher/commit/97cca3d)  Email sender with template (#23) (Issues: [`#23`](https://github.com/size-up/freegamescatcher/issues/23))
+
+## ♻️ Refactor code
+- [`9955458`](https://github.com/size-up/freegamescatcher/commit/9955458)  Relocate client saving data in a file service (#21) (Issues: [`#21`](https://github.com/size-up/freegamescatcher/issues/21) [`#23`](https://github.com/size-up/freegamescatcher/issues/23))
+
+## 🔨 Add or update development scripts
+- [`afeae75`](https://github.com/size-up/freegamescatcher/commit/afeae75)  Add vscode &#x60;tasks&#x60; and use in &#x60;preLaunchTask&#x60; 
+
+## 🚚 Move or rename resources (e.g.: files, paths, routes)
+- [`a4cb30d`](https://github.com/size-up/freegamescatcher/commit/a4cb30d)  Move &#x60;data&#x60; to &#x60;/&#x60;
+
 # v1.0.0 (2022-09-15)
 
 ## ✨ Introduce new features
