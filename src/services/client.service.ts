@@ -5,7 +5,7 @@ import fs from "fs";
 export class ClientService {
 
     /**
-     * Update `cache.json` with fresh datas from Epic Games
+     * Update `cache.epicgames.json` with fresh datas from Epic Games
      * @param {EpicGamesDatasInterface} data Datas from Epic Games
      */
     public updateCache(data: EpicGamesDatasInterface) {

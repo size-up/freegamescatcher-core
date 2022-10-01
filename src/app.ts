@@ -1,9 +1,12 @@
 import express, { NextFunction, Request, Response } from "express";
 import { Express } from "express-serve-static-core";
 import { readFileSync } from "fs";
-import packageJson from "../package.json";
 import ReceiverRouter from "./inputs/http/receiver.controller";
 import DefaultMiddleware from "./middlewares/default.middleware";
+import { EpicGamesClient } from "./outputs/epic-games/client";
+import { EmailSenderService } from "./services/emailSender.service";
+
+import packageJson from "../package.json";
 
 class Application {
     private http: Express = express();
