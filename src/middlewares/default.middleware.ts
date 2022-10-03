@@ -6,11 +6,28 @@ import { logger } from "../config/logger";
 export default class DefaultMiddleware {
 
     constructor(http: Express) {
-        this.initMiddleware(http);
+        this.defaultMiddleware(http);
+        this.errorMiddleware(http);
     }
 
-    private initMiddleware(http: Express) {
+    private defaultMiddleware(http: Express): void {
+        /**
+         * Log all API calls.
+         */
+        http.use((request: Request, response: Response, next: NextFunction) => {
+            const message = {
+                method: request.method,
+                url: request.originalUrl,
+                ip: request.ip,
+                headers: request.headers
+            };
 
+            logger.info(message);
+            next();
+        });
+    }
+
+    private errorMiddleware(http: Express) {
         /**
          * Catch all not found route.
          * See this https://stackoverflow.com/questions/11500204/how-can-i-get-express-js-to-404-only-on-missing-routes.
