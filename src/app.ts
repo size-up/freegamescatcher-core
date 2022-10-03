@@ -30,21 +30,6 @@ class Application {
      */
     private routes(): void {
         /**
-         * Log all API calls.
-         */
-        this.http.use((request: Request, response: Response, next: NextFunction) => {
-            const message = {
-                method: request.method,
-                url: request.originalUrl,
-                ip: request.ip,
-                headers: request.headers
-            };
-
-            logger.info(message);
-            next();
-        });
-        
-        /**
          * Default application message response.
          */
         this.http.get("/", (request: Request, response: Response) => {
@@ -55,8 +40,15 @@ class Application {
             };
             response.json(application);
         });
-        
+
         this.http.use("/receivers", new ReceiverRouter().get());
+    }
+
+    /**
+     * Define all middlewares.
+     */
+    private middlewares(): void {
+        new DefaultMiddleware(this.http);
     }
 
     /**
@@ -67,14 +59,6 @@ class Application {
             logger.info(`${packageJson.displayName} is now listening on port [${port}].`);
             logger.info("--- --- --- --- --- --- --- --- --- --- --- --- --");
         });
-    }
-    
-
-    /**
-     * Define all middlewares.
-     */
-    private middlewares(): void {
-        new DefaultMiddleware(this.http);
     }
 }
 
