@@ -11,7 +11,6 @@ RUN yarn install --frozen-lockfile
 
 # Bundle built app source
 COPY build .
-COPY data ./data
 
 ENV NODE_ENV=production
 
