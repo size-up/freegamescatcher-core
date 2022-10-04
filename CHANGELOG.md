@@ -1,3 +1,14 @@
+# [v1.2.0](https://github.com/size-up/freegamescatcher/compare/v1.1.0...v1.2.0) (2022-10-04)
+
+## ✨ Introduce new features
+- [`24f9fa4`](https://github.com/size-up/freegamescatcher/commit/24f9fa4)  Setup winston as logger 
+
+## 📌 Pin dependencies to specific versions
+- [`bf0f445`](https://github.com/size-up/freegamescatcher/commit/bf0f445)  Use &#x60;lts-alpine3.16&#x60; image version 
+
+## ♻️ Refactor code
+- [`2ab14a1`](https://github.com/size-up/freegamescatcher/commit/2ab14a1)  Delocate all API logging into the &#x60;DefaultMiddleware&#x60;
+
 # [v1.1.0](https://github.com/size-up/freegamescatcher/compare/v1.0.0...v1.1.0) (2022-10-01)
 
 ## ✨ Introduce new features
