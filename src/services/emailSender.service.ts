@@ -3,7 +3,8 @@ import handlebars from "handlebars";
 import nodemailer from "nodemailer";
 import SMTPTransport from "nodemailer/lib/smtp-transport";
 
-import { ClientPlatformType, ElementToSendInterface } from "../interfaces/client.interface";
+import { EpicGamesCacheDocument } from "../interfaces/cache.interface";
+import { ClientPlatformType } from "../interfaces/client.interface";
 import { DatasToCompileInterface } from "../interfaces/data.interface";
 
 import packageJson from "../../package.json";
@@ -42,7 +43,7 @@ export class EmailSenderService {
     sendMail(platform: ClientPlatformType, subject: string, receivers: string[]): void {
         this.checkEmailAvailability().then(res => {
             logger.info(res);
-            const datas: ElementToSendInterface[] = JSON.parse(fs.readFileSync(`data/cache.${platform}.json`, { encoding: "utf8" }));
+            const datas: EpicGamesCacheDocument[] = JSON.parse(fs.readFileSync(`data/cache.${platform}.json`, { encoding: "utf8" }));
     
             const templateRead = fs.readFileSync(`src/templates/email.${platform}.template.hbs`, { encoding: "utf8" });
             const datasToCompile = this.filterDatasByDate(datas);
@@ -64,7 +65,7 @@ export class EmailSenderService {
         });
     }
 
-    private filterDatasByDate(datas: ElementToSendInterface[]): DatasToCompileInterface {
+    private filterDatasByDate(datas: EpicGamesCacheDocument[]): DatasToCompileInterface {
         const datasToCompile: DatasToCompileInterface = {
             availableGames: [],
             nextGames: []

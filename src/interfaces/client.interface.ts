@@ -12,25 +12,6 @@ export interface ClientInterface {
     params: Object
 }
 
-
-/////////////////////////////////////////////////////
-///////////// ELEMENT_TO_SEND_INTERFACE /////////////
-/////////////////////////////////////////////////////
-export interface ElementToSendInterface {
-    title: string;
-    description: string;
-    imageUrl: string;
-    urlSlug: string;
-    promotion: Promotion;
-    
-}
-interface Promotion {
-    startDate: string,
-    endDate: string
-}
-
-
-
 /////////////////////////////////////////////////////
 //////////// EPIC_GAMES_DATAS_INTERFACE /////////////
 /////////////////////////////////////////////////////
