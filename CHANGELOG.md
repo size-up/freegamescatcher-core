@@ -1,3 +1,8 @@
+# [v1.1.0](https://github.com/size-up/freegamescatcher/compare/v1.0.0...v1.1.0) (2022-10-08)
+
+## ✨ Introduce new features
+- [`98ad7c6`](https://github.com/size-up/freegamescatcher/commit/98ad7c6)  Google drive implementation (#33) (Issues: [`#33`](https://github.com/size-up/freegamescatcher/issues/33))
+
 # v1.0.0 (2022-10-04)
 
 ## ✨ Introduce new features
