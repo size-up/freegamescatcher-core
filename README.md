@@ -33,3 +33,17 @@ This command generates static content into the `build` directory and can be serv
 ```
 yarn run start
 ```
+
+## Sample `.env`
+
+```.env
+# SMTP
+SMTP_HOST="host_to_smtp"
+SMTP_PORT="port_for_smtp"
+SMTP_USER="email_login_for_smtp"
+SMTP_PASSWORD="password_smtp"
+
+# GOOGLE CREDENTIALS
+GOOGLE_USERNAME="svc-email@sizeup.com"
+GOOGLE_PRIVATE_KEY="BEGIN PRIVATE KEYDQSdqsdqsdqsdqsdffsesf"
+```

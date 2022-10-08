@@ -1,14 +1,15 @@
-import { ElementToSendInterface, EpicGamesDatasInterface } from "../../interfaces/client.interface";
+import { GameCacheDocumentInterface } from "../../interfaces/cache.interface";
+import { EpicGamesDataInterface } from "../../interfaces/client.interface";
 
 export class EpicGamesMapperHelper {
 
-    static map(data: EpicGamesDatasInterface): ElementToSendInterface[] {
+    static map(data: EpicGamesDataInterface): GameCacheDocumentInterface[] {
         try {
             const epicGamesElements = data.data.data.Catalog.searchStore.elements;
-            const newElementsToSave: ElementToSendInterface[] = epicGamesElements.filter(filteredGame => filteredGame.promotions && 
+            const newElementsToSave: GameCacheDocumentInterface[] = epicGamesElements.filter(filteredGame => filteredGame.promotions && 
                 (filteredGame.promotions.promotionalOffers.length || filteredGame.promotions.upcomingPromotionalOffers.length))
                 .map(game => {
-                    const newElement: ElementToSendInterface = {
+                    const newElement: GameCacheDocumentInterface = {
                         title: game.title,
                         description: game.description,
                         urlSlug: `https://store.epicgames.com/fr/p/${game.catalogNs.mappings[0].pageSlug}`,

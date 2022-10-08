@@ -1,25 +1,25 @@
 import { EpicGamesMapperHelper } from "../helpers/mappers/epic-games.mapper";
-import { ElementToSendInterface, EpicGamesDatasInterface } from "../interfaces/client.interface";
-import fs from "fs";
+import { GameCacheDocumentInterface } from "../interfaces/cache.interface";
+import {  EpicGamesDataInterface } from "../interfaces/client.interface";
+
+import { EpicGamesOutput } from "../outputs/epic-games/client";
 
 import { logger } from "../config/logger";
 
 export class ClientService {
+    private epicgames: EpicGamesOutput;
 
-    /**
-     * Update `cache.epicgames.json` with fresh datas from Epic Games
-     * @param {EpicGamesDatasInterface} data Datas from Epic Games
-     */
-    public updateCache(data: EpicGamesDatasInterface) {
+    constructor() {
+        this.epicgames = new EpicGamesOutput();
+    }
+
+    public async getEpicGamesData(): Promise<GameCacheDocumentInterface[] | undefined> {
         try {
-            const elementsToSave: ElementToSendInterface[] = EpicGamesMapperHelper.map(data);
-            
-            if (elementsToSave.length) {
-                fs.writeFileSync("data/cache.epicgames.json", JSON.stringify(elementsToSave, null, 4));
-                logger.info("EpicGames cache file was updated");
-            }
+            const data: EpicGamesDataInterface = await Object(this.epicgames.getData());
+            const mappedElements: GameCacheDocumentInterface[] = EpicGamesMapperHelper.map(data);
+            return mappedElements;
         } catch (error) {
-            logger.error("An error has occurred while update EpicGames cache file", error);
-        }        
+            logger.error("Error while calling Epic Games API", error);
+        }
     }
 }
