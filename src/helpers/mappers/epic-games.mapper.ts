@@ -1,9 +1,9 @@
 import { GameCacheDocumentInterface } from "../../interfaces/cache.interface";
-import { EpicGamesDatasInterface } from "../../interfaces/client.interface";
+import { EpicGamesDataInterface } from "../../interfaces/client.interface";
 
 export class EpicGamesMapperHelper {
 
-    static map(data: EpicGamesDatasInterface): GameCacheDocumentInterface[] {
+    static map(data: EpicGamesDataInterface): GameCacheDocumentInterface[] {
         try {
             const epicGamesElements = data.data.data.Catalog.searchStore.elements;
             const newElementsToSave: GameCacheDocumentInterface[] = epicGamesElements.filter(filteredGame => filteredGame.promotions && 

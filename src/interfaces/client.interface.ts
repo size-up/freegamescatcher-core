@@ -178,7 +178,7 @@ interface Data2 {
     Catalog: Catalog;
 }
 
-export interface EpicGamesDatasInterface {
+export interface EpicGamesDataInterface {
     data: Data;
 }
 

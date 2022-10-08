@@ -1,12 +1,47 @@
+import { DocumentOutput } from "../outputs/google/drive";
+
+import { GameCacheDocumentInterface } from "../interfaces/cache.interface";
+
+import { logger } from "../config/logger";
+
 export class DataService {
     private static service: DataService;
 
-    public getCache() {
-        throw new Error("Method not implemented.");
+    private metadata = {
+        client: {
+            name: "client.json",
+        },
+        receivers: {
+            name: "receivers.json",
+        },
+        cache: {
+            name: "cache.json",
+        },
+    };
+
+    constructor(private documentOutput = new DocumentOutput()) {}
+
+    public async getCache(): Promise<GameCacheDocumentInterface[] | null> {
+        try {
+            const cache: GameCacheDocumentInterface[] = await Object(this.documentOutput.getDocument(this.metadata.cache.name));
+            return cache;
+        } catch (error) {
+            logger.error(error);
+            return null;
+        }
     }
 
-    public updateCache() {
-        throw new Error("Method not implemented.");
+    public async updateCache(content: GameCacheDocumentInterface[]): Promise<boolean> {
+        try {
+            await this.documentOutput.updateDocument(
+                this.metadata.cache.name,
+                JSON.stringify(content, null, 4)
+            );
+            return true;
+        } catch (error) {
+            logger.error("Error while updating cache", error);
+            return false;
+        }
     }
 
     public deleteCache() {
@@ -28,7 +63,7 @@ export class DataService {
     public deleteClient(name: string) {
         throw new Error("Method not implemented.");
     }
-    
+
     public getReceivers(name: string) {
         throw new Error("Method not implemented.");
     }
@@ -42,6 +77,6 @@ export class DataService {
     }
 
     public static getInstance(): DataService {
-        return this.service = this.service || new DataService();
+        return (this.service = this.service || new DataService());
     }
 }

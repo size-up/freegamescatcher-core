@@ -18,13 +18,27 @@ export class DocumentOutput {
 
         if (id) {
             try {
-                return Object((await this.getFile(id)).data);
+                return await this.drive.files.get({ fileId: id }, { params: { alt: "media" } });
             } catch (error) {
                 throw new Error(`Can not parse data to JavaScript Object ${this.from}`);
             }
         } else {
             logger.warn(`File name [${fileName}] not found ${this.from}`);
             return null;
+        }
+    }
+
+    public async updateDocument(fileName: string, content: string): Promise<void> {
+        const id = await this.getFileId(fileName);
+        
+        if (id) {
+            try {
+                await this.drive.files.update({ fileId: id, media: { body: content } });
+            } catch (error) {
+                throw new Error(`Error while updating file [${fileName}] ${this.from}`);
+            }
+        } else {
+            logger.warn(`File name [${fileName}] not found ${this.from}`);
         }
     }
 
@@ -68,13 +82,5 @@ export class DocumentOutput {
         } catch (error) {
             throw new Error(`Can not retrieve file from schema file list ${this.from}`);
         }
-    }
-
-    private async getFile(id: string): GaxiosPromise<drive_v3.Schema$File> {
-        return await this.drive.files.get({ fileId: id }, { params: { alt: "media" } });
-    }
-
-    private async updateFile(id: string): GaxiosPromise<drive_v3.Schema$File> {
-        return await this.drive.files.update({ fileId: id }, { params: { alt: "media" } });
     }
 }

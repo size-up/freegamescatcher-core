@@ -1,17 +1,14 @@
 import axios from "axios";
-import { ClientInterface, EpicGamesDatasInterface } from "../../interfaces/client.interface";
-import { ClientService } from "../../services/client.service";
+import { ClientInterface } from "../../interfaces/client.interface";
 import clientInformations from "./../../../data/client.json";
 
 import { logger } from "../../config/logger";
 
-export class EpicGamesClient {
+export class EpicGamesOutput {
     private clientInformations = clientInformations.epicGames;
     private clientParamsConnection: ClientInterface; 
-    private clientService: ClientService;
 
     constructor() {
-        this.clientService = new ClientService();
         this.clientParamsConnection = {
             url: `${this.clientInformations.baseUrl}/${this.clientInformations.endpoint}`,
             params: this.clientInformations.params
@@ -21,12 +18,11 @@ export class EpicGamesClient {
     /**
      * Retrieve datas from Epic-Games store
      */
-    async getDatas() {
+    async getData() {
         try {
-            const data: EpicGamesDatasInterface = await axios.get(this.clientParamsConnection.url, this.clientParamsConnection.params);
-            this.clientService.updateCache(data);
+            return axios.get(this.clientParamsConnection.url, this.clientParamsConnection.params);
         } catch (error) {
-            logger.error("An error has occurred while fetching Epic Games datas or updating epic games cache", error);
+            logger.error("An error has occurred while fetching Epic Games datas", error);
         }
     }
 }
