@@ -1,6 +1,5 @@
 import { drive_v3, google } from "googleapis";
 import { GaxiosPromise } from "googleapis/build/src/apis/abusiveexperiencereport";
-import credentials from "../../../sizeup-freegamescatcher-service-account.json";
 
 import { logger } from "../../config/logger";
 import { EpicGamesCacheDocument } from "../../interfaces/cache.interface";
@@ -36,8 +35,8 @@ export class DocumentOutput {
 
             const auth = new google.auth.GoogleAuth({
                 credentials: {
-                    client_email: credentials.client_email,
-                    private_key: credentials.private_key,
+                    client_email: process.env.GOOGLE_USERNAME,
+                    private_key: process.env.GOOGLE_PRIVATE_KEY,
                 },
                 scopes: scopes,
             });
