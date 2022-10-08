@@ -2,29 +2,28 @@ import { drive_v3, google } from "googleapis";
 import { GaxiosPromise } from "googleapis/build/src/apis/abusiveexperiencereport";
 
 import { logger } from "../../config/logger";
-import { GameCacheDocumentInterface } from "../../interfaces/cache.interface";
-
-const from = "from Google Drive API";
 
 export class DocumentOutput {
+    private from = "from Google Drive API";
+
     private drive: drive_v3.Drive;
+    private schema: drive_v3.Schema$FileList | undefined;
 
     constructor() {
         this.drive = this.authAndGetService();
     }
 
-    public async getCache(fileName: string): Promise<GameCacheDocumentInterface | null> {
-        const id = (await this.getAll()).data.files?.find(schema => schema.name === fileName)?.id;
+    public async getDocument(fileName: string): Promise<Object | null> {
+        const id = await this.getFileId(fileName);
 
         if (id) {
             try {
-                const document: GameCacheDocumentInterface = Object((await this.getFile(id)).data);
-                return document;
+                return Object((await this.getFile(id)).data);
             } catch (error) {
-                throw new Error(`Can not parse data to JavaScript Object ${from}`);
+                throw new Error(`Can not parse data to JavaScript Object ${this.from}`);
             }
         } else {
-            logger.warn(`File ID [${id}] not found ${from}`);
+            logger.warn(`File name [${fileName}] not found ${this.from}`);
             return null;
         }
     }
@@ -43,19 +42,39 @@ export class DocumentOutput {
 
             return google.drive({ version: "v3", auth });
         } catch (error) {
-            throw new Error(`Auth. error ${from}`);
+            throw new Error(`Auth. error ${this.from}`);
         }
     };
 
-    private async getAll(): GaxiosPromise<drive_v3.Schema$FileList> {
-        try {
-            return await this.drive.files.list();
-        } catch (error) {
-            throw new Error(`Can not retrieve files ${from}`);
+    private async getSchemaFileList(): Promise<drive_v3.Schema$FileList> {
+        if (this.schema) {
+            return this.schema;
+        } else {
+            try {
+                this.schema = (await this.drive.files.list()).data;
+                return this.schema;
+            } catch (error) {
+                throw new Error(`Can not retrieve file schema ${this.from}`);
+            }
         }
     }
 
-    private async getFile(id: string) {
+    private async getFileId(fileName: string) {
+        try {
+            const id = (await this.getSchemaFileList()).files?.find(schema => schema.name === fileName)?.id;
+            if (id) {
+                return id;
+            }
+        } catch (error) {
+            throw new Error(`Can not retrieve file from schema file list ${this.from}`);
+        }
+    }
+
+    private async getFile(id: string): GaxiosPromise<drive_v3.Schema$File> {
         return await this.drive.files.get({ fileId: id }, { params: { alt: "media" } });
+    }
+
+    private async updateFile(id: string): GaxiosPromise<drive_v3.Schema$File> {
+        return await this.drive.files.update({ fileId: id }, { params: { alt: "media" } });
     }
 }
