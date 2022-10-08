@@ -12,6 +12,9 @@ RUN yarn install --frozen-lockfile
 # Bundle built app source
 COPY build .
 
+ARG VERSION=latest
+ENV VERSION=${VERSION}
+
 ENV NODE_ENV=production
 
 EXPOSE 8080
