@@ -1,5 +1,6 @@
 import { EpicGamesMapperHelper } from "../helpers/mappers/epic-games.mapper";
-import { ElementToSendInterface, EpicGamesDatasInterface } from "../interfaces/client.interface";
+import { GameCacheDocumentInterface } from "../interfaces/cache.interface";
+import {  EpicGamesDatasInterface } from "../interfaces/client.interface";
 import fs from "fs";
 
 import { logger } from "../config/logger";
@@ -12,7 +13,7 @@ export class ClientService {
      */
     public updateCache(data: EpicGamesDatasInterface) {
         try {
-            const elementsToSave: ElementToSendInterface[] = EpicGamesMapperHelper.map(data);
+            const elementsToSave: GameCacheDocumentInterface[] = EpicGamesMapperHelper.map(data);
             
             if (elementsToSave.length) {
                 fs.writeFileSync("data/cache.epicgames.json", JSON.stringify(elementsToSave, null, 4));

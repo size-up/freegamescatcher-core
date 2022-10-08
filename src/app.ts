@@ -2,7 +2,7 @@ import express, { NextFunction, Request, Response } from "express";
 import { Express } from "express-serve-static-core";
 import { readFileSync } from "fs";
 
-import ReceiverRouter from "./inputs/http/receiver.controller";
+import ReceiverController from "./inputs/http/receiver.controller";
 import DefaultMiddleware from "./middlewares/default.middleware";
 
 import { logger } from "./config/logger";
@@ -41,7 +41,7 @@ class Application {
             response.json(application);
         });
 
-        this.http.use("/receivers", new ReceiverRouter().get());
+        this.http.use("/receivers", new ReceiverController().get());
     }
 
     /**
@@ -57,7 +57,6 @@ class Application {
     private start(port: number): void {
         this.http.listen(port, () => {
             logger.info(`${packageJson.displayName} is now listening on port [${port}].`);
-            logger.info("--- --- --- --- --- --- --- --- --- --- --- --- --");
         });
     }
 }

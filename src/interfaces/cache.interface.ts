@@ -1,4 +1,4 @@
-export interface EpicGamesCacheDocument {
+export interface GameCacheDocumentInterface {
     title: string;
     description: string;
     imageUrl: string;

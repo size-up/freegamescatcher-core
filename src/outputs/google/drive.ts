@@ -2,7 +2,7 @@ import { drive_v3, google } from "googleapis";
 import { GaxiosPromise } from "googleapis/build/src/apis/abusiveexperiencereport";
 
 import { logger } from "../../config/logger";
-import { EpicGamesCacheDocument } from "../../interfaces/cache.interface";
+import { GameCacheDocumentInterface } from "../../interfaces/cache.interface";
 
 const from = "from Google Drive API";
 
@@ -13,12 +13,12 @@ export class DocumentOutput {
         this.drive = this.authAndGetService();
     }
 
-    public async getCache(fileName: string): Promise<EpicGamesCacheDocument | null> {
+    public async getCache(fileName: string): Promise<GameCacheDocumentInterface | null> {
         const id = (await this.getAll()).data.files?.find(schema => schema.name === fileName)?.id;
 
         if (id) {
             try {
-                const document: EpicGamesCacheDocument = Object((await this.getFile(id)).data);
+                const document: GameCacheDocumentInterface = Object((await this.getFile(id)).data);
                 return document;
             } catch (error) {
                 throw new Error(`Can not parse data to JavaScript Object ${from}`);

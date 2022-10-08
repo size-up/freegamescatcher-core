@@ -1,7 +1,7 @@
 import { NextFunction, Request, Response, Router } from "express";
 import ReceiverService from "../../services/receiver.service";
 
-export default class ReceiverRouter {
+export default class ReceiverController {
     private router = Router();
     private receiverService: ReceiverService = new ReceiverService();
 

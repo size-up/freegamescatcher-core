@@ -1,6 +1,6 @@
-import { ElementToSendInterface } from "./client.interface";
+import { GameCacheDocumentInterface } from "./cache.interface";
 
 export interface DatasToCompileInterface {
-    availableGames: ElementToSendInterface[]
-    nextGames: ElementToSendInterface[]
+    availableGames: GameCacheDocumentInterface[]
+    nextGames: GameCacheDocumentInterface[]
 }
