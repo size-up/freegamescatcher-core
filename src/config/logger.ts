@@ -1,18 +1,22 @@
 import winston from "winston";
+
 import packageJson from "../../package.json";
+import { version } from "./information";
 
 function setupLogger(): winston.Logger {
-    const metadata = {
-        "app.name": packageJson.name,
-        "app.version": packageJson.version,
-    };
-
     /**
      * If the application is running is production mode,
      * the logger format will be JSON, instead, it will
      * be something more colored and easier to read.
      */
     if (process.env.NODE_ENV === "production") {
+        const metadata = {
+            app : {
+                name: packageJson.name,
+                version: version(),
+            }
+        };
+
         return winston.createLogger({
             level: "info",
             format: winston.format.json(),

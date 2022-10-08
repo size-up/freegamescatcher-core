@@ -6,6 +6,8 @@ import ReceiverController from "./inputs/http/receiver.controller";
 import DefaultMiddleware from "./middlewares/default.middleware";
 
 import packageJson from "../package.json";
+import { version } from "./config/information";
+
 import { logger } from "./config/logger";
 
 class Application {
@@ -21,7 +23,7 @@ class Application {
 
     private welcome(): void {
         console.info(readFileSync("src/assets/banner.txt", { encoding: "utf8" }));
-        logger.info(`🔖 Application version: [${packageJson.version}].`);
+        logger.info(`🔖 Application version: [${version()}].`);
         logger.info(`${packageJson.description}`);
     }
     
@@ -36,7 +38,7 @@ class Application {
             const application = {
                 name: packageJson.displayName,
                 description: packageJson.description,
-                version: packageJson.version,
+                version: version(),
             };
             response.json(application);
         });
