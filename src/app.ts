@@ -1,12 +1,12 @@
-import express, { NextFunction, Request, Response } from "express";
+import express, { Request, Response } from "express";
 import { Express } from "express-serve-static-core";
 import { readFileSync } from "fs";
 
 import ReceiverController from "./inputs/http/receiver.controller";
 import DefaultMiddleware from "./middlewares/default.middleware";
 
-import { logger } from "./config/logger";
 import packageJson from "../package.json";
+import { logger } from "./config/logger";
 
 class Application {
     private http: Express = express();
