@@ -1,3 +1,8 @@
+# [v1.1.1](https://github.com/size-up/freegamescatcher/compare/v1.1.0...v1.1.1) (2022-10-08)
+
+## 🐛 Bug fixes
+- [`185a6d1`](https://github.com/size-up/freegamescatcher/commit/185a6d1)  Export version to image (#34) (Issues: [`#34`](https://github.com/size-up/freegamescatcher/issues/34))
+
 # [v1.1.0](https://github.com/size-up/freegamescatcher/compare/v1.0.0...v1.1.0) (2022-10-08)
 
 ## ✨ Introduce new features
