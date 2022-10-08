@@ -43,6 +43,12 @@ jobs:
       - name: ⚙️ Build application
         run: yarn run build
 
+      - name: 📤 Upload build artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: build
+          path: ./build
+
       - if: steps.yarn-cache.outputs.cache-hit != 'true'
         name: 🗃 List the state of node modules
         continue-on-error: true
@@ -96,22 +102,11 @@ jobs:
       - name: 📥 Checkout repository
         uses: actions/checkout@v3
 
-      - name: 🌐 Use Node.js LTS
-        uses: actions/setup-node@v3
+      - name: 📥 Download build artifact
+        uses: actions/download-artifact@v3
         with:
-          node-version: lts/*
-
-      - name: 🗂 Cache "node_modules"
-        uses: actions/cache@v3
-        id: yarn-cache # use this to check for `cache-hit` (`steps.yarn-cache.outputs.cache-hit != 'true'`)
-        with:
-          path: "**/node_modules"
-          key: ${{ runner.arch }}-${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
-          restore-keys: |
-            ${{ runner.arch }}-${{ runner.os }}-yarn-
-
-      - name: ⚙️ Build application
-        run: yarn run build
+          name: build
+          path: ./build
 
       - name: ⚙️ Set up QEMU
         uses: docker/setup-qemu-action@v2
