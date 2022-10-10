@@ -1,3 +1,11 @@
+# [v1.1.2](https://github.com/size-up/freegamescatcher/compare/v1.1.1...v1.1.2) (2022-10-10)
+
+## 🔧 Add or update configuration files
+- [`986086e`](https://github.com/size-up/freegamescatcher/commit/986086e)  Optimize &#x60;VERSION&#x60; env. variable 
+
+## 📝 Add or update documentation
+- [`49a84be`](https://github.com/size-up/freegamescatcher/commit/49a84be)  Update &#x60;README.md&#x60; with application versionning
+
 # [v1.1.1](https://github.com/size-up/freegamescatcher/compare/v1.1.0...v1.1.1) (2022-10-08)
 
 ## 🐛 Bug fixes
