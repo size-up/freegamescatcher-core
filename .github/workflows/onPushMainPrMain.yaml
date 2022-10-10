@@ -126,7 +126,7 @@ jobs:
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/${{ env.APPLICATION_NAME }}:latest
           build-args: |
-            VERSION="latest"
+            VERSION=latest
 
       - name: 🐳 Build and push image ${{ needs.release.outputs.version }}
         uses: docker/build-push-action@v3
@@ -137,7 +137,7 @@ jobs:
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/${{ env.APPLICATION_NAME }}:${{ needs.release.outputs.version }}
           build-args: |
-            VERSION="${{ needs.release.outputs.version }}"
+            VERSION=${{ needs.release.outputs.version }}
 
   deploy-prod:
     name: 🚀 Deploy v${{ needs.release.outputs.version }} to prod.
