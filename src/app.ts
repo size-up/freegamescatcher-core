@@ -4,6 +4,7 @@ import { readFileSync } from "fs";
 
 import ReceiverController from "./inputs/http/receiver.controller";
 import DefaultMiddleware from "./middlewares/default.middleware";
+import ErrorMiddleware from "./middlewares/error.middleware";
 
 import packageJson from "../package.json";
 import { version } from "./config/information";
@@ -16,15 +17,23 @@ class Application {
 
     constructor() {
         this.welcome(); // print welcome message
+        this.default(); // define default middleware
         this.routes(); // define all routes
-        this.middlewares(); // define all middlewares
+        this.error(); // define error middleware
         this.start(this.port); // start the application
     }
 
     private welcome(): void {
         console.info(readFileSync("src/assets/banner.txt", { encoding: "utf8" }));
-        logger.info(`🔖 Application version: [${version()}].`);
+        logger.info(`🔖 Application version: [${version()}]`);
         logger.info(`${packageJson.description}`);
+    }
+
+    /**
+     * Define default middlewares.
+     */
+    private default(): void {
+        new DefaultMiddleware(this.http);
     }
     
     /**
@@ -37,28 +46,29 @@ class Application {
         this.http.get("/", (request: Request, response: Response) => {
             const application = {
                 name: packageJson.displayName,
-                description: packageJson.description,
                 version: version(),
+                description: packageJson.description,
+                repository: packageJson.repository.url
             };
-            response.json(application);
+            response.status(200).json(application);
         });
 
         this.http.use("/receivers", new ReceiverController().get());
     }
 
     /**
-     * Define all middlewares.
+     * Define error middlewares.
      */
-    private middlewares(): void {
-        new DefaultMiddleware(this.http);
+    private error(): void {
+        new ErrorMiddleware(this.http);
     }
 
     /**
-     * Init input express HTTP controller
+     * Init input express HTTP controller.
      */
     private start(port: number): void {
         this.http.listen(port, () => {
-            logger.info(`${packageJson.displayName} is now listening on port [${port}].`);
+            logger.info(`${packageJson.displayName} is now listening on port [${port}]`);
         });
     }
 }
