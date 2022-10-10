@@ -13,7 +13,7 @@ RUN yarn install --frozen-lockfile
 COPY build .
 
 ARG VERSION=latest
-ENV VERSION="${VERSION}"
+ENV VERSION=${VERSION}
 
 ENV NODE_ENV=production
 
