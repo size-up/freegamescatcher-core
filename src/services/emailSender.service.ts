@@ -15,9 +15,9 @@ interface DatasToCompileInterface {
 export class EmailSenderService {
     private emailer: Emailer;
     private config: EmailConfigInterface;
-    private datas: GameCacheDocumentInterface[];
+    private datas: GameCacheDocumentInterface[] = [];
 
-    constructor(datas: GameCacheDocumentInterface[]) {
+    constructor() {
         this.config = {
             host: process.env.SMTP_HOST,
             port: Number(process.env.SMTP_PORT),
@@ -26,7 +26,6 @@ export class EmailSenderService {
                 pass: process.env.SMTP_PASSWORD
             }
         };
-        this.datas = datas;
         this.emailer = new Emailer(this.config);
     }
 
@@ -37,8 +36,9 @@ export class EmailSenderService {
      * 
      * @author Francisco Fernandez <francisco59553@gmail.com>
      */
-    public async sendEmail(subject: string, receivers: string[]) {
+    public async sendEmail(subject: string, receivers: string[], datas: GameCacheDocumentInterface[]) {
         try {
+            this.datas = datas;
             logger.info("Preparing transporter...");
             // Create transporter
             const transporterResponse = await this.prepareTransporter();
