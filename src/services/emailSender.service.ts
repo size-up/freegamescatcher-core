@@ -1,21 +1,24 @@
 import fs from "fs";
 import handlebars from "handlebars";
-import nodemailer from "nodemailer";
-import SMTPTransport from "nodemailer/lib/smtp-transport";
-
 import { GameCacheDocumentInterface } from "../interfaces/cache.interface";
-import { ClientPlatformType } from "../interfaces/client.interface";
-import { DatasToCompileInterface } from "../interfaces/data.interface";
-
 import packageJson from "../../package.json";
 import { logger } from "../config/logger";
+import { Emailer } from "../outputs/emailer/emailer";
+import { EmailConfigInterface, EmailOptionsInterface, EmailResponseInterface } from "../interfaces/email.interface";
+
+interface DatasToCompileInterface {
+    availableGames: GameCacheDocumentInterface[]
+    nextGames: GameCacheDocumentInterface[]
+}
+
 
 export class EmailSenderService {
-    private transporter: nodemailer.Transporter<SMTPTransport.SentMessageInfo>;
-    
-    constructor() {
-        // TODO: Delocate this in env or config file
-        const config = {
+    private emailer: Emailer;
+    private config: EmailConfigInterface;
+    private datas: GameCacheDocumentInterface[];
+
+    constructor(datas: GameCacheDocumentInterface[]) {
+        this.config = {
             host: process.env.SMTP_HOST,
             port: Number(process.env.SMTP_PORT),
             auth: {
@@ -23,55 +26,108 @@ export class EmailSenderService {
                 pass: process.env.SMTP_PASSWORD
             }
         };
-        this.transporter = nodemailer.createTransport(config);
-    }
-
-    private checkEmailAvailability(): Promise<string | Error> {
-        return new Promise<string | Error>((resolve, reject) => {
-            this.transporter.verify((error, success) => {
-                return error ? reject(`Error while verifying transporter. Error: ${error.message}`) : resolve(`Mailer is ready to take messages: ${success}`);
-            });
-        });
+        this.datas = datas;
+        this.emailer = new Emailer(this.config);
     }
 
     /**
-     * Method to send notification emails to subscribers
+     * Method to call for sending notifications emails.
+     * @param subject Email object.
+     * @param receivers List of emails.
      * 
-     * @param {ClientPlatformType} platform Platform where the datas comming from 
-     * @param {string} subject Email's title
+     * @author Francisco Fernandez <francisco59553@gmail.com>
      */
-    sendMail(platform: ClientPlatformType, subject: string, receivers: string[]): void {
-        this.checkEmailAvailability().then(res => {
-            logger.info(res);
-            const datas: GameCacheDocumentInterface[] = JSON.parse(fs.readFileSync(`data/cache.${platform}.json`, { encoding: "utf8" }));
-    
-            const templateRead = fs.readFileSync(`src/templates/email.${platform}.template.hbs`, { encoding: "utf8" });
-            const datasToCompile = this.filterDatasByDate(datas);
-    
-            const template = handlebars.compile(templateRead);
-            const templateToSend = template(datasToCompile);
-    
-            const mailOptions = {
-                sender: packageJson.displayName,
-                from: packageJson.author.email,
-                to: receivers,
-                subject: subject,
-                html: templateToSend,
-            };
-            
-            this.transporter.sendMail(mailOptions, (error, data) => {
-                error ? logger.error(`Error while sending emails: ${error}`) : logger.info("Emails are sent correctly");
+    public async sendEmail(subject: string, receivers: string[]) {
+        try {
+            logger.info("Preparing transporter...");
+            // Create transporter
+            const transporterResponse = await this.prepareTransporter();
+            logger.info(`Transporter response : ${transporterResponse}`);
+            // Create email template
+            const emailOptions: EmailOptionsInterface = this.prepareTemplate(subject);
+            logger.info("Sending emails...");
+
+            // Prepare receiver list with options
+            const $emailsToSend: Promise<EmailResponseInterface>[] = receivers.map(element => {
+                return this.emailer.sendEmail({ ...emailOptions, to: [element] });
             });
-        });
+
+            // Send all emails
+            const sendingStatus = await Promise.all($emailsToSend);
+            // Check response from every send email
+            this.verifyEmailSent(sendingStatus, receivers);
+
+        } catch (err) {
+            // Check if error came from email send...
+            if (Array.isArray(err)) {
+                err.forEach((emailResponse: EmailResponseInterface, index) => {
+                    logger.error(`Email ${++index} : ${emailResponse.failed}`);
+                });
+                logger.error("Error while sending email : No email could be sent");
+            // ... Or other
+            } else {
+                logger.error(`Error while sending emails : ${err}`);
+            }
+        }
     }
 
-    private filterDatasByDate(datas: GameCacheDocumentInterface[]): DatasToCompileInterface {
+    /**
+     * Method to verify the availablity of transporter and retry connection if error.
+     * 
+     * @author Francisco Fernandez <francisco59553@gmail.com>
+     */
+    private async prepareTransporter(): Promise<string> {
+        let retry = 3;
+        let availablity = await this.emailer.checkTransporterAvailability();
+        while (retry > 0) {
+            if (availablity.failed) {
+                retry--;
+                logger.warn("Checking transporter failed. Retrying...");
+                availablity = await this.emailer.checkTransporterAvailability();
+            } else {
+                retry = 0;
+                return (await this.emailer.checkTransporterAvailability()).success;
+            }
+        }
+        throw (await this.emailer.checkTransporterAvailability()).failed;
+    }
+
+    /**
+     * Method to build template with datas received from constructor.
+     * @param subject Email subject.
+     * 
+     * @author Francisco Fernandez <francisco59553@gmail.com>
+     */
+    private prepareTemplate(subject: string) {
+        const templateRead = fs.readFileSync("src/templates/email.template.hbs", { encoding: "utf8" });
+        const datasToCompile = this.filterDatasByDate();
+    
+        const template = handlebars.compile(templateRead);
+        const templateToSend = template(datasToCompile);
+    
+        const mailOptions: EmailOptionsInterface = {
+            sender: packageJson.displayName,
+            from: packageJson.author.email,
+            to: [],
+            subject: subject,
+            html: templateToSend,
+        };
+
+        return mailOptions;
+    }
+
+    /**
+     * Method to separate games available now and next games.
+     * 
+     * @author Francisco Fernandez <francisco59553@gmail.com>
+     */
+    private filterDatasByDate(): DatasToCompileInterface {
         const datasToCompile: DatasToCompileInterface = {
             availableGames: [],
             nextGames: []
         };
 
-        datas.forEach(element => {
+        this.datas.forEach(element => {
             const gameStartDate = new Date(element.promotion.startDate);
             if (gameStartDate > new Date()) {
                 datasToCompile.nextGames.push(element);
@@ -89,5 +145,30 @@ export class EmailSenderService {
         });
 
         return datasToCompile;
+    }
+
+    /**
+     * Method to check if emails are correctly sent.
+     * @param sendingStatus Response from transporter after sending emails. 
+     * @param receivers List of emails receivers.
+     * 
+     * @author Francisco Fernandez <francisco59553@gmail.com>
+     */
+    private verifyEmailSent(sendingStatus: EmailResponseInterface[], receivers: string[]) {
+        let countEmailsNoSent = 0;
+        sendingStatus.forEach(response => {
+            if (response.failed) {
+                countEmailsNoSent++;
+                logger.error(`Transporter response : ${response.failed} for [${response.receiver}]`);
+            } else {
+                logger.info(`Transporter response : email sent to [${response.receiver}]`);
+            }
+        });
+    
+        if (countEmailsNoSent !== 0 && countEmailsNoSent !== receivers.length) {
+            logger.warn(`${countEmailsNoSent} / ${receivers.length} emails couldn't be sent`);
+        } else if (countEmailsNoSent === receivers.length) {
+            throw sendingStatus;
+        }
     }
 }
