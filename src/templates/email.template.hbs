@@ -10,7 +10,7 @@
 
 <body style="color: whitesmoke; font-family: sans-serif;">
     <center>
-        <table style="background-color: #1e1e1e; width: 550px;" role="presentation">
+        <table style="background-color: #1e1e1e; width: 600px;" role="presentation">
             <tr>
                 <td align="center">
                     <a href="https://store.epicgames.com/fr/free-games"
@@ -20,12 +20,20 @@
                 </td>
             </tr>
             <tr>
+                <td align="center">
+                    <a href="http://localhost:8080/receivers/delete/{{ this.uuid }}" target="_blank" rel="noopener noreferrer">
+                        <button>SE DESINSCRIRE</button>
+                    </a>
+                </td>
+            </tr>
+            <br>
+            <tr>
                 <td>
                     <hr>
                 </td>
             </tr>
         </table>
-        <table style="background-color: #1e1e1e; width: 550px;" role="presentation">
+        <table style="background-color: #1e1e1e; width: 600px;" role="presentation">
             <tbody>
                 {{#each availableGames}}
                 <tr>
@@ -77,14 +85,14 @@
                 {{/each}}
             </tbody>
         </table>
-        <table style="background-color: #1e1e1e; width: 550px;" role="presentation">
+        <table style="background-color: #1e1e1e; width: 600px;" role="presentation">
             <tr>
                 <td align="center">
                     <h1>Prochainnement</h1>
                 </td>
             </tr>
         </table>
-        <table style="background-color: #1e1e1e; width: 550px;" role="presentation">
+        <table style="background-color: #1e1e1e; width: 600px;" role="presentation">
             <tbody>
                 {{#each nextGames}}
                 <tr>

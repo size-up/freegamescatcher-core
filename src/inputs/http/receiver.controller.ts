@@ -13,9 +13,11 @@ export default class ReceiverController {
         /**
          * Get all receivers
          */
-        this.router.get( "/", (request: Request, response: Response, next: NextFunction) => {
+        this.router.get( "/", async (request: Request, response: Response, next: NextFunction) => {
             try {
-                response.status(200).json(this.receiverService.getAll());
+                // TODO: Secure this route !
+                // return response.status(200).json(await this.receiverService.getAll());
+                return response.status(200).json({ message: "Not accessible" });
             } catch (error) {
                 next(error);
             }
@@ -38,10 +40,13 @@ export default class ReceiverController {
         /**
          * Delete one receiver
          */
-        this.router.delete( "/:id", (request: Request, response: Response, next: NextFunction) => {
+        this.router.get( "/delete/:uuid", async (request: Request, response: Response, next: NextFunction) => {
             try {
-                this.receiverService.delete(request.params.id);
-                response.status(200).json({ status: "Receiver deleted." });
+                const deleted: boolean = await this.receiverService.delete(request.params.uuid);
+                if (deleted) {
+                    return response.status(200).send("<h2>Votre email ne figurera plus dans la liste des notifiés</h2>");
+                }
+                throw new Error("Error during deleting receiver from subscribers list");
             } catch (error) {
                 next(error);
             }
