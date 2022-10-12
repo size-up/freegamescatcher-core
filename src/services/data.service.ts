@@ -3,6 +3,7 @@ import { DocumentOutput } from "../outputs/google/drive";
 import { GameCacheDocumentInterface } from "../interfaces/cache.interface";
 
 import { logger } from "../config/logger";
+import { ReceiverInterface } from "../interfaces/receiver.interface";
 
 export class DataService {
     private static service: DataService;
@@ -64,16 +65,33 @@ export class DataService {
         throw new Error("Method not implemented.");
     }
 
-    public getReceivers(name: string) {
-        throw new Error("Method not implemented.");
+    public async getReceivers(): Promise<ReceiverInterface[] | null> {
+        try {
+            const receivers: ReceiverInterface[] = await Object(this.documentOutput.getDocument(this.metadata.receivers.name));
+            return receivers;
+        } catch (error) {
+            logger.error(error);
+            return null;
+        }
     }
 
     public updateReceiver() {
         throw new Error("Method not implemented.");
     }
 
-    public deleteReceiver() {
-        throw new Error("Method not implemented.");
+    public async deleteReceiver(uuid: string): Promise<boolean> {
+        try {
+            const receivers = await this.getReceivers();
+            receivers?.splice(receivers.findIndex(element => element.uuid === uuid), 1);
+            await this.documentOutput.updateDocument(
+                this.metadata.receivers.name,
+                JSON.stringify(receivers, null, 4)
+            );
+            return true;
+        } catch (error) {
+            logger.error(error);
+            return false;
+        }
     }
 
     public static getInstance(): DataService {

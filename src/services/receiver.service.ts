@@ -1,15 +1,18 @@
 import { ReceiverInterface } from "../interfaces/receiver.interface";
+import { DataService } from "./data.service";
 
 export default class ReceiverService {
-    public getAll(): Array<ReceiverInterface> | unknown {
-        throw new Error("Method not implemented.");
+    private dataService = DataService.getInstance();
+
+    public getAll(): Promise<ReceiverInterface[] | null> {
+        return this.dataService.getReceivers();;
     }
 
     public create(body: ReceiverInterface): boolean | unknown {
         throw new Error("Method not implemented.");
     }
 
-    public delete(id: string): boolean | unknown {
-        throw new Error("Method not implemented.");
+    public delete(uuid: string): Promise<boolean> {
+        return this.dataService.deleteReceiver(uuid);
     }
 }
