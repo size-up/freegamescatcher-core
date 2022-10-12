@@ -18,7 +18,7 @@ export class DocumentOutput {
 
         if (id) {
             try {
-                return await this.drive.files.get({ fileId: id }, { params: { alt: "media" } });
+                return (await this.drive.files.get({ fileId: id }, { params: { alt: "media" } })).data;
             } catch (error) {
                 throw new Error(`Can not parse data to JavaScript Object ${this.from}`);
             }
