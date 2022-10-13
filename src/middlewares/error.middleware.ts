@@ -2,6 +2,8 @@ import { NextFunction, Request, Response } from "express";
 import { Express } from "express-serve-static-core";
 
 import { logger } from "../config/logger";
+import ForbiddenError from "../inputs/errors/forbidden.error";
+import UnauthorizedError from "../inputs/errors/unauthorized.error";
 
 export default class ErrorMiddleware {
 
@@ -55,13 +57,20 @@ export default class ErrorMiddleware {
             };
 
             /**
-             * HTTP response sent.
+             * Handle custom errors.
              */
-            response.status(information.http.code).send({
-                message: message,
-                error: error.message,
-            });
-            logger.error(message, information);
+            if (error instanceof UnauthorizedError || error instanceof ForbiddenError) {
+                response.status(error.status).send({ message: error.message, details: error.details });
+            } else {
+                /**
+                 * Handle all other errors.
+                 */
+                response.status(information.http.code).send({
+                    message: message,
+                    error: error.message,
+                });
+                logger.error(message, information);
+            }
 
             next(); // call next middleware
         });
