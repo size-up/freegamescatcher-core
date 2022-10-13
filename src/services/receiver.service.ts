@@ -5,7 +5,7 @@ export default class ReceiverService {
     private dataService = DataService.getInstance();
 
     public getAll(): Promise<ReceiverInterface[] | null> {
-        return this.dataService.getReceivers();;
+        return this.dataService.getReceivers();
     }
 
     public create(body: ReceiverInterface): boolean | unknown {

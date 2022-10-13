@@ -11,20 +11,6 @@ export default class ReceiverController {
 
     private initRoutes(): void {
         /**
-         * Get all receivers
-         */
-        this.router.get( "/", async (request: Request, response: Response, next: NextFunction) => {
-            try {
-                // TODO: Secure this route !
-                // return response.status(200).json(await this.receiverService.getAll());
-                return response.status(200).json({ message: "Not accessible" });
-            } catch (error) {
-                next(error);
-            }
-        }
-        );
-
-        /**
          * Create one receiver
          */
         this.router.post( "/", (request: Request, response: Response, next: NextFunction) => {
