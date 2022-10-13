@@ -17,7 +17,6 @@ export class EmailSenderService {
     private emailer: Emailer;
     private config: EmailConfigInterface;
     private datas: GameCacheDocumentInterface[] = [];
-    private receivers: ReceiverInterface[] | null = [];
 
     constructor() {
         this.config = {
@@ -42,7 +41,7 @@ export class EmailSenderService {
     public async sendEmails(subject: string, receivers: ReceiverInterface[], datas: GameCacheDocumentInterface[]) {
         try {
             this.datas = datas;
-            const emailList = this.receivers?.map(receiver => receiver.email);
+            const emailList = receivers?.map(receiver => receiver.email);
             if (emailList) {
                 logger.info("Preparing transporter...");
 
@@ -56,7 +55,7 @@ export class EmailSenderService {
                 
                 const $emailsToSend = emailList.map(element => {
                     // Create email template
-                    datasToCompile.uuid = this.receivers?.find(el => el.email = element)?.uuid;
+                    datasToCompile.uuid = receivers?.find(el => el.email = element)?.uuid;
                     const emailOptions: EmailOptionsInterface = this.prepareTemplate(subject, datasToCompile);
                     return this.emailer.sendEmail({ ...emailOptions, to: [element] });
                 });
