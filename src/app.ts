@@ -2,7 +2,7 @@ import express, { Request, Response } from "express";
 import { Express } from "express-serve-static-core";
 import { readFileSync } from "fs";
 
-import ReceiverController from "./inputs/http/receiver.controller";
+import ReceiverController from "./inputs/controllers/receiver.controller";
 import DefaultMiddleware from "./middlewares/default.middleware";
 import ErrorMiddleware from "./middlewares/error.middleware";
 
