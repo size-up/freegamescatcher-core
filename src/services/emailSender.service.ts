@@ -25,6 +25,9 @@ export class EmailSenderService {
             auth: {
                 user: process.env.SMTP_USER,
                 pass: process.env.SMTP_PASSWORD
+            },
+            tls: {
+                rejectUnauthorized: false // see https://stackoverflow.com/questions/55167741/nodemailer-ms-exchaneg-server-error-unable-to-verify-the-first-certificate
             }
         };
         this.emailer = new Emailer(this.config);
@@ -38,7 +41,7 @@ export class EmailSenderService {
      * 
      * @author Francisco Fernandez <francisco59553@gmail.com>
      */
-    public async sendEmails(subject: string, receivers: ReceiverInterface[], datas: GameCacheDocumentInterface[]) {
+    public async sendEmails(subject: string, receivers: ReceiverInterface[], datas: GameCacheDocumentInterface[]): Promise<void> {
         try {
             this.datas = datas;
             const emailList = receivers?.map(receiver => receiver.email);
@@ -68,16 +71,21 @@ export class EmailSenderService {
             } else {
                 throw new Error("No emails provided");
             }
-        } catch (err) {
+        } catch (error) {
             // Check if error came from email send...
-            if (Array.isArray(err)) {
-                err.forEach((emailResponse: EmailResponseInterface, index) => {
+            if (Array.isArray(error)) {
+                error.forEach((emailResponse: EmailResponseInterface, index) => {
                     logger.error(`Email ${++index} : ${emailResponse.failed}`);
+                    throw new Error(`Email index ${index} : ${emailResponse.failed}`);
                 });
-                logger.error("Error while sending email : No email could be sent");
-            // ... Or other
+                const message = "Error while sending email : No email could be sent";
+                logger.error(message);
+                throw new Error(message);
+                // ... Or other
             } else {
-                logger.error(`Error while sending emails : ${err}`);
+                const message = `Error while sending emails : ${error}`;
+                logger.error(message);
+                throw new Error(message);
             }
         }
     }
