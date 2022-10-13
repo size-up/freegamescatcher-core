@@ -5,7 +5,10 @@ export interface EmailConfigInterface {
     auth: {
         user?: string,
         pass?: string
-    }
+    },
+    tls: {
+        rejectUnauthorized: boolean
+    } 
 }
 
 //////////// EMAIL OPTIONS ////////////
