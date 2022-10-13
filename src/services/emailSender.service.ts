@@ -1,12 +1,11 @@
 import fs from "fs";
 import handlebars from "handlebars";
-import { GameCacheDocumentInterface } from "../interfaces/cache.interface";
 import packageJson from "../../package.json";
 import { logger } from "../config/logger";
-import { Emailer } from "../outputs/emailer/emailer";
+import { GameCacheDocumentInterface } from "../interfaces/cache.interface";
 import { EmailConfigInterface, EmailOptionsInterface, EmailResponseInterface } from "../interfaces/email.interface";
-import { DataService } from "./data.service";
 import { ReceiverInterface } from "../interfaces/receiver.interface";
+import { Emailer } from "../outputs/emailer/emailer";
 
 interface DatasToCompileInterface {
     uuid: string | undefined,
@@ -14,9 +13,7 @@ interface DatasToCompileInterface {
     nextGames: GameCacheDocumentInterface[]
 }
 
-
 export class EmailSenderService {
-    private dataService: DataService = DataService.getInstance();
     private emailer: Emailer;
     private config: EmailConfigInterface;
     private datas: GameCacheDocumentInterface[] = [];
@@ -36,32 +33,37 @@ export class EmailSenderService {
 
     /**
      * Method to call for sending notifications emails.
-     * @param subject Email object.
      * @param receivers List of emails.
+     * @param subject Email object.
+     * @param datas Datas to compile in template.
      * 
      * @author Francisco Fernandez <francisco59553@gmail.com>
      */
-    public async sendEmails(subject: string, datas: GameCacheDocumentInterface[]) {
+    public async sendEmails(subject: string, receivers: ReceiverInterface[], datas: GameCacheDocumentInterface[]) {
         try {
             this.datas = datas;
-            this.receivers = await this.dataService.getReceivers();
             const emailList = this.receivers?.map(receiver => receiver.email);
             if (emailList) {
                 logger.info("Preparing transporter...");
+
                 // Create transporter
                 const transporterResponse = await this.prepareTransporter();
                 logger.info(`Transporter response : ${transporterResponse}`);
                 logger.info("Sending emails...");
+                
                 // Prepare receiver list with options
                 const datasToCompile = this.buildDatasForTemplate();
+                
                 const $emailsToSend = emailList.map(element => {
                     // Create email template
                     datasToCompile.uuid = this.receivers?.find(el => el.email = element)?.uuid;
                     const emailOptions: EmailOptionsInterface = this.prepareTemplate(subject, datasToCompile);
                     return this.emailer.sendEmail({ ...emailOptions, to: [element] });
                 });
+                
                 // Send all emails
                 const sendingStatus = await Promise.all($emailsToSend);
+                
                 // Check response from every send email
                 this.verifyEmailSent(sendingStatus, emailList);
             } else {
