@@ -11,7 +11,7 @@ export default class ReceiverController {
 
     private initRoutes(): void {
         /**
-         * Create one receiver
+         * Create one receiver.
          */
         this.router.post( "/", (request: Request, response: Response, next: NextFunction) => {
             try {
@@ -24,7 +24,9 @@ export default class ReceiverController {
         );
 
         /**
-         * Delete one receiver
+         * Delete one receiver.
+         * 
+         * Warning: this route should be a DELETE request, but for the sake of email links security, it's a GET request.
          */
         this.router.get( "/delete/:uuid", async (request: Request, response: Response, next: NextFunction) => {
             try {
