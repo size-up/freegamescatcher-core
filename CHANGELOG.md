@@ -1,3 +1,16 @@
+# [v1.2.0](https://github.com/size-up/freegamescatcher/compare/v1.1.3...v1.2.0) (2022-10-14)
+
+## ✨ Introduce new features
+- [`f2d269b`](https://github.com/size-up/freegamescatcher/commit/f2d269b)  Button Unsubscribe added in email template 
+
+## 🐛 Bug fixes
+- [`091c791`](https://github.com/size-up/freegamescatcher/commit/091c791)  Missing &#x60;.data&#x60; for &#x60;getDocument&#x60; method 
+
+## ♻️ Refactor code
+- [`e6fa5d2`](https://github.com/size-up/freegamescatcher/commit/e6fa5d2)  Adapt email sender to hexagonal architecture (#37) (Issues: [`#37`](https://github.com/size-up/freegamescatcher/issues/37))
+- [`6d493fa`](https://github.com/size-up/freegamescatcher/commit/6d493fa)  Update &#x60;receiver&#x60; module 
+- [`8e259cd`](https://github.com/size-up/freegamescatcher/commit/8e259cd)  Update &#x60;emailSender&#x60; service
+
 # [v1.1.3](https://github.com/size-up/freegamescatcher/compare/v1.1.2...v1.1.3) (2022-10-10)
 
 ## 🐛 Bug fixes
