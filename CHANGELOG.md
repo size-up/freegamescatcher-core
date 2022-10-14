@@ -1,3 +1,8 @@
+# [v1.3.2](https://github.com/size-up/freegamescatcher/compare/v1.3.1...v1.3.2) (2022-10-14)
+
+## 🐛 Bug fixes
+- [`7a2a0f2`](https://github.com/size-up/freegamescatcher/commit/7a2a0f2)  Fix UUID: if wrong, the entire content file &#x60;receivers.json&#x60; was removed
+
 # [v1.3.1](https://github.com/size-up/freegamescatcher/compare/v1.3.0...v1.3.1) (2022-10-14)
 
 ## 🔒️ Fix security issues
