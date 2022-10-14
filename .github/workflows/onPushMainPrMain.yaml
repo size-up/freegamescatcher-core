@@ -126,6 +126,7 @@ jobs:
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/${{ env.APPLICATION_NAME }}:latest
           build-args: |
+            NODE_ENV=pre-production
             VERSION=latest
 
       - name: 🐳 Build and push image ${{ needs.release.outputs.version }}
