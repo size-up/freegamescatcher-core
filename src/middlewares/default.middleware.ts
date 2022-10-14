@@ -32,6 +32,15 @@ export default class DefaultMiddleware {
             logger.info("HTTP request received, see http object for details", information);
 
             /**
+             * Authorize a GET request to /receivers used by email link.
+             * It's a GET to avoid blocked popup from the email.
+             */
+            if (request.method === "GET" && request.originalUrl.startsWith("/receivers/delete")) {
+                next(); // call next middleware
+                return; // break the execution and do not check API key
+            }
+
+            /**
              * Check if the request is authorized.
              */
             if (!request.headers["x-api-key"]) {
@@ -47,7 +56,7 @@ export default class DefaultMiddleware {
                 throw new ForbiddenError();
             }
 
-            next();
+            next(); // call next middleware
         });
     }
 }
