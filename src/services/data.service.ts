@@ -82,7 +82,15 @@ export class DataService {
     public async deleteReceiver(uuid: string): Promise<boolean> {
         try {
             const receivers = await this.getReceivers();
-            receivers?.splice(receivers.findIndex(element => element.uuid === uuid), 1);
+            let index;
+            if (receivers) {
+                index = receivers.findIndex(element => element.uuid === uuid);
+                if (index >= 0) {
+                    receivers?.splice(index, 1);
+                } else {
+                    throw new Error("UUID doesn't exist");
+                }
+            }
             await this.documentOutput.updateDocument(
                 this.metadata.receivers.name,
                 JSON.stringify(receivers, null, 4)
