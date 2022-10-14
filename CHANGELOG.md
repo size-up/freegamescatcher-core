@@ -1,3 +1,14 @@
+# [v1.3.1](https://github.com/size-up/freegamescatcher/compare/v1.3.0...v1.3.1) (2022-10-14)
+
+## 🔒️ Fix security issues
+- [`534ffee`](https://github.com/size-up/freegamescatcher/commit/534ffee) ️ Authorize GET &#x60;/receivers/delete&#x60; without API key 
+
+## ♻️ Refactor code
+- [`c780fab`](https://github.com/size-up/freegamescatcher/commit/c780fab)  Refactor how to prefix by &#x60;prep-filename&#x60; 
+
+## 🚚 Move or rename resources (e.g.: files, paths, routes)
+- [`af27f82`](https://github.com/size-up/freegamescatcher/commit/af27f82)  Get &#x60;version()&#x60; from &#x60;config/application.ts&#x60;
+
 # [v1.3.0](https://github.com/size-up/freegamescatcher/compare/v1.2.0...v1.3.0) (2022-10-14)
 
 ## ✨ Introduce new features
