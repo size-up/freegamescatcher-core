@@ -1,3 +1,20 @@
+# [v1.3.0](https://github.com/size-up/freegamescatcher/compare/v1.2.0...v1.3.0) (2022-10-14)
+
+## ✨ Introduce new features
+- [`698dd54`](https://github.com/size-up/freegamescatcher/commit/698dd54)  Application service with all process engine 
+- [`dd98740`](https://github.com/size-up/freegamescatcher/commit/dd98740)  &#x60;ApplicationController&#x60; with &#x60;execute()&#x60; function 
+
+## 🐛 Bug fixes
+- [`8deeec7`](https://github.com/size-up/freegamescatcher/commit/8deeec7)  Fixing the &#x60;receivers&#x60; param 
+- [`b7e30bc`](https://github.com/size-up/freegamescatcher/commit/b7e30bc)  Use &#x60;DocumentOutput&#x60; Singleton to avoid double Google Drive API auth. 
+
+## 🔒️ Fix security issues
+- [`f4c01e2`](https://github.com/size-up/freegamescatcher/commit/f4c01e2) ️ Add security with API key implementation 
+- [`5626233`](https://github.com/size-up/freegamescatcher/commit/5626233) ️ Do not fail on invalid certs in &#x60;emailSender&#x60; service 
+
+## 📝 Add or update documentation
+- [`db25184`](https://github.com/size-up/freegamescatcher/commit/db25184)  Add &#x60;DocumentOutput&#x60; for Google Drive API documentation
+
 # [v1.2.0](https://github.com/size-up/freegamescatcher/compare/v1.1.3...v1.2.0) (2022-10-14)
 
 ## ✨ Introduce new features
