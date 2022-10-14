@@ -8,7 +8,7 @@ import DefaultMiddleware from "./middlewares/default.middleware";
 import ErrorMiddleware from "./middlewares/error.middleware";
 
 import packageJson from "../package.json";
-import { version } from "./config/information";
+import { version } from "./config/application";
 
 import { logger } from "./config/logger";
 
