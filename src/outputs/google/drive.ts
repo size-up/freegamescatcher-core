@@ -19,10 +19,12 @@ export class DocumentOutput {
      * @returns The content of the file.
      */
     public async getDocument(fileName: string): Promise<Object | null> {
+        fileName = this.verify(fileName);
         const id = await this.getFileId(fileName);
 
         if (id) {
             try {
+                logger.info(`File [${fileName}] downloaded ${this.from}`);
                 return (await this.drive.files.get({ fileId: id }, { params: { alt: "media" } })).data;
             } catch (error) {
                 throw new Error(`Can not parse data to JavaScript Object ${this.from}`);
@@ -32,12 +34,14 @@ export class DocumentOutput {
             return null;
         }
     }
-
+    
     public async updateDocument(fileName: string, content: string): Promise<void> {
+        fileName = this.verify(fileName);
         const id = await this.getFileId(fileName);
         
         if (id) {
             try {
+                logger.info(`File [${fileName}] updated ${this.from}`);
                 await this.drive.files.update({ fileId: id, media: { body: content } });
             } catch (error) {
                 throw new Error(`Error while updating file [${fileName}] ${this.from}`);
@@ -69,6 +73,19 @@ export class DocumentOutput {
     };
 
     /**
+     * Verify if the application is running in production mode or not, if not, prefix the @param fileName with "prep-filename.json".
+     * Because Google Drive API not permit to search file by folder, all prep. files are prefixed by "prep-filename.json" in the Google Drive.
+     * @param fileName The name of the file to retrieve.
+     */
+    private verify(fileName:string): string {
+        if (process.env.NODE_ENV !== "production") {
+            fileName = `prep-${fileName}`;
+            return fileName;
+        }
+        return fileName;
+    }
+
+    /**
      * This method will return the schema file list from the Google Drive API.
      * If the schema file list is already defined, it will return it.
      * @returns The Google Drive API schema file list.
@@ -94,15 +111,6 @@ export class DocumentOutput {
      * @returns The id of the file.
      */
     private async getFileId(fileName: string): Promise<string | undefined> {
-
-        /**
-         * Check if the application is in production mode or not, if not, return the prep. file id.
-         * Because Google Drive API not permit to search file by folder, all prep. files are prefixed by "prep-***".
-         */
-        if (process.env.NODE_ENV !== "production") {
-            fileName = `prep-${fileName}`;
-        }
-
         try {
             logger.info(`Searching file [${fileName}] ${this.from} ...`);
             const id = (await this.getSchemaFileList()).files?.find(schema => schema.name === fileName)?.id;
