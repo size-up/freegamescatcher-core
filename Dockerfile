@@ -7,6 +7,9 @@ WORKDIR /app
 COPY package.json .
 COPY yarn.lock .
 
+# Copy cached node_modules
+COPY node_modules .
+
 RUN yarn install --frozen-lockfile
 
 # Bundle built app source
