@@ -9,11 +9,12 @@ function setupLogger(): winston.Logger {
      * the logger format will be JSON, instead, it will
      * be something more colored and easier to read.
      */
-    if (process.env.NODE_ENV === "production") {
+    if (process.env.NODE_ENV) {
         const metadata = {
             app : {
                 name: packageJson.name,
                 version: version(),
+                environment: process.env.NODE_ENV,
             }
         };
 

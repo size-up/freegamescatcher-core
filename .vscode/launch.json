@@ -15,6 +15,17 @@
     {
       "preLaunchTask": "install",
       "command": "yarn run start",
+      "name": "Launch [pre-production]",
+      "request": "launch",
+      "type": "node-terminal",
+      "env": {
+        "NODE_ENV": "pre-production"
+      },
+      "envFile": "${workspaceFolder}/.env"
+    },
+    {
+      "preLaunchTask": "install",
+      "command": "yarn run start",
       "name": "Launch [production]",
       "request": "launch",
       "type": "node-terminal",

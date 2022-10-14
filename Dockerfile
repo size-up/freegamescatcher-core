@@ -15,7 +15,8 @@ COPY build .
 ARG VERSION=latest
 ENV VERSION=${VERSION}
 
-ENV NODE_ENV=production
+ARG NODE_ENV=production
+ENV NODE_ENV=${NODE_ENV}
 
 EXPOSE 8080
 
