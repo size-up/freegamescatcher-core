@@ -1,3 +1,8 @@
+# [v1.3.4](https://github.com/size-up/freegamescatcher/compare/v1.3.3...v1.3.4) (2022-10-14)
+
+## 🐛 Bug fixes
+- [`98578e2`](https://github.com/size-up/freegamescatcher/commit/98578e2)  Add &#x60;prep&#x60; env. with &#x60;environment&#x60; logger field
+
 # [v1.3.3](https://github.com/size-up/freegamescatcher/compare/v1.3.2...v1.3.3) (2022-10-14)
 
 ## 🐛 Bug fixes
