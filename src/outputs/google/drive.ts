@@ -94,9 +94,20 @@ export class DocumentOutput {
      * @returns The id of the file.
      */
     private async getFileId(fileName: string): Promise<string | undefined> {
+
+        /**
+         * Check if the application is in production mode or not, if not, return the prep. file id.
+         * Because Google Drive API not permit to search file by folder, all prep. files are prefixed by "prep-***".
+         */
+        if (process.env.NODE_ENV !== "production") {
+            fileName = `prep-${fileName}`;
+        }
+
         try {
+            logger.info(`Searching file [${fileName}] ${this.from} ...`);
             const id = (await this.getSchemaFileList()).files?.find(schema => schema.name === fileName)?.id;
             if (id) {
+                logger.info(`File [${fileName}] found ${this.from}`);
                 return id;
             }
         } catch (error) {
