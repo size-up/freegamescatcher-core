@@ -3,12 +3,13 @@ import { drive_v3, google } from "googleapis";
 import { logger } from "../../config/logger";
 
 export class DocumentOutput {
+    private static instance: DocumentOutput;
     private from = "from Google Drive API";
 
     private drive: drive_v3.Drive;
     private schema: drive_v3.Schema$FileList | undefined;
 
-    constructor() {
+    private constructor() {
         this.drive = this.authAndGetService();
     }
 
@@ -58,6 +59,7 @@ export class DocumentOutput {
                 scopes: scopes,
             });
 
+            logger.info(`Drive authenticated ${this.from}`);
             return google.drive({ version: "v3", auth });
         } catch (error) {
             const message = `Can not authenticate to Google Drive API ${this.from}`;
@@ -73,13 +75,15 @@ export class DocumentOutput {
      */
     private async getSchemaFileList(): Promise<drive_v3.Schema$FileList> {
         if (this.schema) {
+            logger.info(`Schema file list already defined, so use cache schema file list ${this.from}`);
             return this.schema;
         } else {
             try {
                 this.schema = (await this.drive.files.list()).data;
+                logger.info(`Schema file list retrieved ${this.from}`);
                 return this.schema;
             } catch (error) {
-                throw new Error(`Can not retrieve file schema ${this.from}`);
+                throw new Error(`Can not retrieve schema file list ${this.from}`);
             }
         }
     }
@@ -98,5 +102,9 @@ export class DocumentOutput {
         } catch (error) {
             throw new Error(`Can not retrieve file ID from schema file list ${this.from}`);
         }
+    }
+
+    public static getInstance(): DocumentOutput {
+        return this.instance || (this.instance = new this());
     }
 }
