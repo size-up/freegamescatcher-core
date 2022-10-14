@@ -6,7 +6,7 @@ import { logger } from "../config/logger";
 import { ReceiverInterface } from "../interfaces/receiver.interface";
 
 export class DataService {
-    private static service: DataService;
+    private static instance: DataService;
 
     private metadata = {
         client: {
@@ -20,7 +20,7 @@ export class DataService {
         },
     };
 
-    constructor(private documentOutput = new DocumentOutput()) {}
+    constructor(private documentOutput = DocumentOutput.getInstance()) {}
 
     public async getCache(): Promise<GameCacheDocumentInterface[] | null> {
         try {
@@ -95,6 +95,6 @@ export class DataService {
     }
 
     public static getInstance(): DataService {
-        return (this.service = this.service || new DataService());
+        return this.instance || (this.instance = new this());
     }
 }
