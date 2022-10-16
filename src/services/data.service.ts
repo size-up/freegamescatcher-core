@@ -75,8 +75,18 @@ export class DataService {
         }
     }
 
-    public updateReceiver() {
-        throw new Error("Method not implemented.");
+    public async updateReceiver(receiver: ReceiverInterface) {
+        try {
+            const receivers = await this.getReceivers();
+            receivers?.push(receiver);
+            await this.documentOutput.updateDocument(
+                this.metadata.receivers.name,
+                JSON.stringify(receivers, null, 4)
+            );
+            return receiver;
+        } catch (error) {
+            throw new Error("Error during updating receivers list");
+        }
     }
 
     public async deleteReceiver(uuid: string): Promise<boolean> {
