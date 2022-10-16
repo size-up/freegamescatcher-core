@@ -10,7 +10,8 @@ on:
     branches: ["main"]
 
 env:
-  APPLICATION_NAME: "freegamescatcher"
+  NAMESPACE_NAME: "freegamescatcher"
+  IMAGE_NAME: "freegamescatcher-core"
 
 jobs:
   build:
@@ -124,7 +125,7 @@ jobs:
           context: . # https://github.com/marketplace/actions/build-and-push-docker-images#git-context
           platforms: linux/amd64,linux/arm64
           push: true
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/${{ env.APPLICATION_NAME }}:latest
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/${{ env.IMAGE_NAME }}:latest
           build-args: |
             NODE_ENV=pre-production
             VERSION=latest
@@ -136,7 +137,7 @@ jobs:
           context: . # https://github.com/marketplace/actions/build-and-push-docker-images#git-context
           platforms: linux/amd64,linux/arm64
           push: true
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/${{ env.APPLICATION_NAME }}:${{ needs.release.outputs.version }}
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/${{ env.IMAGE_NAME }}:${{ needs.release.outputs.version }}
           build-args: |
             VERSION=${{ needs.release.outputs.version }}
 
@@ -155,7 +156,7 @@ jobs:
         env:
           KUBE_CONFIG: ${{ secrets.OCI_KUBE_CONFIG }}
         with:
-          args: rollout -n ${{ env.APPLICATION_NAME }} restart deployment ${{ env.APPLICATION_NAME }}-prep
+          args: rollout -n ${{ env.NAMESPACE_NAME }} restart deployment ${{ env.IMAGE_NAME }}-prep
 
   deploy-prod:
     name: 🚀 Deploy v${{ needs.release.outputs.version }} to prod.
@@ -174,11 +175,11 @@ jobs:
         env:
           KUBE_CONFIG: ${{ secrets.OCI_KUBE_CONFIG }}
         with:
-          args: set image -n ${{ env.APPLICATION_NAME }} deployment/${{ env.APPLICATION_NAME }}-prod ${{ env.APPLICATION_NAME }}-prod=${{ secrets.DOCKERHUB_USERNAME }}/${{ env.APPLICATION_NAME }}:${{ needs.release.outputs.version }}
+          args: set image -n ${{ env.NAMESPACE_NAME }} deployment/${{ env.IMAGE_NAME }}-prod ${{ env.IMAGE_NAME }}-prod=${{ secrets.DOCKERHUB_USERNAME }}/${{ env.IMAGE_NAME }}:${{ needs.release.outputs.version }}
 
       - name: 🚀 Deploy v${{ needs.release.outputs.version }} to production
         uses: actions-hub/kubectl@master
         env:
           KUBE_CONFIG: ${{ secrets.OCI_KUBE_CONFIG }}
         with:
-          args: rollout -n ${{ env.APPLICATION_NAME }} restart deployment ${{ env.APPLICATION_NAME }}-prod
+          args: rollout -n ${{ env.NAMESPACE_NAME }} restart deployment ${{ env.IMAGE_NAME }}-prod

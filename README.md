@@ -1,6 +1,6 @@
 # 🎮 Free Games Catcher
 
-[![CI/CD and release](https://github.com/size-up/freegamescatcher/actions/workflows/onPushMainPrMain.yaml/badge.svg)](https://github.com/size-up/freegamescatcher/actions/workflows/onPushMainPrMain.yaml)
+[![CI/CD and release](https://github.com/size-up/freegamescatcher-core/actions/workflows/onPushMainPrMain.yaml/badge.svg)](https://github.com/size-up/freegamescatcher-core/actions/workflows/onPushMainPrMain.yaml)
 
 Free Games Catcher is an application that aims to search for game sites, trigger an alert and send it to users to notify them when a free game is available.
 
@@ -19,6 +19,7 @@ This application **needs** some environment variables to provide all its feature
 ```sh
 # Application version
 VERSION="1.0.0"
+API_KEY="api-key-value" # API key to access to the API, checked by default on all routes
 
 # SMTP
 # Used to send email notification
