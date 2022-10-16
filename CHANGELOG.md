@@ -1,3 +1,15 @@
+# [v1.4.0](https://github.com/size-up/freegamescatcher-core/compare/v1.3.4...v1.4.0) (2022-10-16)
+
+## ✨ Introduce new features
+- [`92d383c`](https://github.com/size-up/freegamescatcher-core/commit/92d383c)  Add cors policy, body config (urlencoded and json) 
+- [`eaba997`](https://github.com/size-up/freegamescatcher-core/commit/eaba997)  Create method for receiver 
+
+## ♻️ Refactor code
+- [`113f2ae`](https://github.com/size-up/freegamescatcher-core/commit/113f2ae)  Refactor &#x60;bad request&#x60; checking in &#x60;defaultMiddleware&#x60; 
+
+## 🧱 Infrastructure related changes
+- [`3b775d8`](https://github.com/size-up/freegamescatcher-core/commit/3b775d8)  Add the &#x60;-core&#x60; suffix
+
 # [v1.3.4](https://github.com/size-up/freegamescatcher-core/compare/v1.3.3...v1.3.4) (2022-10-14)
 
 ## 🐛 Bug fixes
