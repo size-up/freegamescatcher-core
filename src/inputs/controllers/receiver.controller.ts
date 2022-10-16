@@ -1,4 +1,5 @@
 import { NextFunction, Request, Response, Router } from "express";
+import { logger } from "../../config/logger";
 import ReceiverService from "../../services/receiver.service";
 
 export default class ReceiverController {
@@ -13,11 +14,15 @@ export default class ReceiverController {
         /**
          * Create one receiver.
          */
-        this.router.post( "/", (request: Request, response: Response, next: NextFunction) => {
+        this.router.post( "/", async (request: Request, response: Response, next: NextFunction) => {
             try {
-                console.log(request.body);
-                this.receiverService.create(request.body);
-                response.status(200).json({ status: "Receiver created." });
+                console.log();
+                if (!Object.keys(request.body).length) {
+                    logger.error("Bad request");
+                    return response.status(400).json({ error: "Bad request", message: "Body is missing" });
+                }
+                const res = await this.receiverService.create(request.body);
+                return response.status(200).json({ status: "Receiver created.", receiver: res });
             } catch (error) {
                 next(error);
             }
