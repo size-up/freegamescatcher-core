@@ -1,3 +1,4 @@
+import { logger } from "../../config/logger";
 import { GameCacheDocumentInterface } from "../../interfaces/cache.interface";
 import { EpicGamesDataInterface } from "../../interfaces/client.interface";
 
@@ -26,9 +27,9 @@ export class EpicGamesMapperHelper {
                     return newElement;
                 });
             return newElementsToSave;
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        } catch (err: any) {
-            throw new Error(err.stack);
+        } catch (error) {
+            logger.error("Error while mapping Epic Games data", error);
+            throw (error);
         }
     }
 }
