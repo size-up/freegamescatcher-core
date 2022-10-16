@@ -8,8 +8,10 @@ export default class ReceiverService {
         return this.dataService.getReceivers();
     }
 
-    public create(body: ReceiverInterface): boolean | unknown {
-        throw new Error("Method not implemented.");
+    public create(body: ReceiverInterface) {
+        console.log("CREATED");
+        console.log(body);
+        // throw new Error("Method not implemented.");
     }
 
     public delete(uuid: string): Promise<boolean> {

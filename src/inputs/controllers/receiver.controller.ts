@@ -15,6 +15,7 @@ export default class ReceiverController {
          */
         this.router.post( "/", (request: Request, response: Response, next: NextFunction) => {
             try {
+                console.log(request.body);
                 this.receiverService.create(request.body);
                 response.status(200).json({ status: "Receiver created." });
             } catch (error) {

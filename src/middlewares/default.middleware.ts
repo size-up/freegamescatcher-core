@@ -1,5 +1,6 @@
-import { NextFunction, Request, Response } from "express";
+import { json, NextFunction, Request, Response, urlencoded } from "express";
 import { Express } from "express-serve-static-core";
+import cors from "cors";
 
 import { api } from "../config/security";
 import { logger } from "../config/logger";
@@ -14,6 +15,13 @@ export default class DefaultMiddleware {
     }
 
     private defaultMiddleware(http: Express): void {
+        /**
+         * Use CORS and Body config for `post` requests
+         */
+        http.use(cors());
+        http.use(urlencoded({ extended: true }));
+        http.use(json());
+        
         /**
          * Log all API calls.
          */
