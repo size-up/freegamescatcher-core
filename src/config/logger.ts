@@ -27,20 +27,19 @@ function setupLogger(): winston.Logger {
     } else {
         const alignColorsAndTime = winston.format.combine(
             winston.format.colorize({
-                all: true,
+                all: true
             }),
             winston.format.timestamp({
                 format: "YY-MM-DD HH:mm:ss",
             }),
             winston.format.printf(
-                (info) => `${info.timestamp} [${info.level}] ${info.message}`
+                (info) => `${info.timestamp} [${info.level}] ${info.message}${info.stack ? `\n${info.stack}` : ""}`
             )
         );
 
         return winston.createLogger({
             level: "debug",
             format: winston.format.combine(
-                winston.format.colorize(),
                 alignColorsAndTime
             ),
             transports: [new winston.transports.Console()],
