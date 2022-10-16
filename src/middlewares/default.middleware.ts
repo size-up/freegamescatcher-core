@@ -40,6 +40,14 @@ export default class DefaultMiddleware {
             logger.info("HTTP request received, see http object for details", information);
 
             /**
+             * Check body presence in `POST` and `PUT` methods
+             */
+            if (["POST", "PUT"].includes(request.method) && !Object.entries(request.body).length) {
+                logger.error("Bad request");
+                return response.status(400).json({ error: "Bad request", message: "Body is missing" });
+            }
+
+            /**
              * Authorize a GET request to /receivers used by email link.
              * It's a GET to avoid blocked popup from the email.
              */
