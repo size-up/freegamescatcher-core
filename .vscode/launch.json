@@ -10,16 +10,8 @@
       "name": "Launch [development]",
       "request": "launch",
       "type": "node-terminal",
-      "envFile": "${workspaceFolder}/.env"
-    },
-    {
-      "preLaunchTask": "install",
-      "command": "yarn run start",
-      "name": "Launch [pre-production]",
-      "request": "launch",
-      "type": "node-terminal",
       "env": {
-        "NODE_ENV": "pre-production"
+        "NODE_ENV": "development"
       },
       "envFile": "${workspaceFolder}/.env"
     },
@@ -32,6 +24,14 @@
       "env": {
         "NODE_ENV": "production"
       },
+      "envFile": "${workspaceFolder}/.env"
+    },
+    {
+      "preLaunchTask": "install",
+      "command": "yarn run test:unit:watch",
+      "name": "Launch unit tests in watch mode",
+      "request": "launch",
+      "type": "node-terminal",
       "envFile": "${workspaceFolder}/.env"
     }
   ]

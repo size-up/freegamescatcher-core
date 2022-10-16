@@ -14,5 +14,6 @@
     "noImplicitAny": true,
     "noImplicitThis": false,
     "skipLibCheck": true
-  }
+  },
+  "include": ["src/**/*"]
 }
