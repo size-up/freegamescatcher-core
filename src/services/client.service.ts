@@ -20,7 +20,7 @@ export class ClientService {
             const mappedElements: GameCacheDocumentInterface[] = EpicGamesMapperHelper.map(filteredElements);
             return mappedElements;
         } catch (error) {
-            logger.error("Error while calling Epic Games API", error);
+            logger.error("Error while filtering or mapping Epic Games data.", error);
         }
     }
 
