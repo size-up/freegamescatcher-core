@@ -1,3 +1,8 @@
+# [v1.4.1](https://github.com/size-up/freegamescatcher-core/compare/v1.4.0...v1.4.1) (2022-10-16)
+
+## 🐛 Bug fixes
+- [`35c7312`](https://github.com/size-up/freegamescatcher-core/commit/35c7312)  Retrieve app. version from env. with &#x60;pre-production&#x60;
+
 # [v1.4.0](https://github.com/size-up/freegamescatcher-core/compare/v1.3.4...v1.4.0) (2022-10-16)
 
 ## ✨ Introduce new features
