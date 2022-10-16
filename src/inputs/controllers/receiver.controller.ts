@@ -16,11 +16,6 @@ export default class ReceiverController {
          */
         this.router.post( "/", async (request: Request, response: Response, next: NextFunction) => {
             try {
-                console.log();
-                if (!Object.keys(request.body).length) {
-                    logger.error("Bad request");
-                    return response.status(400).json({ error: "Bad request", message: "Body is missing" });
-                }
                 const res = await this.receiverService.create(request.body);
                 return response.status(200).json({ status: "Receiver created.", receiver: res });
             } catch (error) {
