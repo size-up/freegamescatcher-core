@@ -3,22 +3,11 @@
   "displayName": "🎮 Free Games Catcher",
   "version": "1.4.2",
   "description": "Free Games Catcher is an application that aims to search for game sites, trigger an alert and send it to users to notify them when a free game is available",
+  "license": "GNU GPLv3",
   "repository": {
     "type": "git",
     "url": "https://github.com/size-up/freegamescatcher-core.git"
   },
-  "main": "app.ts",
-  "scripts": {
-    "clean": "rm -rf ./build",
-    "build": "yarn clean && tsc --build && yarn copy",
-    "start": "yarn build && yarn start:prod",
-    "start:prod": "node ./build/src/app.js",
-    "dev": "nodemon",
-    "release": "semantic-release",
-    "copy": "cp -r ./src/assets/ ./build/src/assets/ && cp -r ./src/templates/ ./build/src/templates/",
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "keywords": [],
   "author": {
     "name": "Size Up",
     "email": "noreply@sizeup.cloud",
@@ -36,7 +25,17 @@
       "url": "https://anthonypillot.com"
     }
   ],
-  "license": "ISC",
+  "main": "app.ts",
+  "scripts": {
+    "clean": "rm -rf ./build",
+    "build": "yarn clean && tsc --build && yarn copy",
+    "start": "yarn build && yarn start:prod",
+    "start:prod": "node ./build/src/app.js",
+    "dev": "nodemon",
+    "release": "semantic-release",
+    "copy": "cp -r ./src/assets/ ./build/src/assets/ && cp -r ./src/templates/ ./build/src/templates/",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
   "dependencies": {
     "axios": "^0.27.2",
     "cors": "^2.8.5",
