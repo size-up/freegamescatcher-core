@@ -20,7 +20,9 @@ export class EpicGamesOutput {
      */
     async getData() {
         try {
-            return axios.get(this.clientParamsConnection.url, this.clientParamsConnection.params);
+            return axios.get(this.clientParamsConnection.url, {
+                params: this.clientParamsConnection.params
+            });
         } catch (error) {
             logger.error("An error has occurred while fetching Epic Games datas", error);
         }
