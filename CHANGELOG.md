@@ -1,3 +1,9 @@
+# [v1.4.2](https://github.com/size-up/freegamescatcher-core/compare/v1.4.1...v1.4.2) (2022-10-21)
+
+## 🐛 Bug fixes
+- [`39a87f1`](https://github.com/size-up/freegamescatcher-core/commit/39a87f1)  Pass params correctly in axios for getting french informations 
+- [`fa515c9`](https://github.com/size-up/freegamescatcher-core/commit/fa515c9)  Fix the mapper to get only free games now
+
 # [v1.4.1](https://github.com/size-up/freegamescatcher-core/compare/v1.4.0...v1.4.1) (2022-10-16)
 
 ## 🐛 Bug fixes
