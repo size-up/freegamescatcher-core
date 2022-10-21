@@ -1,15 +1,13 @@
 import { logger } from "../../config/logger";
 import { GameCacheDocumentInterface } from "../../interfaces/cache.interface";
-import { EpicGamesDataInterface } from "../../interfaces/client.interface";
+import { Element } from "../../interfaces/client.interface";
 
 export class EpicGamesMapperHelper {
 
-    static map(data: EpicGamesDataInterface): GameCacheDocumentInterface[] {
+    static map(data: Element[]): GameCacheDocumentInterface[] {
         try {
-            const epicGamesElements = data.data.data.Catalog.searchStore.elements;
-            const newElementsToSave: GameCacheDocumentInterface[] = epicGamesElements.filter(filteredGame => filteredGame.promotions && 
-                (filteredGame.promotions.promotionalOffers.length || filteredGame.promotions.upcomingPromotionalOffers.length))
-                .map(game => {
+            const newElementsToSave: GameCacheDocumentInterface[] = 
+                data.map(game => {
                     const newElement: GameCacheDocumentInterface = {
                         title: game.title,
                         description: game.description,

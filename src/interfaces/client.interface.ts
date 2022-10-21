@@ -125,7 +125,7 @@ interface Promotions {
     upcomingPromotionalOffers: UpcomingPromotionalOffer[];
 }
 
-interface Element {
+export interface Element {
     title: string;
     id: string;
     namespace: string;

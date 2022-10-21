@@ -1,5 +1,5 @@
 import axios from "axios";
-import { ClientInterface } from "../../interfaces/client.interface";
+import { ClientInterface, Element, EpicGamesDataInterface } from "../../interfaces/client.interface";
 import clientInformations from "./../../../data/client.json";
 
 import { logger } from "../../config/logger";
@@ -18,11 +18,13 @@ export class EpicGamesOutput {
     /**
      * Retrieve datas from Epic-Games store
      */
-    async getData() {
+    async getData(): Promise<Element[] | undefined> {
         try {
-            return axios.get(this.clientParamsConnection.url, {
+            const response: EpicGamesDataInterface = await axios.get(this.clientParamsConnection.url, {
                 params: this.clientParamsConnection.params
             });
+            const epicGamesElements: Element[] = response.data.data.Catalog.searchStore.elements;
+            return epicGamesElements;
         } catch (error) {
             logger.error("An error has occurred while fetching Epic Games datas", error);
         }
