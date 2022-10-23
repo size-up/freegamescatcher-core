@@ -68,11 +68,19 @@ describe("Test Game Client service", () => {
 
         // when
         const clientService = new ClientService();
-        const spyService = jest.spyOn(clientService, "getEpicGamesData");
+
+        const spyGetEpicGames = jest.spyOn(clientService, "getEpicGamesData");
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        const spyFilter = jest.spyOn(clientService as any, "filterElements");
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        const spyIsFreeGames = jest.spyOn(clientService as any, "isFreeGame");
+
         const epicGamesData = await clientService.getEpicGamesData();
         
         // then
-        expect(spyService).toHaveBeenCalledTimes(1);
+        expect(spyGetEpicGames).toHaveBeenCalledTimes(1);
+        expect(spyFilter).toHaveBeenCalledTimes(1);
+        expect(spyIsFreeGames).toHaveBeenCalledTimes(12); // because there is 12 games.
 
         expect(epicGamesData).toBeTruthy();
         expect(epicGamesData).toBeDefined();
@@ -109,11 +117,19 @@ describe("Test Game Client service", () => {
 
         // when
         const clientService = new ClientService();
-        const spyService = jest.spyOn(clientService, "getEpicGamesData");
+
+        const spyGetEpicGames = jest.spyOn(clientService, "getEpicGamesData");
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        const spyFilter = jest.spyOn(clientService as any, "filterElements");
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        const spyIsFreeGames = jest.spyOn(clientService as any, "isFreeGame");
+
         const epicGamesData = await clientService.getEpicGamesData();
-        
+
         // then
-        expect(spyService).toHaveBeenCalledTimes(1);
+        expect(spyGetEpicGames).toHaveBeenCalledTimes(1);
+        expect(spyFilter).toHaveBeenCalledTimes(1);
+        expect(spyIsFreeGames).toHaveBeenCalledTimes(5); // because there is 5 games.
 
         expect(epicGamesData).toBeTruthy();
         expect(epicGamesData).toBeDefined();
