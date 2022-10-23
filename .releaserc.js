@@ -74,7 +74,7 @@ module.exports = {
         [
             "@semantic-release/exec",
             {
-                publishCmd: "echo ::set-output name=nextVersion::${nextRelease.version}",
+                publishCmd: 'echo "nextVersion=${nextRelease.version}" >> $GITHUB_OUTPUT',
             },
         ],
     ],
