@@ -35,7 +35,9 @@
     "release": "semantic-release",
     "copy": "cp -r ./src/assets/ ./build/src/assets/ && cp -r ./src/templates/ ./build/src/templates/",
     "test:unit": "jest",
-    "test:unit:watch": "jest --watch"
+    "test:unit:watch": "jest --watch",
+    "test:unit:coverage": "jest --coverage",
+    "test:unit:coverage:open": "jest --coverage && npx --yes http-server -o ./coverage/lcov-report/"
   },
   "dependencies": {
     "axios": "^0.27.2",
