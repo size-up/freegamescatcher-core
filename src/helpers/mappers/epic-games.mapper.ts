@@ -11,14 +11,14 @@ export class EpicGamesMapperHelper {
                     const newElement: GameCacheDocumentInterface = {
                         title: game.title,
                         description: game.description,
-                        urlSlug: `https://store.epicgames.com/fr/p/${game.catalogNs.mappings[0].pageSlug}`,
+                        urlSlug: `https://store.epicgames.com/fr/p/${game.catalogNs.mappings[0]?.pageSlug}`,
                         promotion: {
-                            startDate: game.promotions.promotionalOffers.length ? 
+                            startDate: game.promotions?.promotionalOffers.length ? 
                                 game.promotions.promotionalOffers[0].promotionalOffers[0].startDate.toString() : 
-                                game.promotions.upcomingPromotionalOffers[0].promotionalOffers[0].startDate.toString(),
-                            endDate: game.promotions.promotionalOffers.length ? 
+                                game.promotions?.upcomingPromotionalOffers[0]?.promotionalOffers[0].startDate.toString(),
+                            endDate: game.promotions?.promotionalOffers.length ? 
                                 game.promotions.promotionalOffers[0].promotionalOffers[0].endDate.toString() : 
-                                game.promotions.upcomingPromotionalOffers[0].promotionalOffers[0].endDate.toString(),
+                                game.promotions?.upcomingPromotionalOffers[0]?.promotionalOffers[0].endDate.toString(),
                         },
                         imageUrl: game.keyImages[1].url
                     };
@@ -26,8 +26,9 @@ export class EpicGamesMapperHelper {
                 });
             return newElementsToSave;
         } catch (error) {
-            logger.error("Error while mapping Epic Games data", error);
-            throw (error);
+            const message = "Error while mapping Epic Games data";
+            logger.error(message, error);
+            throw new Error(message);
         }
     }
 }
