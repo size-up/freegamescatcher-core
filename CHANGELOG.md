@@ -1,3 +1,9 @@
+# [v1.4.4](https://github.com/size-up/freegamescatcher-core/compare/v1.4.3...v1.4.4) (2022-10-23)
+
+## 🔧 Add or update configuration files
+- [`19c08a4`](https://github.com/size-up/freegamescatcher-core/commit/19c08a4)  Update &#x60;.eslintignore&#x60; to ignore &#x60;build&#x60; 
+- [`05d9225`](https://github.com/size-up/freegamescatcher-core/commit/05d9225)  Add &#x60;test:unit:coverage&#x60; script
+
 # [v1.4.3](https://github.com/size-up/freegamescatcher-core/compare/v1.4.2...v1.4.3) (2022-10-23)
 
 # [v1.4.2](https://github.com/size-up/freegamescatcher-core/compare/v1.4.1...v1.4.2) (2022-10-21)
