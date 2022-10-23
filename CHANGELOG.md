@@ -1,3 +1,5 @@
+# [v1.4.3](https://github.com/size-up/freegamescatcher-core/compare/v1.4.2...v1.4.3) (2022-10-23)
+
 # [v1.4.2](https://github.com/size-up/freegamescatcher-core/compare/v1.4.1...v1.4.2) (2022-10-21)
 
 ## 🐛 Bug fixes
