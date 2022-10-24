@@ -13,14 +13,16 @@ export class ClientService {
         this.epicgames = new EpicGamesOutput();
     }
 
-    public async getEpicGamesData(): Promise<GameCacheDocumentInterface[] | undefined> {
+    public async getEpicGamesData(): Promise<GameCacheDocumentInterface[]> {
         try {
             const data: Element[] = await Object(this.epicgames.getData());
             const filteredElements: Element[] = this.filterElements(data);
             const mappedElements: GameCacheDocumentInterface[] = EpicGamesMapperHelper.map(filteredElements);
             return mappedElements;
         } catch (error) {
-            logger.error("Error while filtering or mapping Epic Games data.", error);
+            const message = "Error while filtering or mapping Epic Games data";
+            logger.error(message, error);
+            throw new Error(message);
         }
     }
 
