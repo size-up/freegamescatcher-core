@@ -34,20 +34,23 @@ describe("Test Game Client service", () => {
 
     test(`given Epic Games client that return undefined,
     when get Epic Games data,
-    then expect to be undefined`, async () => {
+    then throw error`, async () => {
         // given
         data.mockResolvedValue(undefined);
-
-        // when
+        
         const clientService = new ClientService();
         const spyService = jest.spyOn(clientService, "getEpicGamesData");
-        const epicGamesData = await clientService.getEpicGamesData();
+
+        // when
+        try {
+            const epicGamesData = await clientService.getEpicGamesData();
+        } catch (error) {
+            // then
+            expect(spyService).toHaveBeenCalledTimes(1);
         
-        // then
-        expect(spyService).toHaveBeenCalledTimes(1);
-        
-        expect(epicGamesData).not.toBeTruthy();
-        expect(epicGamesData).toBeUndefined();
+            expect(error).toBeInstanceOf(Error);
+            expect(error).toStrictEqual(Error("Error while filtering or mapping Epic Games data"));
+        }
     });
     
     test(`given Epic Games client that return 12 games,
