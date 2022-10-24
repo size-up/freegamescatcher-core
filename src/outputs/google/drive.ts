@@ -2,8 +2,8 @@ import { drive_v3, google } from "googleapis";
 
 import { logger } from "../../config/logger";
 
-export class DocumentOutput {
-    private static instance: DocumentOutput;
+export class DriveOutput {
+    private static instance: DriveOutput;
     private from = "from Google Drive API";
 
     private drive: drive_v3.Drive;
@@ -123,7 +123,7 @@ export class DocumentOutput {
         }
     }
 
-    public static getInstance(): DocumentOutput {
+    public static getInstance(): DriveOutput {
         return this.instance || (this.instance = new this());
     }
 }
