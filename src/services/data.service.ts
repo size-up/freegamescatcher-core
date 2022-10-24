@@ -1,4 +1,4 @@
-import { DocumentOutput } from "../outputs/google/drive";
+import { DriveOutput } from "../outputs/google/drive";
 
 import { GameCacheDocumentInterface } from "../interfaces/cache.interface";
 
@@ -20,11 +20,11 @@ export class DataService {
         },
     };
 
-    constructor(private documentOutput = DocumentOutput.getInstance()) {}
+    constructor(private drive = DriveOutput.getInstance()) {}
 
     public async getCache(): Promise<GameCacheDocumentInterface[] | null> {
         try {
-            const cache: GameCacheDocumentInterface[] = await Object(this.documentOutput.getDocument(this.metadata.cache.name));
+            const cache: GameCacheDocumentInterface[] = await Object(this.drive.getDocument(this.metadata.cache.name));
             return cache;
         } catch (error) {
             logger.error(error);
@@ -34,7 +34,7 @@ export class DataService {
 
     public async updateCache(content: GameCacheDocumentInterface[]): Promise<boolean> {
         try {
-            await this.documentOutput.updateDocument(
+            await this.drive.updateDocument(
                 this.metadata.cache.name,
                 JSON.stringify(content, null, 4)
             );
@@ -67,7 +67,7 @@ export class DataService {
 
     public async getReceivers(): Promise<ReceiverInterface[] | null> {
         try {
-            const receivers: ReceiverInterface[] = await Object(this.documentOutput.getDocument(this.metadata.receivers.name));
+            const receivers: ReceiverInterface[] = await Object(this.drive.getDocument(this.metadata.receivers.name));
             return receivers;
         } catch (error) {
             logger.error(error);
@@ -79,7 +79,7 @@ export class DataService {
         try {
             const receivers = await this.getReceivers();
             receivers?.push(receiver);
-            await this.documentOutput.updateDocument(
+            await this.drive.updateDocument(
                 this.metadata.receivers.name,
                 JSON.stringify(receivers, null, 4)
             );
@@ -101,7 +101,7 @@ export class DataService {
                     throw new Error("UUID doesn't exist");
                 }
             }
-            await this.documentOutput.updateDocument(
+            await this.drive.updateDocument(
                 this.metadata.receivers.name,
                 JSON.stringify(receivers, null, 4)
             );
