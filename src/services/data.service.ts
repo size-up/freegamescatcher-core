@@ -7,6 +7,7 @@ import { ReceiverInterface } from "../interfaces/receiver.interface";
 
 export class DataService {
     private static instance: DataService;
+    private drive: DriveOutput;
 
     private metadata = {
         client: {
@@ -20,7 +21,9 @@ export class DataService {
         },
     };
 
-    constructor(private drive = DriveOutput.getInstance()) {}
+    private constructor() {
+        this.drive = DriveOutput.getInstance();
+    }
 
     public async getCache(): Promise<GameCacheDocumentInterface[] | null> {
         try {

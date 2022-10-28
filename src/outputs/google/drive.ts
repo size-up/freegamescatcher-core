@@ -55,6 +55,10 @@ export class DriveOutput {
         try {
             const scopes = ["https://www.googleapis.com/auth/drive"];
 
+            if (!process.env.GOOGLE_USERNAME || !process.env.GOOGLE_PRIVATE_KEY) {
+                throw new Error("Credentials not found");
+            }
+
             const auth = new google.auth.GoogleAuth({
                 credentials: {
                     client_email: process.env.GOOGLE_USERNAME,
