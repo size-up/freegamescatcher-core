@@ -1,12 +1,12 @@
-import { EpicGamesMapperHelper } from "../helpers/mappers/epic-games.mapper";
+import { EpicGamesMapper } from "../helpers/epic.games.mapper";
 import { GameCacheDocumentInterface } from "../interfaces/cache.interface";
 import { Element } from "../interfaces/client.interface";
 
-import { EpicGamesOutput } from "../outputs/epic-games/client";
+import { EpicGamesOutput } from "../outputs/epic-games/epic.games.output";
 
-import { logger } from "../config/logger";
+import { logger } from "../config/logger.config";
 
-export class ClientService {
+export class GameService {
     private epicgames: EpicGamesOutput;
 
     constructor() {
@@ -17,7 +17,7 @@ export class ClientService {
         try {
             const data: Element[] = await Object(this.epicgames.getData());
             const filteredElements: Element[] = this.filterElements(data);
-            const mappedElements: GameCacheDocumentInterface[] = EpicGamesMapperHelper.map(filteredElements);
+            const mappedElements: GameCacheDocumentInterface[] = EpicGamesMapper.map(filteredElements);
             return mappedElements;
         } catch (error) {
             const message = "Error while filtering or mapping Epic Games data";

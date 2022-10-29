@@ -2,7 +2,7 @@ import { EmailCheckTransporterInterface, EmailConfigInterface, EmailOptionsInter
 import nodemailer from "nodemailer";
 import SMTPTransport from "nodemailer/lib/smtp-transport";
 
-export class Emailer {
+export class EmailerOutput {
     private transporter: nodemailer.Transporter<SMTPTransport.SentMessageInfo>;
     private config: EmailConfigInterface;
     

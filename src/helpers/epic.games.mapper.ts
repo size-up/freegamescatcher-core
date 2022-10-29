@@ -1,8 +1,8 @@
-import { logger } from "../../config/logger";
-import { GameCacheDocumentInterface } from "../../interfaces/cache.interface";
-import { Element } from "../../interfaces/client.interface";
+import { logger } from "../config/logger.config";
+import { GameCacheDocumentInterface } from "../interfaces/cache.interface";
+import { Element } from "../interfaces/client.interface";
 
-export class EpicGamesMapperHelper {
+export class EpicGamesMapper {
 
     static map(data: Element[]): GameCacheDocumentInterface[] {
         try {

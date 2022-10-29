@@ -1,11 +1,11 @@
 import fs from "fs";
 import handlebars from "handlebars";
 import packageJson from "../../package.json";
-import { logger } from "../config/logger";
+import { logger } from "../config/logger.config";
 import { GameCacheDocumentInterface } from "../interfaces/cache.interface";
 import { EmailConfigInterface, EmailOptionsInterface, EmailResponseInterface } from "../interfaces/email.interface";
 import { ReceiverInterface } from "../interfaces/receiver.interface";
-import { Emailer } from "../outputs/emailer/emailer";
+import { EmailerOutput } from "../outputs/emailer/emailer.output";
 
 interface DatasToCompileInterface {
     uuid: string | undefined,
@@ -13,8 +13,8 @@ interface DatasToCompileInterface {
     nextGames: GameCacheDocumentInterface[]
 }
 
-export class EmailSenderService {
-    private emailer: Emailer;
+export class EmailService {
+    private emailer: EmailerOutput;
     private config: EmailConfigInterface;
     private datas: GameCacheDocumentInterface[] = [];
 
@@ -30,7 +30,7 @@ export class EmailSenderService {
                 rejectUnauthorized: false // see https://stackoverflow.com/questions/55167741/nodemailer-ms-exchaneg-server-error-unable-to-verify-the-first-certificate
             }
         };
-        this.emailer = new Emailer(this.config);
+        this.emailer = new EmailerOutput(this.config);
     }
 
     /**

@@ -1,7 +1,7 @@
 import winston from "winston";
 
 import packageJson from "../../package.json";
-import { version } from "./application";
+import { version } from "./application.config";
 
 function setupLogger(): winston.Logger {
     /**

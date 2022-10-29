@@ -8,9 +8,9 @@ import DefaultMiddleware from "./middlewares/default.middleware";
 import ErrorMiddleware from "./middlewares/error.middleware";
 
 import packageJson from "../package.json";
-import { version } from "./config/application";
+import { version } from "./config/application.config";
 
-import { logger } from "./config/logger";
+import { logger } from "./config/logger.config";
 
 class Application {
     private http: Express = express();

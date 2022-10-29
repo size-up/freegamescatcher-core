@@ -1,4 +1,4 @@
-import { version } from "../../src/config/application";
+import { version } from "../../src/config/application.config";
 import packageJson from "../../package.json";
 
 describe("Test application configuration", () => {

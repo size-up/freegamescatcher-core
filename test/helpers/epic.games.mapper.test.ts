@@ -1,8 +1,8 @@
-import { logger } from "../../../src/config/logger";
-import { EpicGamesMapperHelper } from "../../../src/helpers/mappers/epic-games.mapper";
-import { GameCacheDocumentInterface } from "../../../src/interfaces/cache.interface";
-import { Element } from "../../../src/interfaces/client.interface";
-import gamesJSON from "../../data/games.json";
+import { logger } from "../../src/config/logger.config";
+import { EpicGamesMapper } from "../../src/helpers/epic.games.mapper";
+import { GameCacheDocumentInterface } from "../../src/interfaces/cache.interface";
+import { Element } from "../../src/interfaces/client.interface";
+import gamesJSON from "../data/games.json";
 
 beforeAll(() => {
     /**
@@ -28,7 +28,7 @@ describe("Test Epic Games mapper", () => {
 
         try {
             // when
-            EpicGamesMapperHelper.map(data);
+            EpicGamesMapper.map(data);
         } catch (error) {
             // then
             expect(error).toBeInstanceOf(Error);
@@ -43,7 +43,7 @@ describe("Test Epic Games mapper", () => {
 
         try {
             // when
-            EpicGamesMapperHelper.map(data);
+            EpicGamesMapper.map(data);
         } catch (error) {
             // then
             expect(error).toBeInstanceOf(Error);
@@ -57,7 +57,7 @@ describe("Test Epic Games mapper", () => {
         expect(games).toHaveLength(0);
 
         // when
-        const gameCacheDocuments: GameCacheDocumentInterface[] = EpicGamesMapperHelper.map(games);
+        const gameCacheDocuments: GameCacheDocumentInterface[] = EpicGamesMapper.map(games);
 
         // then
         expect(gameCacheDocuments).toBeInstanceOf(Array);
@@ -68,7 +68,7 @@ describe("Test Epic Games mapper", () => {
         // given
 
         // when
-        const gameCacheDocuments: GameCacheDocumentInterface[] = EpicGamesMapperHelper.map(games);
+        const gameCacheDocuments: GameCacheDocumentInterface[] = EpicGamesMapper.map(games);
 
         // then
         expect(gameCacheDocuments).toHaveLength(12);

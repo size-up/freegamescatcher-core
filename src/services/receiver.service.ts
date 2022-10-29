@@ -1,7 +1,7 @@
 import { ReceiverInterface } from "../interfaces/receiver.interface";
 import { DataService } from "./data.service";
 import crypto from "crypto";
-import { logger } from "../config/logger";
+import { logger } from "../config/logger.config";
 
 export default class ReceiverService {
     private dataService = DataService.getInstance();

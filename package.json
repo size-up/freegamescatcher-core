@@ -25,9 +25,9 @@
       "url": "https://anthonypillot.com"
     }
   ],
-  "main": "app.ts",
+  "main": "src/app.ts",
   "scripts": {
-    "clean": "rm -rf ./build",
+    "clean": "rm -rf ./build && rm -rf ./coverage",
     "build": "yarn clean && tsc --build && yarn copy",
     "start": "yarn build && yarn start:prod",
     "start:prod": "node ./build/src/app.js",
