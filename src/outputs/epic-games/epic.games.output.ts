@@ -1,8 +1,8 @@
 import axios from "axios";
 import { ClientInterface, Element, EpicGamesDataInterface } from "../../interfaces/client.interface";
-import clientInformations from "./../../../data/client.json";
+import clientInformations from "../../../data/client.json";
 
-import { logger } from "../../config/logger";
+import { logger } from "../../config/logger.config";
 
 export class EpicGamesOutput {
     private clientInformations = clientInformations.epicGames;

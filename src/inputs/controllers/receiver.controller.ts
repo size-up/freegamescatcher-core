@@ -1,5 +1,4 @@
 import { NextFunction, Request, Response, Router } from "express";
-import { logger } from "../../config/logger";
 import ReceiverService from "../../services/receiver.service";
 
 export default class ReceiverController {
@@ -33,7 +32,7 @@ export default class ReceiverController {
             try {
                 const deleted: boolean = await this.receiverService.delete(request.params.uuid);
                 if (deleted) {
-                    return response.status(200).send("<h2>Votre email ne figurera plus dans la liste des notifiés</h2>");
+                    return response.status(200).send("<h2>Votre email ne figurera plus dans la liste des notifiés.</h2>");
                 }
                 throw new Error("Error during deleting receiver from subscribers list");
             } catch (error) {

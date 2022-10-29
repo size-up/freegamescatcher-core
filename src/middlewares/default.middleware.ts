@@ -2,8 +2,8 @@ import { json, NextFunction, Request, Response, urlencoded } from "express";
 import { Express } from "express-serve-static-core";
 import cors from "cors";
 
-import { api } from "../config/security";
-import { logger } from "../config/logger";
+import { api } from "../config/security.config";
+import { logger } from "../config/logger.config";
 
 import UnauthorizedError from "../inputs/errors/unauthorized.error";
 import ForbiddenError from "../inputs/errors/forbidden.error";

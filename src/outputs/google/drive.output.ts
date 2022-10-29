@@ -1,6 +1,6 @@
 import { drive_v3, google } from "googleapis";
 
-import { logger } from "../../config/logger";
+import { logger } from "../../config/logger.config";
 
 export class DriveOutput {
     private static instance: DriveOutput;

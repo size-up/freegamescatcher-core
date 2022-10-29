@@ -1,11 +1,11 @@
-import { logger } from "../../src/config/logger";
+import { logger } from "../../src/config/logger.config";
 import { ReceiverInterface } from "../../src/interfaces/receiver.interface";
-import { DriveOutput } from "../../src/outputs/google/drive";
+import { DriveOutput } from "../../src/outputs/google/drive.output";
 import { DataService } from "../../src/services/data.service";
 
 import receiversJson from "../data/receivers.json";
 
-jest.mock("../../src/outputs/google/drive");
+jest.mock("../../src/outputs/google/drive.output");
 
 beforeAll(async () => {
     /**

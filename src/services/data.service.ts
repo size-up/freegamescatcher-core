@@ -1,15 +1,15 @@
-import { DriveOutput } from "../outputs/google/drive";
+import { DriveOutput } from "../outputs/google/drive.output";
 
 import { GameCacheDocumentInterface } from "../interfaces/cache.interface";
-
-import { logger } from "../config/logger";
 import { ReceiverInterface } from "../interfaces/receiver.interface";
+
+import { logger } from "../config/logger.config";
 
 export class DataService {
     private static instance: DataService;
     private drive: DriveOutput;
 
-    private metadata = {
+    private file = {
         client: {
             name: "client.json",
         },
@@ -27,7 +27,7 @@ export class DataService {
 
     public async getCache(): Promise<GameCacheDocumentInterface[] | null> {
         try {
-            const cache: GameCacheDocumentInterface[] = await Object(this.drive.getDocument(this.metadata.cache.name));
+            const cache: GameCacheDocumentInterface[] = await Object(this.drive.getDocument(this.file.cache.name));
             return cache;
         } catch (error) {
             logger.error(error);
@@ -38,7 +38,7 @@ export class DataService {
     public async updateCache(content: GameCacheDocumentInterface[]): Promise<boolean> {
         try {
             await this.drive.updateDocument(
-                this.metadata.cache.name,
+                this.file.cache.name,
                 JSON.stringify(content, null, 4)
             );
             return true;
@@ -48,29 +48,9 @@ export class DataService {
         }
     }
 
-    public deleteCache() {
-        throw new Error("Method not implemented.");
-    }
-
-    public getClients() {
-        throw new Error("Method not implemented.");
-    }
-
-    public getClient(name: string) {
-        throw new Error("Method not implemented.");
-    }
-
-    public updateClient(name: string) {
-        throw new Error("Method not implemented.");
-    }
-
-    public deleteClient(name: string) {
-        throw new Error("Method not implemented.");
-    }
-
     public async getReceivers(): Promise<ReceiverInterface[] | null> {
         try {
-            const receivers: ReceiverInterface[] = await Object(this.drive.getDocument(this.metadata.receivers.name));
+            const receivers: ReceiverInterface[] = await Object(this.drive.getDocument(this.file.receivers.name));
             return receivers;
         } catch (error) {
             logger.error(error);
@@ -83,7 +63,7 @@ export class DataService {
             const receivers = await this.getReceivers();
             receivers?.push(receiver);
             await this.drive.updateDocument(
-                this.metadata.receivers.name,
+                this.file.receivers.name,
                 JSON.stringify(receivers, null, 4)
             );
             return receiver;
@@ -105,7 +85,7 @@ export class DataService {
                 }
             }
             await this.drive.updateDocument(
-                this.metadata.receivers.name,
+                this.file.receivers.name,
                 JSON.stringify(receivers, null, 4)
             );
             return true;

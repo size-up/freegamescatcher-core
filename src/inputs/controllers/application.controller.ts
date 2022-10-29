@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response, Router } from "express";
-import { logger } from "../../config/logger";
-import ApplicationService from "../../services/application.service";
+import { logger } from "../../config/logger.config";
+import CoreFacade from "../../facade/core.facade";
 
 export default class ApplicationController {
     private router = Router();
@@ -15,8 +15,8 @@ export default class ApplicationController {
          */
         this.router.get( "/execute", async (request: Request, response: Response, next: NextFunction) => {
             try {
-                const application = new ApplicationService();
-                const isOk = await application.execute();
+                const core = new CoreFacade();
+                const isOk = await core.execute();
                 
                 if (isOk) {
                     response.status(200).json({ status: "Application process well executed" });
