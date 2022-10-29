@@ -1,3 +1,14 @@
+# [v1.5.0](https://github.com/size-up/freegamescatcher-core/compare/v1.4.4...v1.5.0) (2022-10-29)
+
+## ✨ Introduce new features
+- [`b47015b`](https://github.com/size-up/freegamescatcher-core/commit/b47015b)  Significant refactor, renaming and optimization 
+
+## ♻️ Refactor code
+- [`ac61177`](https://github.com/size-up/freegamescatcher-core/commit/ac61177)  Enhance &#x60;ClientService&#x60; 
+
+## 🚚 Move or rename resources (e.g.: files, paths, routes)
+- [`344dd23`](https://github.com/size-up/freegamescatcher-core/commit/344dd23)  Rename &#x60;DocumentOutput&#x60; to &#x60;DriveOutput&#x60;
+
 # [v1.4.4](https://github.com/size-up/freegamescatcher-core/compare/v1.4.3...v1.4.4) (2022-10-23)
 
 ## 🔧 Add or update configuration files
