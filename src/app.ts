@@ -36,7 +36,7 @@ class Application {
     private default(): void {
         new DefaultMiddleware(this.http);
     }
-    
+
     /**
      * Define all available routes.
      */
@@ -49,7 +49,7 @@ class Application {
                 name: packageJson.displayName,
                 version: version(),
                 description: packageJson.description,
-                repository: packageJson.repository.url
+                repository: packageJson.repository.url,
             };
             response.status(200).json(application);
         });

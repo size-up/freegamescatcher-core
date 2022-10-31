@@ -13,11 +13,11 @@ export default class ApplicationController {
         /**
          * Execute the full application process.
          */
-        this.router.get( "/execute", async (request: Request, response: Response, next: NextFunction) => {
+        this.router.get("/execute", async (request: Request, response: Response, next: NextFunction) => {
             try {
                 const core = new CoreFacade();
                 const isOk = await core.execute();
-                
+
                 if (isOk) {
                     response.status(200).json({ status: "Application process well executed" });
                 } else {
@@ -28,8 +28,7 @@ export default class ApplicationController {
                 logger.error(message, error);
                 throw new Error(message);
             }
-        }
-        );
+        });
     }
 
     public get(): Router {

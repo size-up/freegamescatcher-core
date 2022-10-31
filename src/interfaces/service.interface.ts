@@ -1,3 +1,3 @@
 export interface GameServiceInterface {
-    getGames(): Promise<string>
+    getGames(): Promise<string>;
 }

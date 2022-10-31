@@ -8,9 +8,9 @@ import { ReceiverInterface } from "../interfaces/receiver.interface";
 import { EmailerOutput } from "../outputs/emailer/emailer.output";
 
 interface DatasToCompileInterface {
-    uuid: string | undefined,
-    availableGames: GameCacheDocumentInterface[]
-    nextGames: GameCacheDocumentInterface[]
+    uuid: string | undefined;
+    availableGames: GameCacheDocumentInterface[];
+    nextGames: GameCacheDocumentInterface[];
 }
 
 export class EmailService {
@@ -24,11 +24,11 @@ export class EmailService {
             port: Number(process.env.SMTP_PORT),
             auth: {
                 user: process.env.SMTP_USER,
-                pass: process.env.SMTP_PASSWORD
+                pass: process.env.SMTP_PASSWORD,
             },
             tls: {
-                rejectUnauthorized: false // see https://stackoverflow.com/questions/55167741/nodemailer-ms-exchaneg-server-error-unable-to-verify-the-first-certificate
-            }
+                rejectUnauthorized: false, // see https://stackoverflow.com/questions/55167741/nodemailer-ms-exchaneg-server-error-unable-to-verify-the-first-certificate
+            },
         };
         this.emailer = new EmailerOutput(this.config);
     }
@@ -38,13 +38,17 @@ export class EmailService {
      * @param receivers List of emails.
      * @param subject Email object.
      * @param datas Datas to compile in template.
-     * 
+     *
      * @author Francisco Fernandez <francisco59553@gmail.com>
      */
-    public async sendEmails(subject: string, receivers: ReceiverInterface[], datas: GameCacheDocumentInterface[]): Promise<void> {
+    public async sendEmails(
+        subject: string,
+        receivers: ReceiverInterface[],
+        datas: GameCacheDocumentInterface[]
+    ): Promise<void> {
         try {
             this.datas = datas;
-            const emailList = receivers?.map(receiver => receiver.email);
+            const emailList = receivers?.map((receiver) => receiver.email);
             if (emailList) {
                 logger.info("Preparing transporter...");
 
@@ -52,20 +56,20 @@ export class EmailService {
                 const transporterResponse = await this.prepareTransporter();
                 logger.info(`Transporter response : ${transporterResponse}`);
                 logger.info("Sending emails...");
-                
+
                 // Prepare receiver list with options
                 const datasToCompile = this.buildDatasForTemplate();
-                
-                const $emailsToSend = emailList.map(element => {
+
+                const $emailsToSend = emailList.map((element) => {
                     // Create email template
-                    datasToCompile.uuid = receivers?.find(el => el.email = element)?.uuid;
+                    datasToCompile.uuid = receivers?.find((el) => (el.email = element))?.uuid;
                     const emailOptions: EmailOptionsInterface = this.prepareTemplate(subject, datasToCompile);
                     return this.emailer.sendEmail({ ...emailOptions, to: [element] });
                 });
-                
+
                 // Send all emails
                 const sendingStatus = await Promise.all($emailsToSend);
-                
+
                 // Check response from every send email
                 this.verifyEmailSent(sendingStatus, emailList);
             } else {
@@ -92,7 +96,7 @@ export class EmailService {
 
     /**
      * Method to verify the availablity of transporter and retry connection if error.
-     * 
+     *
      * @author Francisco Fernandez <francisco59553@gmail.com>
      */
     private async prepareTransporter(): Promise<string> {
@@ -114,14 +118,14 @@ export class EmailService {
     /**
      * Method to build template with datas received from constructor.
      * @param subject Email subject.
-     * 
+     *
      * @author Francisco Fernandez <francisco59553@gmail.com>
      */
     private prepareTemplate(subject: string, datasToCompile: DatasToCompileInterface) {
         const templateRead = fs.readFileSync("src/templates/email.template.hbs", { encoding: "utf8" });
         const template = handlebars.compile(templateRead);
         const templateToSend = template(datasToCompile);
-    
+
         const mailOptions: EmailOptionsInterface = {
             sender: packageJson.displayName,
             from: packageJson.author.email,
@@ -135,17 +139,17 @@ export class EmailService {
 
     /**
      * Method to separate games available now and next games.
-     * 
+     *
      * @author Francisco Fernandez <francisco59553@gmail.com>
      */
     private buildDatasForTemplate() {
         const datasToCompile: DatasToCompileInterface = {
             uuid: "",
             availableGames: [],
-            nextGames: []
+            nextGames: [],
         };
 
-        this.datas.forEach(element => {
+        this.datas.forEach((element) => {
             const gameStartDate = new Date(element.promotion.startDate);
             if (gameStartDate > new Date()) {
                 datasToCompile.nextGames.push(element);
@@ -155,11 +159,13 @@ export class EmailService {
 
             element.promotion.endDate = Intl.DateTimeFormat("en-GB")
                 .format(new Date(element.promotion.endDate))
-                .split("/").join(" / ");
+                .split("/")
+                .join(" / ");
 
             element.promotion.startDate = Intl.DateTimeFormat("en-GB")
                 .format(new Date(element.promotion.startDate))
-                .split("/").join(" / ");
+                .split("/")
+                .join(" / ");
         });
 
         return datasToCompile;
@@ -167,14 +173,14 @@ export class EmailService {
 
     /**
      * Method to check if emails are correctly sent.
-     * @param sendingStatus Response from transporter after sending emails. 
+     * @param sendingStatus Response from transporter after sending emails.
      * @param receivers List of emails receivers.
-     * 
+     *
      * @author Francisco Fernandez <francisco59553@gmail.com>
      */
     private verifyEmailSent(sendingStatus: EmailResponseInterface[], receivers: string[]) {
         let countEmailsNoSent = 0;
-        sendingStatus.forEach(response => {
+        sendingStatus.forEach((response) => {
             if (response.failed) {
                 countEmailsNoSent++;
                 logger.error(`Transporter response : ${response.failed} for [${response.receiver}]`);
@@ -182,7 +188,7 @@ export class EmailService {
                 logger.info(`Transporter response : email sent to [${response.receiver}]`);
             }
         });
-    
+
         if (countEmailsNoSent !== 0 && countEmailsNoSent !== receivers.length) {
             logger.warn(`${countEmailsNoSent} / ${receivers.length} emails couldn't be sent`);
         } else if (countEmailsNoSent === receivers.length) {

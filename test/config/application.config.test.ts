@@ -5,7 +5,7 @@ describe("Test application configuration", () => {
     it(`given application version is undefined,
     when get version,
     then version is the default package.json version`, async () => {
-    // given
+        // given
         process.env.NODE_ENV = undefined;
         process.env.VERSION = undefined;
 
@@ -19,7 +19,7 @@ describe("Test application configuration", () => {
     it(`given application version is not production,
     when get version,
     then version is the default package.json version`, async () => {
-    // given
+        // given
         process.env.NODE_ENV = "development";
         process.env.VERSION = "1.0.0";
 
@@ -33,7 +33,7 @@ describe("Test application configuration", () => {
     it(`given application version is production,
     when get version,
     then version is equal to the VERSION env. variable`, async () => {
-    // given
+        // given
         process.env.NODE_ENV = "production";
         process.env.VERSION = "1.0.0";
 

@@ -6,7 +6,6 @@ import ForbiddenError from "../inputs/errors/forbidden.error";
 import UnauthorizedError from "../inputs/errors/unauthorized.error";
 
 export default class ErrorMiddleware {
-
     constructor(http: Express) {
         this.errorMiddleware(http);
     }
@@ -25,7 +24,7 @@ export default class ErrorMiddleware {
                     host: request.hostname,
                     ip: request.ip,
                     headers: request.headers,
-                    code: 404
+                    code: 404,
                 },
             };
 
@@ -47,13 +46,13 @@ export default class ErrorMiddleware {
                     host: request.hostname,
                     ip: request.ip,
                     headers: request.headers,
-                    code: 500
+                    code: 500,
                 },
                 error: {
                     name: error.name,
                     message: error.message,
                     stack: error.stack,
-                }
+                },
             };
 
             /**

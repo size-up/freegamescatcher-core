@@ -2,8 +2,8 @@
 ///////////////// CLIENT_INTERFACE //////////////////
 /////////////////////////////////////////////////////
 export interface ClientInterface {
-    url: string,
-    params: Object
+    url: string;
+    params: Object;
 }
 
 /////////////////////////////////////////////////////
@@ -175,5 +175,3 @@ interface Data2 {
 export interface EpicGamesDataInterface {
     data: Data;
 }
-
-
