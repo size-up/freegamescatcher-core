@@ -186,16 +186,9 @@ jobs:
         environment: production # refer to https://github.com/size-up/docs/settings/environments
 
         steps:
-            - name: ⚙️ Set tag image
-              uses: actions-hub/kubectl@master
-              env:
-                  KUBE_CONFIG: ${{ secrets.OCI_KUBE_CONFIG }}
-              with:
-                  args: set image -n ${{ env.NAMESPACE_NAME }} deployment/${{ env.IMAGE_NAME }}-prod ${{ env.IMAGE_NAME }}-prod=${{ secrets.DOCKERHUB_USERNAME }}/${{ env.IMAGE_NAME }}:${{ needs.release.outputs.version }}
-
             - name: 🚀 Deploy v${{ needs.release.outputs.version }} to production
               uses: actions-hub/kubectl@master
               env:
                   KUBE_CONFIG: ${{ secrets.OCI_KUBE_CONFIG }}
               with:
-                  args: rollout -n ${{ env.NAMESPACE_NAME }} restart deployment ${{ env.IMAGE_NAME }}-prod
+                  args: set image -n ${{ env.NAMESPACE_NAME }} deployment/${{ env.IMAGE_NAME }}-prod ${{ env.IMAGE_NAME }}-prod=${{ secrets.DOCKERHUB_USERNAME }}/${{ env.IMAGE_NAME }}:${{ needs.release.outputs.version }}
