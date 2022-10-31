@@ -1,3 +1,8 @@
+# [v1.5.1](https://github.com/size-up/freegamescatcher-core/compare/v1.5.0...v1.5.1) (2022-10-31)
+
+## 🎨 Improve structure / format of the code
+- [`ea94eea`](https://github.com/size-up/freegamescatcher-core/commit/ea94eea)  Run &#x60;yarn format&#x60; using &#x60;prettier&#x60;
+
 # [v1.5.0](https://github.com/size-up/freegamescatcher-core/compare/v1.4.4...v1.5.0) (2022-10-29)
 
 ## ✨ Introduce new features
