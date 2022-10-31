@@ -1,3 +1,5 @@
+const hrstart = process.hrtime(); // Used to calculate the time it takes to run the application
+
 import express, { Request, Response } from "express";
 import { Express } from "express-serve-static-core";
 import { readFileSync } from "fs";
@@ -26,8 +28,9 @@ class Application {
 
     private welcome(): void {
         console.info(readFileSync("src/assets/banner.txt", { encoding: "utf8" }));
+        logger.info(packageJson.displayName);
         logger.info(`🔖 Application version: [${version()}]`);
-        logger.info(`${packageJson.description}`);
+        logger.info(packageJson.description);
     }
 
     /**
@@ -70,7 +73,7 @@ class Application {
      */
     private start(port: number): void {
         this.http.listen(port, () => {
-            logger.info(`${packageJson.displayName} is now listening on port [${port}]`);
+            logger.info(`Application listening on port [${port}]`);
         });
     }
 }
@@ -79,3 +82,6 @@ class Application {
  * Start the application.
  */
 const app = new Application();
+
+const hrend = process.hrtime(hrstart); // Used to calculate the time it takes to run the application
+logger.info(`Application started in [${hrend[0]}s ${hrend[1] / 1000000}ms]`);
