@@ -1,12 +1,12 @@
 [
-  {
-    "uuid": "08d814ff-4130-4f81-84a0-6fdf43549ce6",
-    "name": "Francisco Fernandez",
-    "email": "francisco59553@gmail.com"
-  },
-  {
-    "uuid": "a935d168-f605-41a9-bb66-853ff1aa876a",
-    "name": "Anthony Pillot",
-    "email": "pillot.anthony@gmail.com"
-  }
+    {
+        "uuid": "08d814ff-4130-4f81-84a0-6fdf43549ce6",
+        "name": "Francisco Fernandez",
+        "email": "francisco59553@gmail.com"
+    },
+    {
+        "uuid": "a935d168-f605-41a9-bb66-853ff1aa876a",
+        "name": "Anthony Pillot",
+        "email": "pillot.anthony@gmail.com"
+    }
 ]

@@ -9,19 +9,17 @@ jest.mock("../../src/outputs/google/drive.output");
 
 beforeAll(async () => {
     /**
-    * Silence the logger to avoid unnecessary output.
-    */
+     * Silence the logger to avoid unnecessary output.
+     */
     logger.silent = true;
 });
 
 describe("DataService", () => {
-    
     afterEach(() => {
         jest.clearAllMocks();
     });
-    
-    describe("getReceivers()", () => {
 
+    describe("getReceivers()", () => {
         test(`given Drive output that return null,
         when calling getReceivers() from data service,
         then retrieve null value`, async () => {
@@ -29,8 +27,8 @@ describe("DataService", () => {
             const receivers: ReceiverInterface[] | null = null;
 
             /**
-            * Mock the private constructor and the `getInstance()` method of the DriveOutput class.
-            */
+             * Mock the private constructor and the `getInstance()` method of the DriveOutput class.
+             */
 
             // eslint-disable-next-line @typescript-eslint/no-explicit-any
             const mockedDriveOutput = new (DriveOutput as any)() as jest.Mocked<DriveOutput>; // jest.MockedObject<DriveOutput> is working too
@@ -57,8 +55,8 @@ describe("DataService", () => {
             const receivers: ReceiverInterface[] = receiversJson;
 
             /**
-            * Mock the private constructor and the `getInstance()` method of the DriveOutput class.
-            */
+             * Mock the private constructor and the `getInstance()` method of the DriveOutput class.
+             */
 
             // eslint-disable-next-line @typescript-eslint/no-explicit-any
             const mockedDriveOutput = new (DriveOutput as any)() as jest.Mocked<DriveOutput>; // jest.MockedObject<DriveOutput> is working too
@@ -83,7 +81,7 @@ describe("DataService", () => {
             expect(result?.[0].name).not.toBe("Anthony Pillot");
             expect(result?.[0].email).toBe("francisco59553@gmail.com");
             expect(result?.[0].email).not.toBe("pillot.anthony@gmail.com");
-        
+
             expect(result?.[1].name).toBe("Anthony Pillot");
             expect(result?.[1].name).not.toBe("Francisco Fernandez");
             expect(result?.[1].email).toBe("pillot.anthony@gmail.com");

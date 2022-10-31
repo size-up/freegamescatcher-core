@@ -9,7 +9,6 @@ import UnauthorizedError from "../inputs/errors/unauthorized.error";
 import ForbiddenError from "../inputs/errors/forbidden.error";
 
 export default class DefaultMiddleware {
-
     constructor(http: Express) {
         this.defaultMiddleware(http);
     }
@@ -21,20 +20,19 @@ export default class DefaultMiddleware {
         http.use(cors());
         http.use(urlencoded({ extended: true }));
         http.use(json());
-        
+
         /**
          * Log all API calls.
          */
         http.use((request: Request, response: Response, next: NextFunction) => {
-
             const information = {
                 http: {
                     method: request.method,
                     url: request.originalUrl,
                     host: request.hostname,
                     ip: request.ip,
-                    headers: request.headers
-                }
+                    headers: request.headers,
+                },
             };
 
             logger.info("HTTP request received, see http object for details", information);

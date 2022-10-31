@@ -17,7 +17,7 @@ export default class ReceiverService {
             logger.error("Invalid Email");
             throw new Error("Verifying email failed");
         }
-        if ((await this.dataService.getReceivers())?.find(element => element.email === body.email)) {
+        if ((await this.dataService.getReceivers())?.find((element) => element.email === body.email)) {
             logger.error("Receiver already exists");
             throw new Error("Failed to update receivers list");
         }

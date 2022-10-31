@@ -34,11 +34,11 @@ export class DriveOutput {
             return null;
         }
     }
-    
+
     public async updateDocument(fileName: string, content: string): Promise<void> {
         fileName = this.verify(fileName);
         const id = await this.getFileId(fileName);
-        
+
         if (id) {
             try {
                 logger.info(`File [${fileName}] updated ${this.from}`);
@@ -74,14 +74,14 @@ export class DriveOutput {
             logger.error(message, error);
             throw new Error(message);
         }
-    };
+    }
 
     /**
      * Verify if the application is running in production mode or not, if not, prefix the @param fileName with "prep-filename.json".
      * Because Google Drive API not permit to search file by folder, all prep. files are prefixed by "prep-filename.json" in the Google Drive.
      * @param fileName The name of the file to retrieve.
      */
-    private verify(fileName:string): string {
+    private verify(fileName: string): string {
         if (process.env.NODE_ENV !== "production") {
             fileName = `prep-${fileName}`;
             return fileName;
@@ -117,7 +117,7 @@ export class DriveOutput {
     private async getFileId(fileName: string): Promise<string | undefined> {
         try {
             logger.info(`Searching file [${fileName}] ${this.from} ...`);
-            const id = (await this.getSchemaFileList()).files?.find(schema => schema.name === fileName)?.id;
+            const id = (await this.getSchemaFileList()).files?.find((schema) => schema.name === fileName)?.id;
             if (id) {
                 logger.info(`File [${fileName}] found ${this.from}`);
                 return id;

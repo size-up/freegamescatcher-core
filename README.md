@@ -70,8 +70,8 @@ yarn run start
 
 Free Games Catcher is using [**semantic-release**](https://semantic-release.gitbook.io/) and the semantic gitmoji extension.
 
-- `.releaserc.js` that contains **semantic-release** configuration.
-- If **semantic-release** determine that there is a new released version, the `"@semantic-release/exec", { publishCmd: "echo ::set-output name=nextVersion::${nextRelease.version}", }` will output the next release version.
-- This variable is retrieved by the CI/CD in the release job: `outputs.version: ${{ steps.version.outputs.nextVersion }}`
-- The CD deploy job will set the `VERSION` image variable environnement to the next release version output.
-- If the application is running in `production` mode, then this is the `VERSION` variable environnement that will print and provide the application version ; instead of the version field contained in the `package.json` file.
+-   `.releaserc.js` that contains **semantic-release** configuration.
+-   If **semantic-release** determine that there is a new released version, the `"@semantic-release/exec", { publishCmd: "echo ::set-output name=nextVersion::${nextRelease.version}", }` will output the next release version.
+-   This variable is retrieved by the CI/CD in the release job: `outputs.version: ${{ steps.version.outputs.nextVersion }}`
+-   The CD deploy job will set the `VERSION` image variable environnement to the next release version output.
+-   If the application is running in `production` mode, then this is the `VERSION` variable environnement that will print and provide the application version ; instead of the version field contained in the `package.json` file.

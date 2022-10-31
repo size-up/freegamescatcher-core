@@ -11,23 +11,23 @@ function setupLogger(): winston.Logger {
      */
     if (process.env.NODE_ENV === "production" || process.env.NODE_ENV === "pre-production") {
         const metadata = {
-            app : {
+            app: {
                 name: packageJson.name,
                 version: version(),
                 environment: process.env.NODE_ENV,
-            }
+            },
         };
 
         return winston.createLogger({
             level: "info",
             format: winston.format.json(),
             defaultMeta: metadata,
-            transports: [new winston.transports.Console({})]
+            transports: [new winston.transports.Console({})],
         });
     } else {
         const alignColorsAndTime = winston.format.combine(
             winston.format.colorize({
-                all: true
+                all: true,
             }),
             winston.format.timestamp({
                 format: "YY-MM-DD HH:mm:ss",
@@ -39,9 +39,7 @@ function setupLogger(): winston.Logger {
 
         return winston.createLogger({
             level: "debug",
-            format: winston.format.combine(
-                alignColorsAndTime
-            ),
+            format: winston.format.combine(alignColorsAndTime),
             transports: [new winston.transports.Console()],
         });
     }

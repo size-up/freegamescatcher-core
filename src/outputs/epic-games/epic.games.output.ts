@@ -6,12 +6,12 @@ import { logger } from "../../config/logger.config";
 
 export class EpicGamesOutput {
     private clientInformations = clientInformations.epicGames;
-    private clientParamsConnection: ClientInterface; 
+    private clientParamsConnection: ClientInterface;
 
     constructor() {
         this.clientParamsConnection = {
             url: `${this.clientInformations.baseUrl}/${this.clientInformations.endpoint}`,
-            params: this.clientInformations.params
+            params: this.clientInformations.params,
         };
     }
 
@@ -21,7 +21,7 @@ export class EpicGamesOutput {
     async getData(): Promise<Element[] | undefined> {
         try {
             const response: EpicGamesDataInterface = await axios.get(this.clientParamsConnection.url, {
-                params: this.clientParamsConnection.params
+                params: this.clientParamsConnection.params,
             });
             const epicGamesElements: Element[] = response.data.data.Catalog.searchStore.elements;
             return epicGamesElements;

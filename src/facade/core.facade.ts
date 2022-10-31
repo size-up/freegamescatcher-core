@@ -25,18 +25,17 @@ export default class CoreFacade {
      */
     public async execute(): Promise<Boolean> {
         let executed = false;
-        
+
         // Retrieve game list from games API.
         const games = await this.client.getEpicGamesData();
-        
-        if (games) {
 
+        if (games) {
             // Update games list in the cache.
             this.data.updateCache(games);
 
             // Retrieve receivers list from the cache.
             const receivers = await this.data.getReceivers();
-    
+
             // Send game list to receivers.
             if (receivers) {
                 try {

@@ -6,6 +6,6 @@ export interface GameCacheDocumentInterface {
     promotion: Promotion;
 }
 interface Promotion {
-    startDate: string,
-    endDate: string
+    startDate: string;
+    endDate: string;
 }

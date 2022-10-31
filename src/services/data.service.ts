@@ -37,10 +37,7 @@ export class DataService {
 
     public async updateCache(content: GameCacheDocumentInterface[]): Promise<boolean> {
         try {
-            await this.drive.updateDocument(
-                this.file.cache.name,
-                JSON.stringify(content, null, 4)
-            );
+            await this.drive.updateDocument(this.file.cache.name, JSON.stringify(content, null, 4));
             return true;
         } catch (error) {
             logger.error("Error while updating cache", error);
@@ -62,10 +59,7 @@ export class DataService {
         try {
             const receivers = await this.getReceivers();
             receivers?.push(receiver);
-            await this.drive.updateDocument(
-                this.file.receivers.name,
-                JSON.stringify(receivers, null, 4)
-            );
+            await this.drive.updateDocument(this.file.receivers.name, JSON.stringify(receivers, null, 4));
             return receiver;
         } catch (error) {
             throw new Error("Error during updating receivers list");
@@ -77,17 +71,14 @@ export class DataService {
             const receivers = await this.getReceivers();
             let index;
             if (receivers) {
-                index = receivers.findIndex(element => element.uuid === uuid);
+                index = receivers.findIndex((element) => element.uuid === uuid);
                 if (index >= 0) {
                     receivers?.splice(index, 1);
                 } else {
                     throw new Error("UUID doesn't exist");
                 }
             }
-            await this.drive.updateDocument(
-                this.file.receivers.name,
-                JSON.stringify(receivers, null, 4)
-            );
+            await this.drive.updateDocument(this.file.receivers.name, JSON.stringify(receivers, null, 4));
             return true;
         } catch (error) {
             logger.error(error);

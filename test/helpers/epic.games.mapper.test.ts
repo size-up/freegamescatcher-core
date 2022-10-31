@@ -12,7 +12,6 @@ beforeAll(() => {
 });
 
 describe("Test Epic Games mapper", () => {
-
     /**
      * Deep clone the games.json data.
      */

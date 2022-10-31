@@ -15,14 +15,13 @@ beforeAll(() => {
 });
 
 describe("Test Game Client service", () => {
-
     test(`given Epic Games client that return undefined,
     when get Epic Games data,
     then throw error`, async () => {
         // given
         const data = jest.spyOn(EpicGamesOutput.prototype, "getData");
         data.mockResolvedValue(undefined);
-        
+
         const gamesClient = new GameService();
         const spyService = jest.spyOn(gamesClient, "getEpicGamesData");
 
@@ -32,12 +31,12 @@ describe("Test Game Client service", () => {
         } catch (error) {
             // then
             expect(spyService).toHaveBeenCalledTimes(1);
-        
+
             expect(error).toBeInstanceOf(Error);
             expect(error).toStrictEqual(Error("Error while filtering or mapping Epic Games data"));
         }
     });
-    
+
     test(`given Epic Games client that return 12 games,
     when get Epic Games data,
     then expect to receive 4 games, with 2 games actually free and 2 games that they're going to be free`, async () => {
@@ -46,11 +45,18 @@ describe("Test Game Client service", () => {
         expect(games).toHaveLength(12);
 
         // Actual free games.
-        const freeGames = games.filter(game => game.promotions?.promotionalOffers[0]?.promotionalOffers[0]?.discountSetting?.discountPercentage === 0);
+        const freeGames = games.filter(
+            (game) =>
+                game.promotions?.promotionalOffers[0]?.promotionalOffers[0]?.discountSetting?.discountPercentage === 0
+        );
         expect(freeGames).toHaveLength(2);
 
         // Upcoming free games.
-        const upcomingFreeGames = games.filter(game => game.promotions?.upcomingPromotionalOffers[0]?.promotionalOffers[0]?.discountSetting?.discountPercentage === 0);
+        const upcomingFreeGames = games.filter(
+            (game) =>
+                game.promotions?.upcomingPromotionalOffers[0]?.promotionalOffers[0]?.discountSetting
+                    ?.discountPercentage === 0
+        );
         expect(upcomingFreeGames).toHaveLength(2);
 
         const data = jest.spyOn(EpicGamesOutput.prototype, "getData");
@@ -66,7 +72,7 @@ describe("Test Game Client service", () => {
         const spyIsFreeGames = jest.spyOn(gamesClient as any, "isFreeGame");
 
         const epicGamesData = await gamesClient.getEpicGamesData();
-        
+
         // then
         expect(spyGetEpicGames).toHaveBeenCalledTimes(1);
         expect(spyFilter).toHaveBeenCalledTimes(1);
@@ -76,7 +82,7 @@ describe("Test Game Client service", () => {
         expect(epicGamesData).toBeDefined();
         expect(epicGamesData).toHaveLength(4);
 
-        epicGamesData?.forEach(game => {
+        epicGamesData?.forEach((game) => {
             expect(game).toHaveProperty("title");
             expect(game).toHaveProperty("description");
             expect(game).toHaveProperty("imageUrl");
@@ -91,20 +97,25 @@ describe("Test Game Client service", () => {
         // given
         let games: Element[] = Object(gamesJson);
         expect(games).toHaveLength(12);
-        
+
         /**
          * Retrieve all games that have a discount percentage greater than 0.
          * That means that the game is potentially free.
          * If it's greater than 0, then it's not free.
          */
-        games = games.filter(game => game.promotions?.promotionalOffers[0]?.promotionalOffers[0]?.discountSetting?.discountPercentage >= 0);
+        games = games.filter(
+            (game) =>
+                game.promotions?.promotionalOffers[0]?.promotionalOffers[0]?.discountSetting?.discountPercentage >= 0
+        );
 
-        games.forEach(game => {
-            expect(game.promotions?.promotionalOffers[0]?.promotionalOffers[0]?.discountSetting?.discountPercentage).toBeGreaterThanOrEqual(0);
+        games.forEach((game) => {
+            expect(
+                game.promotions?.promotionalOffers[0]?.promotionalOffers[0]?.discountSetting?.discountPercentage
+            ).toBeGreaterThanOrEqual(0);
         });
 
         expect(games).toHaveLength(5);
-        
+
         const data = jest.spyOn(EpicGamesOutput.prototype, "getData");
         data.mockResolvedValue(games);
 
@@ -128,7 +139,7 @@ describe("Test Game Client service", () => {
         expect(epicGamesData).toBeDefined();
         expect(epicGamesData).toHaveLength(2);
 
-        epicGamesData?.forEach(game => {
+        epicGamesData?.forEach((game) => {
             expect(game).toHaveProperty("title");
             expect(game).toHaveProperty("description");
             expect(game).toHaveProperty("imageUrl");
