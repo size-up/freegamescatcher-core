@@ -1,72 +1,73 @@
 {
-  "name": "freegamescatcher-core",
-  "displayName": "🎮 Free Games Catcher",
-  "version": "1.5.0",
-  "description": "Free Games Catcher is an application that aims to search for game sites, trigger an alert and send it to users to notify them when a free game is available",
-  "license": "GPL-3.0-or-later",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/size-up/freegamescatcher-core.git"
-  },
-  "author": {
-    "name": "Size Up",
-    "email": "noreply@sizeup.cloud",
-    "url": "https://sizeup.cloud"
-  },
-  "contributors": [
-    {
-      "name": "Francisco Fernandez",
-      "email": "francisco59553@gmail.com",
-      "url": "https://francisco-fernandez.fr"
+    "name": "freegamescatcher-core",
+    "displayName": "🎮 Free Games Catcher",
+    "version": "1.5.0",
+    "description": "Free Games Catcher is an application that aims to search for game sites, trigger an alert and send it to users to notify them when a free game is available",
+    "license": "GPL-3.0-or-later",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/size-up/freegamescatcher-core.git"
     },
-    {
-      "name": "Anthony Pillot",
-      "email": "pillot.anthony@gmail.com",
-      "url": "https://anthonypillot.com"
+    "author": {
+        "name": "Size Up",
+        "email": "noreply@sizeup.cloud",
+        "url": "https://sizeup.cloud"
+    },
+    "contributors": [
+        {
+            "name": "Francisco Fernandez",
+            "email": "francisco59553@gmail.com",
+            "url": "https://francisco-fernandez.fr"
+        },
+        {
+            "name": "Anthony Pillot",
+            "email": "pillot.anthony@gmail.com",
+            "url": "https://anthonypillot.com"
+        }
+    ],
+    "main": "src/app.ts",
+    "scripts": {
+        "clean": "rm -rf ./build && rm -rf ./coverage",
+        "build": "yarn clean && tsc --build && yarn copy",
+        "start": "yarn build && yarn start:prod",
+        "start:prod": "node ./build/src/app.js",
+        "dev": "nodemon",
+        "release": "semantic-release",
+        "copy": "cp -r ./src/assets/ ./build/src/assets/ && cp -r ./src/templates/ ./build/src/templates/",
+        "format": "prettier --write .",
+        "test:unit": "jest",
+        "test:unit:watch": "jest --watch",
+        "test:unit:coverage": "jest --coverage",
+        "test:unit:coverage:open": "jest --coverage && npx --yes http-server -o ./coverage/lcov-report/"
+    },
+    "dependencies": {
+        "axios": "^0.27.2",
+        "cors": "^2.8.5",
+        "express": "^4.18.1",
+        "googleapis": "^108.0.0",
+        "handlebars": "^4.7.7",
+        "nodemailer": "^6.7.8",
+        "winston": "^3.8.2"
+    },
+    "devDependencies": {
+        "@semantic-release/changelog": "^6.0.1",
+        "@semantic-release/exec": "^6.0.3",
+        "@semantic-release/git": "^10.0.1",
+        "@types/cors": "^2.8.12",
+        "@types/express": "^4.17.13",
+        "@types/jest": "^29.1.2",
+        "@types/node": "^18.7.16",
+        "@types/nodemailer": "^6.4.6",
+        "@typescript-eslint/eslint-plugin": "^5.36.0",
+        "@typescript-eslint/parser": "^5.36.0",
+        "eslint": "^8.23.0",
+        "eslint-config-prettier": "^8.5.0",
+        "jest": "^29.2.0",
+        "nodemon": "^2.0.19",
+        "semantic-release": "^19.0.5",
+        "semantic-release-gitmoji": "^1.4.4",
+        "ts-jest": "^29.0.3",
+        "ts-node": "^10.9.1",
+        "typescript": "^4.8.2"
     }
-  ],
-  "main": "src/app.ts",
-  "scripts": {
-    "clean": "rm -rf ./build && rm -rf ./coverage",
-    "build": "yarn clean && tsc --build && yarn copy",
-    "start": "yarn build && yarn start:prod",
-    "start:prod": "node ./build/src/app.js",
-    "dev": "nodemon",
-    "release": "semantic-release",
-    "copy": "cp -r ./src/assets/ ./build/src/assets/ && cp -r ./src/templates/ ./build/src/templates/",
-    "test:unit": "jest",
-    "test:unit:watch": "jest --watch",
-    "test:unit:coverage": "jest --coverage",
-    "test:unit:coverage:open": "jest --coverage && npx --yes http-server -o ./coverage/lcov-report/"
-  },
-  "dependencies": {
-    "axios": "^0.27.2",
-    "cors": "^2.8.5",
-    "express": "^4.18.1",
-    "googleapis": "^108.0.0",
-    "handlebars": "^4.7.7",
-    "nodemailer": "^6.7.8",
-    "winston": "^3.8.2"
-  },
-  "devDependencies": {
-    "@semantic-release/changelog": "^6.0.1",
-    "@semantic-release/exec": "^6.0.3",
-    "@semantic-release/git": "^10.0.1",
-    "@types/cors": "^2.8.12",
-    "@types/express": "^4.17.13",
-    "@types/jest": "^29.1.2",
-    "@types/node": "^18.7.16",
-    "@types/nodemailer": "^6.4.6",
-    "@typescript-eslint/eslint-plugin": "^5.36.0",
-    "@typescript-eslint/parser": "^5.36.0",
-    "eslint": "^8.23.0",
-    "eslint-config-prettier": "^8.5.0",
-    "jest": "^29.2.0",
-    "nodemon": "^2.0.19",
-    "semantic-release": "^19.0.5",
-    "semantic-release-gitmoji": "^1.4.4",
-    "ts-jest": "^29.0.3",
-    "ts-node": "^10.9.1",
-    "typescript": "^4.8.2"
-  }
 }
