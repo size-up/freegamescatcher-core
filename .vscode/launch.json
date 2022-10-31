@@ -1,38 +1,38 @@
 {
-  // Use IntelliSense to learn about possible attributes.
-  // Hover to view descriptions of existing attributes.
-  // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
-  "version": "0.2.0",
-  "configurations": [
-    {
-      "preLaunchTask": "install",
-      "command": "yarn run dev",
-      "name": "Launch [development]",
-      "request": "launch",
-      "type": "node-terminal",
-      "env": {
-        "NODE_ENV": "development"
-      },
-      "envFile": "${workspaceFolder}/.env"
-    },
-    {
-      "preLaunchTask": "install",
-      "command": "yarn run start",
-      "name": "Launch [production]",
-      "request": "launch",
-      "type": "node-terminal",
-      "env": {
-        "NODE_ENV": "production"
-      },
-      "envFile": "${workspaceFolder}/.env"
-    },
-    {
-      "preLaunchTask": "install",
-      "command": "yarn run test:unit:watch",
-      "name": "Launch unit tests in watch mode",
-      "request": "launch",
-      "type": "node-terminal",
-      "envFile": "${workspaceFolder}/.env"
-    }
-  ]
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "preLaunchTask": "install",
+            "command": "yarn run dev",
+            "name": "Launch [development]",
+            "request": "launch",
+            "type": "node-terminal",
+            "env": {
+                "NODE_ENV": "development"
+            },
+            "envFile": "${workspaceFolder}/.env"
+        },
+        {
+            "preLaunchTask": "install",
+            "command": "yarn run start",
+            "name": "Launch [production]",
+            "request": "launch",
+            "type": "node-terminal",
+            "env": {
+                "NODE_ENV": "production"
+            },
+            "envFile": "${workspaceFolder}/.env"
+        },
+        {
+            "preLaunchTask": "install",
+            "command": "yarn run test:unit:watch",
+            "name": "Launch unit tests in watch mode",
+            "request": "launch",
+            "type": "node-terminal",
+            "envFile": "${workspaceFolder}/.env"
+        }
+    ]
 }

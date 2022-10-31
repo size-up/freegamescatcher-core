@@ -1,6 +1,0 @@
-{
-  // This config. is used to set ESLint as default formatter
-  "eslint.format.enable": true,
-  "[javascript]": { "editor.defaultFormatter": "dbaeumer.vscode-eslint" },
-  "[typescript]": { "editor.defaultFormatter": "dbaeumer.vscode-eslint" }
-}
