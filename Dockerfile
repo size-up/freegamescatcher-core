@@ -1,5 +1,5 @@
 # First stage is to build the application
-FROM node:lts-alpine3.16 AS build
+FROM node:lts-alpine AS build
 
 # Define working directory
 WORKDIR /app
@@ -14,7 +14,7 @@ RUN yarn install --frozen-lockfile
 RUN yarn run build
 
 # Second stage is to build the application image
-FROM node:lts-alpine3.16 AS application
+FROM node:lts-alpine AS application
 
 WORKDIR /app
 
