@@ -148,6 +148,7 @@ export interface Element {
     offerMappings: OfferMapping[];
     price: Price;
     promotions: Promotions;
+    free?: boolean;
 }
 
 interface Paging {
