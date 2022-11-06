@@ -11,12 +11,12 @@ export class EpicGamesMapper {
                     description: game.description,
                     urlSlug: `https://store.epicgames.com/fr/p/${game.catalogNs.mappings[0]?.pageSlug}`,
                     promotion: {
-                        startDate: game.promotions?.promotionalOffers.length
+                        startDate: game.free 
                             ? game.promotions.promotionalOffers[0].promotionalOffers[0].startDate.toString()
                             : game.promotions?.upcomingPromotionalOffers[0]?.promotionalOffers[0].startDate.toString(),
-                        endDate: game.promotions?.promotionalOffers.length
+                        endDate: game.free 
                             ? game.promotions.promotionalOffers[0].promotionalOffers[0].endDate.toString()
-                            : game.promotions?.upcomingPromotionalOffers[0]?.promotionalOffers[0].endDate.toString(),
+                            : game.promotions?.upcomingPromotionalOffers[0]?.promotionalOffers[0].endDate.toString()
                     },
                     imageUrl: game.keyImages[1].url,
                 };

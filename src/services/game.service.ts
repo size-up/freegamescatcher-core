@@ -27,31 +27,42 @@ export class GameService {
     }
 
     private filterElements(data: Element[]): Element[] {
-        return data.filter((filteredGame) => this.isFreeGame(filteredGame));
+        return data.filter((filteredGame) => {
+            const freeNowOrAfter = this.isFreeGame(filteredGame);
+            if (freeNowOrAfter === "now") {
+                filteredGame["free"] = true;
+                return true;
+            } else if (freeNowOrAfter === "after") {
+                filteredGame["free"] = false;
+                return true;
+            }
+        });
     }
 
     /**
      * For each received game, check if it is free or not, by checking if the `discountPercentage` is equal to 0.
      *
      * @param filteredGame The game to check if it's free.
-     * @returns true if the game is free, false if not.
+     * @returns "now" for free game now, "after" for free game next week, "none" if not free
      */
-    private isFreeGame(filteredGame: Element): boolean {
-        // If the game is currently free, then return true.
+    private isFreeGame(filteredGame: Element): string {
+        let freeNowOrAfter = "none";
+
         const isCurrentlyFree =
             filteredGame.promotions?.promotionalOffers[0]?.promotionalOffers[0]?.discountSetting?.discountPercentage ===
             0;
 
-        // If the game isn't free, with a boolean to false, then check if it'll be free in the future.
-        // If is, return true, if not, return false.
-        if (!isCurrentlyFree) {
-            return (
-                filteredGame.promotions?.upcomingPromotionalOffers[0]?.promotionalOffers[0]?.discountSetting
-                    ?.discountPercentage === 0
-            );
+        // The game is free now ? return "now"
+        if (isCurrentlyFree) {
+            return freeNowOrAfter = "now";
+        } 
+        const isAfterFree = filteredGame.promotions?.upcomingPromotionalOffers[0]?.promotionalOffers[0]?.discountSetting
+            ?.discountPercentage === 0;
+        // The game is free after ? return "after"
+        if (isAfterFree) {
+            return freeNowOrAfter = "after";
         }
-
-        // If the game is free, return true. In any case.
-        return isCurrentlyFree;
+        // If no condition is filled, return "none"
+        return freeNowOrAfter;
     }
 }
