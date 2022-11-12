@@ -1,12 +1,12 @@
 import { logger } from "../config/logger.config";
-import { GameCacheDocumentInterface } from "../interfaces/cache.interface";
+import { GameInterface } from "../interfaces/game.interface";
 import { Element } from "../interfaces/client.interface";
 
 export class EpicGamesMapper {
-    static map(data: Element[]): GameCacheDocumentInterface[] {
+    static map(data: Element[]): GameInterface[] {
         try {
-            const newElementsToSave: GameCacheDocumentInterface[] = data.map((game) => {
-                const newElement: GameCacheDocumentInterface = {
+            const newElementsToSave: GameInterface[] = data.map((game) => {
+                const newElement: GameInterface = {
                     title: game.title,
                     description: game.description,
                     urlSlug: `https://store.epicgames.com/fr/p/${game.catalogNs.mappings[0]?.pageSlug}`,

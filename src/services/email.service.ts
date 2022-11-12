@@ -2,21 +2,21 @@ import fs from "fs";
 import handlebars from "handlebars";
 import packageJson from "../../package.json";
 import { logger } from "../config/logger.config";
-import { GameCacheDocumentInterface } from "../interfaces/cache.interface";
+import { GameInterface } from "../interfaces/game.interface";
 import { EmailConfigInterface, EmailOptionsInterface, EmailResponseInterface } from "../interfaces/email.interface";
 import { ReceiverInterface } from "../interfaces/receiver.interface";
 import { EmailerOutput } from "../outputs/emailer/emailer.output";
 
 interface DatasToCompileInterface {
     uuid: string | undefined;
-    availableGames: GameCacheDocumentInterface[];
-    nextGames: GameCacheDocumentInterface[];
+    availableGames: GameInterface[];
+    nextGames: GameInterface[];
 }
 
 export class EmailService {
     private emailer: EmailerOutput;
     private config: EmailConfigInterface;
-    private datas: GameCacheDocumentInterface[] = [];
+    private datas: GameInterface[] = [];
 
     constructor() {
         this.config = {
@@ -44,7 +44,7 @@ export class EmailService {
     public async sendEmails(
         subject: string,
         receivers: ReceiverInterface[],
-        datas: GameCacheDocumentInterface[]
+        datas: GameInterface[]
     ): Promise<void> {
         try {
             this.datas = datas;
