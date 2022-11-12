@@ -1,3 +1,8 @@
+# [v1.5.4](https://github.com/size-up/freegamescatcher-core/compare/v1.5.3...v1.5.4) (2022-11-12)
+
+## 🐛 Bug fixes
+- [`267d791`](https://github.com/size-up/freegamescatcher-core/commit/267d791)  Change saving dates methods to get free games
+
 # [v1.5.3](https://github.com/size-up/freegamescatcher-core/compare/v1.5.2...v1.5.3) (2022-11-12)
 
 # [v1.5.2](https://github.com/size-up/freegamescatcher-core/compare/v1.5.1...v1.5.2) (2022-10-31)
