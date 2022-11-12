@@ -1,4 +1,4 @@
-export interface GameCacheDocumentInterface {
+export interface GameInterface {
     title: string;
     description: string;
     imageUrl: string;

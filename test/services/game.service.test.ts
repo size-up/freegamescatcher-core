@@ -14,7 +14,7 @@ beforeAll(() => {
     logger.silent = true;
 });
 
-describe("Test Game Client service", () => {
+describe("GameService", () => {
     test(`given Epic Games client that return undefined,
     when get Epic Games data,
     then throw error`, async () => {
@@ -37,27 +37,41 @@ describe("Test Game Client service", () => {
         }
     });
 
-    test(`given Epic Games client that return 12 games,
+    test(`given Epic Games client that return 26 games with 8 free games with 4 actually free and 4 upcoming, 
     when get Epic Games data,
     then expect to receive 4 games, with 2 games actually free and 2 games that they're going to be free`, async () => {
         // given
         const games: Element[] = Object(gamesJson);
-        expect(games).toHaveLength(12);
+        expect(games).toHaveLength(26);
+
+        // Actual and upcoming free games.
+        expect(
+            games.filter(
+                (game) =>
+                    game.promotions?.promotionalOffers[0]?.promotionalOffers[0]?.discountSetting?.discountPercentage ===
+                        0 ||
+                    game.promotions?.upcomingPromotionalOffers[0]?.promotionalOffers[0]?.discountSetting
+                        ?.discountPercentage === 0
+            )
+        ).toHaveLength(8);
 
         // Actual free games.
-        const freeGames = games.filter(
-            (game) =>
-                game.promotions?.promotionalOffers[0]?.promotionalOffers[0]?.discountSetting?.discountPercentage === 0
-        );
-        expect(freeGames).toHaveLength(2);
+        expect(
+            games.filter(
+                (game) =>
+                    game.promotions?.promotionalOffers[0]?.promotionalOffers[0]?.discountSetting?.discountPercentage ===
+                    0
+            )
+        ).toHaveLength(4);
 
         // Upcoming free games.
-        const upcomingFreeGames = games.filter(
-            (game) =>
-                game.promotions?.upcomingPromotionalOffers[0]?.promotionalOffers[0]?.discountSetting
-                    ?.discountPercentage === 0
-        );
-        expect(upcomingFreeGames).toHaveLength(2);
+        expect(
+            games.filter(
+                (game) =>
+                    game.promotions?.upcomingPromotionalOffers[0]?.promotionalOffers[0]?.discountSetting
+                        ?.discountPercentage === 0
+            )
+        ).toHaveLength(4);
 
         const data = jest.spyOn(EpicGamesOutput.prototype, "getData");
         data.mockResolvedValue(games);
@@ -76,68 +90,14 @@ describe("Test Game Client service", () => {
         // then
         expect(spyGetEpicGames).toHaveBeenCalledTimes(1);
         expect(spyFilter).toHaveBeenCalledTimes(1);
-        expect(spyIsFreeGames).toHaveBeenCalledTimes(12); // because there is 12 games
+        expect(spyIsFreeGames).toHaveBeenCalledTimes(26); // because there is 26 games
+
+        expect(spyIsFreeGames.mock.results.filter((result) => result.value === "now")).toHaveLength(4);
+        expect(spyIsFreeGames.mock.results.filter((result) => result.value === "upcoming")).toHaveLength(4);
+        expect(spyIsFreeGames.mock.results.filter((result) => result.value === "none")).toHaveLength(18);
 
         expect(epicGamesData).toBeTruthy();
-        expect(epicGamesData).toBeDefined();
-        expect(epicGamesData).toHaveLength(4);
-
-        epicGamesData?.forEach((game) => {
-            expect(game).toHaveProperty("title");
-            expect(game).toHaveProperty("description");
-            expect(game).toHaveProperty("imageUrl");
-            expect(game).toHaveProperty("promotion");
-            expect(game).toHaveProperty("urlSlug");
-        });
-    });
-
-    test(`given Epic Games client that return data with 5 games and only 2 free games,
-    when get Epic Games data,
-    then expect to receive only 2 free games`, async () => {
-        // given
-        let games: Element[] = Object(gamesJson);
-        expect(games).toHaveLength(12);
-
-        /**
-         * Retrieve all games that have a discount percentage greater than 0.
-         * That means that the game is potentially free.
-         * If it's greater than 0, then it's not free.
-         */
-        games = games.filter(
-            (game) =>
-                game.promotions?.promotionalOffers[0]?.promotionalOffers[0]?.discountSetting?.discountPercentage >= 0
-        );
-
-        games.forEach((game) => {
-            expect(
-                game.promotions?.promotionalOffers[0]?.promotionalOffers[0]?.discountSetting?.discountPercentage
-            ).toBeGreaterThanOrEqual(0);
-        });
-
-        expect(games).toHaveLength(5);
-
-        const data = jest.spyOn(EpicGamesOutput.prototype, "getData");
-        data.mockResolvedValue(games);
-
-        // when
-        const gamesClient = new GameService();
-
-        const spyGetEpicGames = jest.spyOn(gamesClient, "getEpicGamesData");
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        const spyFilter = jest.spyOn(gamesClient as any, "filterElements");
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        const spyIsFreeGames = jest.spyOn(gamesClient as any, "isFreeGame");
-
-        const epicGamesData = await gamesClient.getEpicGamesData();
-
-        // then
-        expect(spyGetEpicGames).toHaveBeenCalledTimes(1);
-        expect(spyFilter).toHaveBeenCalledTimes(1);
-        expect(spyIsFreeGames).toHaveBeenCalledTimes(5); // because there is 5 games
-
-        expect(epicGamesData).toBeTruthy();
-        expect(epicGamesData).toBeDefined();
-        expect(epicGamesData).toHaveLength(2);
+        expect(epicGamesData).toHaveLength(8); // because there is 8 free games
 
         epicGamesData?.forEach((game) => {
             expect(game).toHaveProperty("title");

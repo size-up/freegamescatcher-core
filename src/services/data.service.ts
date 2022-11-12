@@ -1,6 +1,6 @@
 import { DriveOutput } from "../outputs/google/drive.output";
 
-import { GameCacheDocumentInterface } from "../interfaces/cache.interface";
+import { GameInterface } from "../interfaces/game.interface";
 import { ReceiverInterface } from "../interfaces/receiver.interface";
 
 import { logger } from "../config/logger.config";
@@ -25,9 +25,9 @@ export class DataService {
         this.drive = DriveOutput.getInstance();
     }
 
-    public async getCache(): Promise<GameCacheDocumentInterface[] | null> {
+    public async getCache(): Promise<GameInterface[] | null> {
         try {
-            const cache: GameCacheDocumentInterface[] = await Object(this.drive.getDocument(this.file.cache.name));
+            const cache: GameInterface[] = await Object(this.drive.getDocument(this.file.cache.name));
             return cache;
         } catch (error) {
             logger.error(error);
@@ -35,7 +35,7 @@ export class DataService {
         }
     }
 
-    public async updateCache(content: GameCacheDocumentInterface[]): Promise<boolean> {
+    public async updateCache(content: GameInterface[]): Promise<boolean> {
         try {
             await this.drive.updateDocument(this.file.cache.name, JSON.stringify(content, null, 4));
             return true;

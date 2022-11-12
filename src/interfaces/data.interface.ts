@@ -1,6 +1,6 @@
-import { GameCacheDocumentInterface } from "./cache.interface";
+import { GameInterface } from "./game.interface";
 
 export interface DatasToCompileInterface {
-    availableGames: GameCacheDocumentInterface[];
-    nextGames: GameCacheDocumentInterface[];
+    availableGames: GameInterface[];
+    nextGames: GameInterface[];
 }
