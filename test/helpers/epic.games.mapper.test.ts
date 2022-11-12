@@ -1,6 +1,6 @@
 import { logger } from "../../src/config/logger.config";
 import { EpicGamesMapper } from "../../src/helpers/epic.games.mapper";
-import { GameCacheDocumentInterface } from "../../src/interfaces/cache.interface";
+import { GameInterface } from "../../src/interfaces/game.interface";
 import { Element } from "../../src/interfaces/client.interface";
 import gamesJSON from "../data/games.json";
 
@@ -11,7 +11,7 @@ beforeAll(() => {
     logger.silent = true;
 });
 
-describe("Test Epic Games mapper", () => {
+describe("EpicGamesMapper", () => {
     /**
      * Deep clone the games.json data.
      */
@@ -56,20 +56,20 @@ describe("Test Epic Games mapper", () => {
         expect(games).toHaveLength(0);
 
         // when
-        const gameCacheDocuments: GameCacheDocumentInterface[] = EpicGamesMapper.map(games);
+        const mappedGames: GameInterface[] = EpicGamesMapper.map(games);
 
         // then
-        expect(gameCacheDocuments).toBeInstanceOf(Array);
-        expect(gameCacheDocuments).toHaveLength(0);
+        expect(mappedGames).toBeInstanceOf(Array);
+        expect(mappedGames).toHaveLength(0);
     });
 
-    test("given 12 elements to map, when map elements, then retrieve 12 game cache documents", () => {
+    test("given 26 elements to map, when map elements, then retrieve 26 games cache documents", () => {
         // given
 
         // when
-        const gameCacheDocuments: GameCacheDocumentInterface[] = EpicGamesMapper.map(games);
+        const mappedGames: GameInterface[] = EpicGamesMapper.map(games);
 
         // then
-        expect(gameCacheDocuments).toHaveLength(12);
+        expect(mappedGames).toHaveLength(26);
     });
 });
