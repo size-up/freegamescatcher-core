@@ -21,10 +21,12 @@ export default class CoreFacade {
     /**
      * This method is responsible to do all the process of the application.
      * It will get the games data from the API, filter it and send it to the receivers.
-     * @returns If the process was successful.
+     * @returns If the process was successful or not.
      */
     public async execute(): Promise<Boolean> {
         let executed = false;
+
+        logger.info("Starting the core application process...");
 
         // Retrieve game list from games API.
         const games = await this.client.getEpicGamesData();
@@ -40,6 +42,8 @@ export default class CoreFacade {
             if (receivers) {
                 try {
                     await this.email.sendEmails("Epic Games Store - Nouveaux jeux", receivers, games);
+
+                    logger.info("Core application process finished successfully");
                     executed = true;
                 } catch (error) {
                     logger.error(error);
@@ -47,11 +51,11 @@ export default class CoreFacade {
                 }
             } else {
                 executed = false;
-                logger.error("No receivers found, process is aborted");
+                logger.error("No receivers found, core application process is aborted");
             }
         } else {
             executed = false;
-            logger.error("No games found, process is aborted");
+            logger.error("No games found, core application process is aborted");
         }
 
         return executed;

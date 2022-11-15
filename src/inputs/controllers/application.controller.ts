@@ -1,4 +1,4 @@
-import { NextFunction, Request, Response, Router } from "express";
+import { Request, Response, Router } from "express";
 import { logger } from "../../config/logger.config";
 import CoreFacade from "../../facade/core.facade";
 
@@ -13,18 +13,18 @@ export default class ApplicationController {
         /**
          * Execute the full application process.
          */
-        this.router.get("/execute", async (request: Request, response: Response, next: NextFunction) => {
+        this.router.get("/execute", async (request: Request, response: Response) => {
             try {
                 const core = new CoreFacade();
                 const isOk = await core.execute();
 
                 if (isOk) {
-                    response.status(200).json({ status: "Application process well executed" });
+                    response.status(200).json({ status: "Core application process well executed" });
                 } else {
-                    response.status(500).json({ status: "Application process failed" });
+                    response.status(500).json({ status: "Core application process failed" });
                 }
             } catch (error) {
-                const message = "Process application runtime failed";
+                const message = "Core application process failed";
                 logger.error(message, error);
                 throw new Error(message);
             }
