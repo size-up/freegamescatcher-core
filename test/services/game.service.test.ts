@@ -42,7 +42,7 @@ describe("GameService", () => {
     then expect to receive 4 games, with 2 games actually free and 2 games that they're going to be free`, async () => {
         // given
         const games: Element[] = Object(gamesJson);
-        expect(games).toHaveLength(26);
+        expect(games).toHaveLength(41);
 
         // Actual and upcoming free games.
         expect(
@@ -53,7 +53,7 @@ describe("GameService", () => {
                     game.promotions?.upcomingPromotionalOffers[0]?.promotionalOffers[0]?.discountSetting
                         ?.discountPercentage === 0
             )
-        ).toHaveLength(8);
+        ).toHaveLength(12);
 
         // Actual free games.
         expect(
@@ -62,7 +62,7 @@ describe("GameService", () => {
                     game.promotions?.promotionalOffers[0]?.promotionalOffers[0]?.discountSetting?.discountPercentage ===
                     0
             )
-        ).toHaveLength(4);
+        ).toHaveLength(7);
 
         // Upcoming free games.
         expect(
@@ -71,7 +71,7 @@ describe("GameService", () => {
                     game.promotions?.upcomingPromotionalOffers[0]?.promotionalOffers[0]?.discountSetting
                         ?.discountPercentage === 0
             )
-        ).toHaveLength(4);
+        ).toHaveLength(5);
 
         const data = jest.spyOn(EpicGamesOutput.prototype, "getData");
         data.mockResolvedValue(games);
@@ -90,14 +90,14 @@ describe("GameService", () => {
         // then
         expect(spyGetEpicGames).toHaveBeenCalledTimes(1);
         expect(spyFilter).toHaveBeenCalledTimes(1);
-        expect(spyIsFreeGames).toHaveBeenCalledTimes(26); // because there is 26 games
+        expect(spyIsFreeGames).toHaveBeenCalledTimes(41); // because there is 41 games
 
-        expect(spyIsFreeGames.mock.results.filter((result) => result.value === "now")).toHaveLength(4);
-        expect(spyIsFreeGames.mock.results.filter((result) => result.value === "upcoming")).toHaveLength(4);
-        expect(spyIsFreeGames.mock.results.filter((result) => result.value === "none")).toHaveLength(18);
+        expect(spyIsFreeGames.mock.results.filter((result) => result.value === "now")).toHaveLength(7);
+        expect(spyIsFreeGames.mock.results.filter((result) => result.value === "upcoming")).toHaveLength(5);
+        expect(spyIsFreeGames.mock.results.filter((result) => result.value === "none")).toHaveLength(29);
 
         expect(epicGamesData).toBeTruthy();
-        expect(epicGamesData).toHaveLength(8); // because there is 8 free games
+        expect(epicGamesData).toHaveLength(12); // because there is 12 free games
 
         epicGamesData?.forEach((game) => {
             expect(game).toHaveProperty("title");

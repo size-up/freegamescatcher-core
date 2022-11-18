@@ -70,6 +70,6 @@ describe("EpicGamesMapper", () => {
         const mappedGames: GameInterface[] = EpicGamesMapper.map(games);
 
         // then
-        expect(mappedGames).toHaveLength(26);
+        expect(mappedGames).toHaveLength(41);
     });
 });
