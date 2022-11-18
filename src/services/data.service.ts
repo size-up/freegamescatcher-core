@@ -37,6 +37,11 @@ export class DataService {
 
     public async updateCache(content: GameInterface[]): Promise<boolean> {
         try {
+            const cache = await this.getCache();
+            if (cache && cache.length > 0) {
+                content = content.concat(cache);
+            }
+
             await this.drive.updateDocument(this.file.cache.name, JSON.stringify(content, null, 4));
             return true;
         } catch (error) {
