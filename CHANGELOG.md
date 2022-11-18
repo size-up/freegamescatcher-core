@@ -1,3 +1,8 @@
+# [v1.5.5](https://github.com/size-up/freegamescatcher-core/compare/v1.5.4...v1.5.5) (2022-11-18)
+
+## ⚡️ Improve performance
+- [`3061c39`](https://github.com/size-up/freegamescatcher-core/commit/3061c39) ️ Improve &#x60;DataService.updateCache()&#x60; to concat already saved cache
+
 # [v1.5.4](https://github.com/size-up/freegamescatcher-core/compare/v1.5.3...v1.5.4) (2022-11-12)
 
 ## 🐛 Bug fixes
