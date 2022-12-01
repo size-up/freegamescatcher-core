@@ -1,7 +1,7 @@
 {
     "name": "freegamescatcher-core",
     "displayName": "🎮 Free Games Catcher",
-    "version": "1.5.5",
+    "version": "1.5.6",
     "description": "Free Games Catcher is an application that aims to search for game sites, trigger an alert and send it to users to notify them when a free game is available",
     "license": "GPL-3.0-or-later",
     "repository": {
