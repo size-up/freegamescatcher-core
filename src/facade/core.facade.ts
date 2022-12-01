@@ -2,6 +2,7 @@ import { logger } from "../config/logger.config";
 import { DataService } from "../services/data.service";
 import { GameService } from "../services/game.service";
 import { EmailService } from "../services/email.service";
+import { GameInterface } from "../interfaces/game.interface";
 
 /**
  * This facade class is responsible for get games data
@@ -29,7 +30,7 @@ export default class CoreFacade {
         logger.info("Starting the core application process...");
 
         // Retrieve game list from games API.
-        const games = await this.client.getEpicGamesData();
+        const games: GameInterface[] = await this.client.getEpicGamesData();
 
         if (games) {
             // Update games list in the cache.
