@@ -12,11 +12,11 @@ To run Free Games Catcher locally, you need to
 
 This application **needs** some environment variables to provide all its features.
 
-> If you are usind Visual Studio Code, the application provide launch configuration contained into `.vscode` directory, that automatically scrap a `.env` file in the root application directory.
+> If you are using Visual Studio Code, the application provide launch configuration contained into `.vscode` directory, that automatically scrap a `.env` file in the root application directory.
 
 `.env` example:
 
-```sh
+```bash
 # Application version
 VERSION="1.0.0"
 API_KEY="api-key-value" # API key to access to the API, checked by default on all routes
