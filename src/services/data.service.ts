@@ -13,8 +13,8 @@ export class DataService {
         client: {
             name: "client.json",
         },
-        receivers: {
-            name: "receivers.json",
+        receiver: {
+            name: "receiver.json",
         },
         cache: {
             name: "cache.json",
@@ -52,7 +52,7 @@ export class DataService {
 
     public async getReceivers(): Promise<ReceiverInterface[] | null> {
         try {
-            const receivers: ReceiverInterface[] = await Object(this.drive.getDocument(this.file.receivers.name));
+            const receivers: ReceiverInterface[] = await Object(this.drive.getDocument(this.file.receiver.name));
             return receivers;
         } catch (error) {
             logger.error(error);
@@ -64,7 +64,7 @@ export class DataService {
         try {
             const receivers = await this.getReceivers();
             receivers?.push(receiver);
-            await this.drive.updateDocument(this.file.receivers.name, JSON.stringify(receivers, null, 4));
+            await this.drive.updateDocument(this.file.receiver.name, JSON.stringify(receivers, null, 4));
             return receiver;
         } catch (error) {
             throw new Error("Error during updating receivers list");
@@ -83,7 +83,7 @@ export class DataService {
                     throw new Error("UUID doesn't exist");
                 }
             }
-            await this.drive.updateDocument(this.file.receivers.name, JSON.stringify(receivers, null, 4));
+            await this.drive.updateDocument(this.file.receiver.name, JSON.stringify(receivers, null, 4));
             return true;
         } catch (error) {
             logger.error(error);
