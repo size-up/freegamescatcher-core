@@ -1,3 +1,14 @@
+# [v1.5.7](https://github.com/size-up/freegamescatcher-core/compare/v1.5.6...v1.5.7) (2022-12-12)
+
+## 🔧 Add or update configuration files
+- [`c72837b`](https://github.com/size-up/freegamescatcher-core/commit/c72837b)  Update &#x60;displayName&#x60; in &#x60;package.json&#x60; 
+
+## ✏️ Fix typos
+- [`383c716`](https://github.com/size-up/freegamescatcher-core/commit/383c716)  Change &#x60;receivers.json&#x60; to &#x60;receiver.json&#x60; 
+
+## ♻️ Refactor code
+- [`6be59a5`](https://github.com/size-up/freegamescatcher-core/commit/6be59a5)  Enhance return type in &#x60;CoreFacade&#x60;
+
 # [v1.5.6](https://github.com/size-up/freegamescatcher-core/compare/v1.5.5...v1.5.6) (2022-12-01)
 
 ## 🍱 Add or update assets
