@@ -139,6 +139,22 @@ jobs:
             - name: 📥 Checkout repository
               uses: actions/checkout@v3
 
+            - name: 🌳 Extract branch name
+              id: branch_name
+              shell: bash
+              run: |
+                  echo Default branch name: ${{ github.event.repository.default_branch }}
+                  echo Current branch name: ${{ github.head_ref }}
+
+                  branch_name=${{ github.head_ref }} && branch_name_sanitized=${branch_name//\//-}
+                  echo Sanitized branch name: $branch_name_sanitized
+
+                  if [ "$branch_name_sanitized" = ${{ github.event.repository.default_branch }} ]; then
+                  branch_name_sanitized="latest"
+                  fi
+
+                  echo value=$branch_name_sanitized >> $GITHUB_OUTPUT
+
             - name: ⚙️ Set up QEMU
               uses: docker/setup-qemu-action@v2
 
@@ -151,20 +167,20 @@ jobs:
                   username: ${{ secrets.DOCKERHUB_USERNAME }}
                   password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-            - name: 🐳 Build and push image latest
+            - name: 🐳 Build and push image ${{ steps.branch_name.outputs.value }}
               uses: docker/build-push-action@v3
               with:
                   context: . # https://github.com/marketplace/actions/build-and-push-docker-images#git-context
                   platforms: linux/amd64,linux/arm64
                   push: true
-                  tags: ${{ secrets.DOCKERHUB_USERNAME }}/${{ env.IMAGE_NAME }}:latest
+                  tags: ${{ secrets.DOCKERHUB_USERNAME }}/${{ env.IMAGE_NAME }}:${{ steps.branch_name.outputs.value }}
                   build-args: |
                       NODE_ENV=pre-production
-                      VERSION=latest
+                      VERSION=${{ steps.branch_name.outputs.value }}
 
             - name: 🐳 Build and push image ${{ needs.release.outputs.version }}
               uses: docker/build-push-action@v3
-              if: ${{ needs.release.outputs.version }} # deploy only if there is a new published version
+              if: needs.release.outputs.version # deploy only if there is a new published version
               with:
                   context: . # https://github.com/marketplace/actions/build-and-push-docker-images#git-context
                   platforms: linux/amd64,linux/arm64
@@ -173,25 +189,51 @@ jobs:
                   build-args: |
                       VERSION=${{ needs.release.outputs.version }}
 
+        outputs:
+            branch_name: ${{ steps.branch_name.outputs.value }}
+
     deploy-prep:
-        name: 🚀 Deploy latest to prep.
+        name: 🚀 Deploy prep. [${{ needs.push.outputs.branch_name }}]
 
         runs-on: ubuntu-latest
 
         needs: [release, push]
 
-        environment: pre-production # refer to https://github.com/size-up/docs/settings/environments
+        environment: pre-production # refer to https://github.com/size-up/freegamescatcher-core/settings/environments
 
         steps:
-            - name: 🚀 Deploy latest to pre-production
-              uses: actions-hub/kubectl@master
-              env:
-                  KUBE_CONFIG: ${{ secrets.OCI_KUBE_CONFIG }}
+            - name: ⚙️ Set up kubectl
+              uses: tale/kubectl-action@v1
               with:
-                  args: rollout -n ${{ env.NAMESPACE_NAME }} restart deployment ${{ env.IMAGE_NAME }}-prep
+                  base64-kube-config: ${{ secrets.OCI_KUBE_CONFIG }}
+
+            - name: 🔊 Display deployment image before update
+              run: kubectl get deployments -n ${{ env.NAMESPACE_NAME }} ${{ env.IMAGE_NAME }}-prep -o=wide
+
+            - name: 🚀 Set image [${{ needs.push.outputs.branch_name }}] to pre-production
+              id: image_updated
+              run: |
+                  echo value=$(kubectl set image -n ${{ env.NAMESPACE_NAME }} deployment/${{ env.IMAGE_NAME }}-prep ${{ env.IMAGE_NAME }}-prep=${{ secrets.DOCKERHUB_USERNAME }}/${{ env.IMAGE_NAME }}:${{ needs.push.outputs.branch_name }}) >> $GITHUB_OUTPUT
+
+            - name: 🔊 Display "set_image" step output
+              run: echo ${{ steps.image_updated.outputs.value }}
+
+            # Rollout the deployment only if the image hasn't been updated, to avoid unnecessary restarts.
+            - name: 🚀 Rollout pre-production deployment
+              id: rollout
+              if: steps.image_updated.outputs.value == '' # rollout only if the image hasn't been updated
+              run: |
+                  echo value=$(kubectl rollout -n ${{ env.NAMESPACE_NAME }} restart deployment ${{ env.IMAGE_NAME }}-prep) >> $GITHUB_OUTPUT
+
+            - name: 🔊 Display "rollout" step output
+              if: steps.rollout.outputs.value
+              run: echo ${{ steps.rollout.outputs.value }}
+
+            - name: 🔊 Display deployment image after update
+              run: kubectl get deployments -n ${{ env.NAMESPACE_NAME }} ${{ env.IMAGE_NAME }}-prep -o=wide
 
     deploy-prod:
-        name: 🚀 Deploy v${{ needs.release.outputs.version }} to prod.
+        name: 🚀 Deploy prod. v${{ needs.release.outputs.version }}
 
         runs-on: ubuntu-latest
 
@@ -199,12 +241,13 @@ jobs:
 
         if: ${{ needs.release.outputs.version }} # deploy only if there is a new published version
 
-        environment: production # refer to https://github.com/size-up/docs/settings/environments
+        environment: production # refer to https://github.com/size-up/freegamescatcher-core/settings/environments
 
         steps:
-            - name: 🚀 Deploy v${{ needs.release.outputs.version }} to production
-              uses: actions-hub/kubectl@master
-              env:
-                  KUBE_CONFIG: ${{ secrets.OCI_KUBE_CONFIG }}
+            - name: ⚙️ Set up kubectl
+              uses: tale/kubectl-action@v1
               with:
-                  args: set image -n ${{ env.NAMESPACE_NAME }} deployment/${{ env.IMAGE_NAME }}-prod ${{ env.IMAGE_NAME }}-prod=${{ secrets.DOCKERHUB_USERNAME }}/${{ env.IMAGE_NAME }}:${{ needs.release.outputs.version }}
+                  base64-kube-config: ${{ secrets.OCI_KUBE_CONFIG }}
+
+            - name: 🚀 Deploy to production v${{ needs.release.outputs.version }}
+              run: kubectl set image -n ${{ env.NAMESPACE_NAME }} deployment/${{ env.IMAGE_NAME }}-prod ${{ env.IMAGE_NAME }}-prod=${{ secrets.DOCKERHUB_USERNAME }}/${{ env.IMAGE_NAME }}:${{ needs.release.outputs.version }}
