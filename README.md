@@ -76,7 +76,15 @@ This command generates static content into the `build` directory and can be serv
 yarn run start
 ```
 
-# Extra
+# Documentation
+
+## Discord webhook
+
+Free Games Catcher is using Discord webhook to send notifications.
+To use the webhook, you need to create a webhook in your Discord server, then a `POST` to the webhook URL will send a message to the Discord channel.
+
+-   [Webhook documentation](https://discord.com/developers/docs/resources/webhook#execute-webhook).
+-   [Embed object documentation](https://discord.com/developers/docs/resources/channel#embed-object) (the `embeds` field of the webhook request body, to create some embedded rich message content).
 
 ## Application versionning
 

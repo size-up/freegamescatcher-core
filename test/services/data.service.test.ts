@@ -2,9 +2,11 @@
 import { logger } from "../../src/config/logger.config";
 import { GameInterface } from "../../src/interfaces/game.interface";
 import { ReceiverInterface } from "../../src/interfaces/receiver.interface";
+import { ChannelInterface } from "../../src/interfaces/webhook.interface";
 import { DriveOutput } from "../../src/outputs/google/drive.output";
 import { DataService } from "../../src/services/data.service";
 
+import channelJson from "../data/channel.json";
 import receiverJson from "../data/receiver.json";
 
 jest.mock("../../src/outputs/google/drive.output");
@@ -217,6 +219,95 @@ describe("DataService", () => {
             const spyUpdateDocument = jest.spyOn(mockedDriveOutput, "updateDocument");
             expect(spyUpdateDocument).toHaveBeenCalledTimes(1);
             expect(JSON.parse(spyUpdateDocument.mock.calls[0][1])).toHaveLength(5); // verify that we have now 5 GameInterface objects because we have added 2 new ones to the 3 existing ones
+        });
+    });
+
+    describe("getChannels()", () => {
+        test(`given output that return null,
+        when calling getChannels() from data service,
+        then retrieve an empty array`, async () => {
+            // given
+            /**
+             * Mock the private constructor and the `getInstance()` method of the DriveOutput class.
+             */
+            const mockedDriveOutput = new (DriveOutput as any)() as jest.Mocked<DriveOutput>; // jest.MockedObject<DriveOutput> is working too
+
+            const mockGetDocument = mockedDriveOutput.getDocument.mockResolvedValue(null);
+
+            const mockDriveOutputInstance = jest.spyOn(DriveOutput, "getInstance").mockReturnValue(mockedDriveOutput);
+
+            // when
+            const dataService: DataService = new (DataService as any)(); // even if the constructor is private, we can still instantiate it, it's to avoid retrieve the instance from the singleton
+            const result = await dataService.getChannels();
+
+            // then
+
+            expect(mockGetDocument).toHaveBeenCalledWith("channel.json");
+            expect(mockDriveOutputInstance).toHaveBeenCalledTimes(1);
+
+            expect(result).toBeNull();
+        });
+
+        test(`given output that return empty channel,
+        when calling getChannels() from data service,
+        then retrieve an empty array`, async () => {
+            // given
+            /**
+             * Mock the private constructor and the `getInstance()` method of the DriveOutput class.
+             */
+            const mockedDriveOutput = new (DriveOutput as any)() as jest.Mocked<DriveOutput>; // jest.MockedObject<DriveOutput> is working too
+
+            const mockGetDocument = mockedDriveOutput.getDocument.mockResolvedValue([]);
+
+            const mockDriveOutputInstance = jest.spyOn(DriveOutput, "getInstance").mockReturnValue(mockedDriveOutput);
+
+            // when
+            const dataService: DataService = new (DataService as any)(); // even if the constructor is private, we can still instantiate it, it's to avoid retrieve the instance from the singleton
+            const result = await dataService.getChannels();
+
+            // then
+            expect(mockGetDocument).toHaveBeenCalledWith("channel.json");
+            expect(mockDriveOutputInstance).toHaveBeenCalledTimes(1);
+
+            expect(result).toHaveLength(0);
+        });
+
+        test(`given output that return two channels,
+        when calling getChannels() from data service,
+        then retrieve two channels`, async () => {
+            // given
+            /**
+             * Mock the private constructor and the `getInstance()` method of the DriveOutput class.
+             */
+            const mockedDriveOutput = new (DriveOutput as any)() as jest.Mocked<DriveOutput>; // jest.MockedObject<DriveOutput> is working too
+
+            const channels: ChannelInterface[] = channelJson;
+
+            const mockGetDocument = mockedDriveOutput.getDocument.mockResolvedValue(channels);
+
+            const mockDriveOutputInstance = jest.spyOn(DriveOutput, "getInstance").mockReturnValue(mockedDriveOutput);
+
+            // when
+            const dataService: DataService = new (DataService as any)(); // even if the constructor is private, we can still instantiate it, it's to avoid retrieve the instance from the singleton
+            const result = await dataService.getChannels();
+
+            // then
+            expect(mockGetDocument).toHaveBeenCalledWith("channel.json");
+            expect(mockDriveOutputInstance).toHaveBeenCalledTimes(1);
+
+            expect(result).not.toBeNull();
+            expect(result).toBeInstanceOf(Array);
+            expect(result).toHaveLength(2);
+
+            expect(result?.[0].server).toBe("Size Up® Organization");
+            expect(result?.[0].name).toBe("webhook-testing");
+            expect(result?.[0].id).toBe("1");
+            expect(result?.[0].token).toBe("XXX");
+
+            expect(result?.[1].server).toBe("BarberCrew® Community");
+            expect(result?.[1].name).toBe("free-game");
+            expect(result?.[1].id).toBe("2");
+            expect(result?.[1].token).toBe("XXX");
         });
     });
 });
