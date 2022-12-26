@@ -1,7 +1,6 @@
 import { EpicGamesMapper } from "../helpers/epic.games.mapper";
+import { Element } from "../interfaces/epic.games.interface";
 import { GameInterface } from "../interfaces/game.interface";
-import { Element } from "../interfaces/client.interface";
-
 import { EpicGamesOutput } from "../outputs/epic-games/epic.games.output";
 
 import { logger } from "../config/logger.config";

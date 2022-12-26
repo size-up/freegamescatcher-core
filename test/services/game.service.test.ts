@@ -1,5 +1,5 @@
 import { logger } from "../../src/config/logger.config";
-import { Element } from "../../src/interfaces/client.interface";
+import { Element } from "../../src/interfaces/epic.games.interface";
 import { EpicGamesOutput } from "../../src/outputs/epic-games/epic.games.output";
 import { GameService } from "../../src/services/game.service";
 
