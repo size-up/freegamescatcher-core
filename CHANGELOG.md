@@ -1,3 +1,11 @@
+# [v1.5.8](https://github.com/size-up/freegamescatcher-core/compare/v1.5.7...v1.5.8) (2022-12-26)
+
+## 🐛 Bug fixes
+- [`7b2d632`](https://github.com/size-up/freegamescatcher-core/commit/7b2d632)  Pick &#x60;productSlug&#x60; or &#x60;catalogNs.mappings.pageSlug&#x60; 
+
+## ♻️ Refactor code
+- [`03e333d`](https://github.com/size-up/freegamescatcher-core/commit/03e333d)  Separate Epic Games interfaces
+
 # [v1.5.7](https://github.com/size-up/freegamescatcher-core/compare/v1.5.6...v1.5.7) (2022-12-12)
 
 ## 🔧 Add or update configuration files
