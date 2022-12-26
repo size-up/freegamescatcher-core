@@ -1,6 +1,6 @@
 import { logger } from "../config/logger.config";
 import { GameInterface } from "../interfaces/game.interface";
-import { Element } from "../interfaces/client.interface";
+import { Element } from "../interfaces/epic.games.interface";
 
 export class EpicGamesMapper {
     static map(data: Element[]): GameInterface[] {

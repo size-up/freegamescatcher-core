@@ -1,7 +1,7 @@
 import { logger } from "../../src/config/logger.config";
 import { EpicGamesMapper } from "../../src/helpers/epic.games.mapper";
+import { Element } from "../../src/interfaces/epic.games.interface";
 import { GameInterface } from "../../src/interfaces/game.interface";
-import { Element } from "../../src/interfaces/client.interface";
 import gamesJSON from "../data/games.json";
 
 beforeAll(() => {

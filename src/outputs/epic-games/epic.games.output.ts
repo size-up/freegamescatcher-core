@@ -1,6 +1,7 @@
 import axios from "axios";
-import { ClientInterface, Element, EpicGamesDataInterface } from "../../interfaces/client.interface";
 import clientInformations from "../../../data/client.json";
+import { ClientInterface } from "../../interfaces/client.interface";
+import { Element, EpicGamesDataInterface } from "../../interfaces/epic.games.interface";
 
 import { logger } from "../../config/logger.config";
 
