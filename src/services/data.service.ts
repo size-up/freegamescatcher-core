@@ -2,6 +2,7 @@ import { DriveOutput } from "../outputs/google/drive.output";
 
 import { GameInterface } from "../interfaces/game.interface";
 import { ReceiverInterface } from "../interfaces/receiver.interface";
+import { ChannelInterface } from "../interfaces/webhook.interface";
 
 import { logger } from "../config/logger.config";
 
@@ -18,6 +19,9 @@ export class DataService {
         },
         cache: {
             name: "cache.json",
+        },
+        channel: {
+            name: "channel.json",
         },
     };
 
@@ -91,6 +95,16 @@ export class DataService {
         } catch (error) {
             logger.error(error);
             return false;
+        }
+    }
+
+    public async getChannels(): Promise<ChannelInterface[] | null> {
+        try {
+            const channels: ChannelInterface[] = await Object(this.drive.getDocument(this.file.channel.name));
+            return channels;
+        } catch (error) {
+            logger.error(error);
+            return null;
         }
     }
 
