@@ -5,7 +5,7 @@ import { ReceiverInterface } from "../../src/interfaces/receiver.interface";
 import { DriveOutput } from "../../src/outputs/google/drive.output";
 import { DataService } from "../../src/services/data.service";
 
-import receiversJson from "../data/receivers.json";
+import receiverJson from "../data/receiver.json";
 
 jest.mock("../../src/outputs/google/drive.output");
 
@@ -53,7 +53,7 @@ describe("DataService", () => {
         when calling getReceivers() from data service,
         then retrieve receivers list`, async () => {
             // given
-            const receivers: ReceiverInterface[] = receiversJson;
+            const receivers: ReceiverInterface[] = receiverJson;
 
             /**
              * Mock the private constructor and the `getInstance()` method of the DriveOutput class.
