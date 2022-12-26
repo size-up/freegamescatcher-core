@@ -1,9 +1,11 @@
 import { Request, Response, Router } from "express";
 import { logger } from "../../config/logger.config";
 import CoreFacade from "../../facade/core.facade";
+import { CoreProcessInterface } from "../../interfaces/core.interface";
 
 export default class ApplicationController {
     private router = Router();
+    private failed = { message: "Core application process failed, error occurred" };
 
     constructor() {
         this.initRoutes();
@@ -13,10 +15,12 @@ export default class ApplicationController {
         /**
          * Execute the full application process.
          */
-        this.router.get("/execute", async (request: Request, response: Response) => {
+        this.router.post("/execute", async (request: Request, response: Response) => {
+            const processOptions : CoreProcessInterface = request.body;
+
             try {
                 const core = new CoreFacade();
-                const isOk = await core.execute();
+                const isOk = await core.execute(processOptions);
 
                 if (isOk) {
                     response.status(200).json({ status: "Core application process well executed" });
@@ -24,9 +28,8 @@ export default class ApplicationController {
                     response.status(500).json({ status: "Core application process failed" });
                 }
             } catch (error) {
-                const message = "Core application process failed";
-                logger.error(message, error);
-                throw new Error(message);
+                logger.error(this.failed.message, error);
+                throw new Error(this.failed.message);
             }
         });
     }

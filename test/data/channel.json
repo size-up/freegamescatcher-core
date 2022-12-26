@@ -1,0 +1,14 @@
+[
+    {
+        "server": "Size Up",
+        "name": "webhook-testing",
+        "id": "some-id-0",
+        "token": "some-token-0"
+    },
+    {
+        "server": "BarberCrew",
+        "name": "games",
+        "id": "some-id-1",
+        "token": "some-token-1"
+    }
+]
