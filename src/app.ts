@@ -81,6 +81,7 @@ class Application {
 /**
  * Start the application.
  */
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const app = new Application();
 
 const hrend = process.hrtime(hrstart); // Used to calculate the time it takes to run the application
