@@ -2,10 +2,12 @@
 import { logger } from "../../src/config/logger.config";
 import { GameInterface } from "../../src/interfaces/game.interface";
 import { ReceiverInterface } from "../../src/interfaces/receiver.interface";
+import { ChannelInterface } from "../../src/interfaces/webhook.interface";
 import { DriveOutput } from "../../src/outputs/google/drive.output";
 import { DataService } from "../../src/services/data.service";
 
-import receiversJson from "../data/receivers.json";
+import channelJson from "../data/channel.json";
+import receiverJson from "../data/receiver.json";
 
 jest.mock("../../src/outputs/google/drive.output");
 
@@ -34,7 +36,7 @@ describe("DataService", () => {
 
             const mockedDriveOutput = new (DriveOutput as any)() as jest.Mocked<DriveOutput>; // jest.MockedObject<DriveOutput> is working too
 
-            mockedDriveOutput.getDocument.mockRejectedValue(Object(receivers));
+            const mockGetDocument = mockedDriveOutput.getDocument.mockRejectedValue(Object(receivers));
 
             const mockDriveOutputInstance = jest.spyOn(DriveOutput, "getInstance").mockReturnValue(mockedDriveOutput);
 
@@ -42,9 +44,10 @@ describe("DataService", () => {
             const dataService = new (DataService as any)(); // even if the constructor is private, we can still instantiate it, it's to avoid retrieve the instance from the singleton
             const result: ReceiverInterface[] | null = await dataService.getReceivers();
 
+            // then
+            expect(mockGetDocument).toBeCalledWith("receiver.json");
             expect(mockDriveOutputInstance).toHaveBeenCalledTimes(1);
 
-            // then
             expect(result).toBeNull();
         });
 
@@ -52,7 +55,7 @@ describe("DataService", () => {
         when calling getReceivers() from data service,
         then retrieve receivers list`, async () => {
             // given
-            const receivers: ReceiverInterface[] = receiversJson;
+            const receivers: ReceiverInterface[] = receiverJson;
 
             /**
              * Mock the private constructor and the `getInstance()` method of the DriveOutput class.
@@ -60,7 +63,7 @@ describe("DataService", () => {
 
             const mockedDriveOutput = new (DriveOutput as any)() as jest.Mocked<DriveOutput>; // jest.MockedObject<DriveOutput> is working too
 
-            mockedDriveOutput.getDocument.mockResolvedValue(Object(receivers));
+            const mockGetDocument = mockedDriveOutput.getDocument.mockResolvedValue(Object(receivers));
 
             const mockDriveOutputInstance = jest.spyOn(DriveOutput, "getInstance").mockReturnValue(mockedDriveOutput);
 
@@ -68,9 +71,10 @@ describe("DataService", () => {
             const dataService = new (DataService as any)(); // even if the constructor is private, we can still instantiate it, it's to avoid retrieve the instance from the singleton
             const result: ReceiverInterface[] | null = await dataService.getReceivers();
 
+            // then
+            expect(mockGetDocument).toHaveBeenCalledWith("receiver.json");
             expect(mockDriveOutputInstance).toHaveBeenCalledTimes(1);
 
-            // then
             expect(result).toBeTruthy();
             expect(result).toBeInstanceOf(Array);
             expect(result).toHaveLength(2);
@@ -97,7 +101,7 @@ describe("DataService", () => {
              */
             const mockedDriveOutput = new (DriveOutput as any)() as jest.Mocked<DriveOutput>; // jest.MockedObject<DriveOutput> is working too
 
-            mockedDriveOutput.getDocument.mockResolvedValue(null); // start with an array with 3 GameInterface objects
+            const mockGetDocument = mockedDriveOutput.getDocument.mockResolvedValue(null); // start with an array with 3 GameInterface objects
 
             const mockDriveOutputInstance = jest.spyOn(DriveOutput, "getInstance").mockReturnValue(mockedDriveOutput);
 
@@ -133,6 +137,9 @@ describe("DataService", () => {
             const result: boolean = await dataService.updateCache(games); // update the cache with an array with 2 GameInterface objects
 
             // then
+            expect(mockGetDocument).toHaveBeenCalledWith("cache.json");
+            expect(mockDriveOutputInstance).toHaveBeenCalledTimes(1);
+
             expect(result).toBe(true);
 
             expect(spyGetCache).toHaveBeenCalledTimes(1);
@@ -141,82 +148,166 @@ describe("DataService", () => {
             const spyUpdateDocument = jest.spyOn(mockedDriveOutput, "updateDocument");
             expect(spyUpdateDocument).toHaveBeenCalledTimes(1);
             expect(JSON.parse(spyUpdateDocument.mock.calls[0][1])).toHaveLength(2); // verify that we have now 5 GameInterface objects because we have added 2 new ones to the 3 existing ones
-
-            expect(mockDriveOutputInstance).toHaveBeenCalledTimes(1);
         });
 
-        describe("updateCache()", () => {
-            test(`given getCache() method that return an array with 3 GameInterface objects,
+        test(`given getCache() method that return an array with 3 GameInterface objects,
         when calling updateCache() from data service with an array with 2 GameInterface objects,
         then retrieve an array with 5 GameInterface objects`, async () => {
-                // given
-                const games: GameInterface[] = [
-                    {
-                        title: "Game 1",
-                        description: "Description 1",
-                        imageUrl: "https://image1.com",
-                        urlSlug: "game-1",
-                        promotion: {
-                            startDate: "2021-01-01",
-                            endDate: "2021-01-31",
-                        },
+            // given
+            const games: GameInterface[] = [
+                {
+                    title: "Game 1",
+                    description: "Description 1",
+                    imageUrl: "https://image1.com",
+                    urlSlug: "game-1",
+                    promotion: {
+                        startDate: "2021-01-01",
+                        endDate: "2021-01-31",
                     },
-                    {
-                        title: "Game 2",
-                        description: "Description 2",
-                        imageUrl: "https://image2.com",
-                        urlSlug: "game-2",
-                        promotion: {
-                            startDate: "2021-01-01",
-                            endDate: "2021-01-31",
-                        },
+                },
+                {
+                    title: "Game 2",
+                    description: "Description 2",
+                    imageUrl: "https://image2.com",
+                    urlSlug: "game-2",
+                    promotion: {
+                        startDate: "2021-01-01",
+                        endDate: "2021-01-31",
                     },
-                    {
-                        title: "Game 3",
-                        description: "Description 3",
-                        imageUrl: "https://image3.com",
-                        urlSlug: "game-3",
-                        promotion: {
-                            startDate: "2021-01-01",
-                            endDate: "2021-01-31",
-                        },
+                },
+                {
+                    title: "Game 3",
+                    description: "Description 3",
+                    imageUrl: "https://image3.com",
+                    urlSlug: "game-3",
+                    promotion: {
+                        startDate: "2021-01-01",
+                        endDate: "2021-01-31",
                     },
-                ];
+                },
+            ];
 
-                /**
-                 * Mock the private constructor and the `getInstance()` method of the DriveOutput class.
-                 */
-                const mockedDriveOutput = new (DriveOutput as any)() as jest.Mocked<DriveOutput>; // jest.MockedObject<DriveOutput> is working too
+            /**
+             * Mock the private constructor and the `getInstance()` method of the DriveOutput class.
+             */
+            const mockedDriveOutput = new (DriveOutput as any)() as jest.Mocked<DriveOutput>; // jest.MockedObject<DriveOutput> is working too
 
-                mockedDriveOutput.getDocument.mockResolvedValue(games); // start with an array with 3 GameInterface objects
-                expect(games).toHaveLength(3);
+            const mockGetDocument = mockedDriveOutput.getDocument.mockResolvedValue(games); // start with an array with 3 GameInterface objects
+            expect(games).toHaveLength(3);
 
-                const mockDriveOutputInstance = jest
-                    .spyOn(DriveOutput, "getInstance")
-                    .mockReturnValue(mockedDriveOutput);
+            const mockDriveOutputInstance = jest.spyOn(DriveOutput, "getInstance").mockReturnValue(mockedDriveOutput);
 
-                // when
-                const dataService: DataService = new (DataService as any)(); // even if the constructor is private, we can still instantiate it, it's to avoid retrieve the instance from the singleton
+            // when
+            const dataService: DataService = new (DataService as any)(); // even if the constructor is private, we can still instantiate it, it's to avoid retrieve the instance from the singleton
 
-                const spyGetCache = jest.spyOn(dataService, "getCache");
+            const spyGetCache = jest.spyOn(dataService, "getCache");
 
-                const gamesUpdate = games.slice(0, games.length - 1); // remove the first element of the array to retrieve an array with 2 GameInterface objects
-                expect(gamesUpdate).toHaveLength(2);
+            const gamesUpdate = games.slice(0, games.length - 1); // remove the first element of the array to retrieve an array with 2 GameInterface objects
+            expect(gamesUpdate).toHaveLength(2);
 
-                const result: boolean = await dataService.updateCache(gamesUpdate); // update the cache with an array with 2 GameInterface objects
+            const result: boolean = await dataService.updateCache(gamesUpdate); // update the cache with an array with 2 GameInterface objects
 
-                // then
-                expect(result).toBe(true);
+            // then
+            expect(mockGetDocument).toHaveBeenCalledWith("cache.json");
+            expect(mockDriveOutputInstance).toHaveBeenCalledTimes(1);
 
-                expect(spyGetCache).toHaveBeenCalledTimes(1);
-                expect(await spyGetCache.mock.results[0].value).toHaveLength(3);
+            expect(result).toBe(true);
 
-                const spyUpdateDocument = jest.spyOn(mockedDriveOutput, "updateDocument");
-                expect(spyUpdateDocument).toHaveBeenCalledTimes(1);
-                expect(JSON.parse(spyUpdateDocument.mock.calls[0][1])).toHaveLength(5); // verify that we have now 5 GameInterface objects because we have added 2 new ones to the 3 existing ones
+            expect(spyGetCache).toHaveBeenCalledTimes(1);
+            expect(await spyGetCache.mock.results[0].value).toHaveLength(3);
 
-                expect(mockDriveOutputInstance).toHaveBeenCalledTimes(1);
-            });
+            const spyUpdateDocument = jest.spyOn(mockedDriveOutput, "updateDocument");
+            expect(spyUpdateDocument).toHaveBeenCalledTimes(1);
+            expect(JSON.parse(spyUpdateDocument.mock.calls[0][1])).toHaveLength(5); // verify that we have now 5 GameInterface objects because we have added 2 new ones to the 3 existing ones
+        });
+    });
+
+    describe("getChannels()", () => {
+        test(`given output that return null,
+        when calling getChannels() from data service,
+        then retrieve an empty array`, async () => {
+            // given
+            /**
+             * Mock the private constructor and the `getInstance()` method of the DriveOutput class.
+             */
+            const mockedDriveOutput = new (DriveOutput as any)() as jest.Mocked<DriveOutput>; // jest.MockedObject<DriveOutput> is working too
+
+            const mockGetDocument = mockedDriveOutput.getDocument.mockResolvedValue(null);
+
+            const mockDriveOutputInstance = jest.spyOn(DriveOutput, "getInstance").mockReturnValue(mockedDriveOutput);
+
+            // when
+            const dataService: DataService = new (DataService as any)(); // even if the constructor is private, we can still instantiate it, it's to avoid retrieve the instance from the singleton
+            const result = await dataService.getChannels();
+
+            // then
+
+            expect(mockGetDocument).toHaveBeenCalledWith("channel.json");
+            expect(mockDriveOutputInstance).toHaveBeenCalledTimes(1);
+
+            expect(result).toBeNull();
+        });
+
+        test(`given output that return empty channel,
+        when calling getChannels() from data service,
+        then retrieve an empty array`, async () => {
+            // given
+            /**
+             * Mock the private constructor and the `getInstance()` method of the DriveOutput class.
+             */
+            const mockedDriveOutput = new (DriveOutput as any)() as jest.Mocked<DriveOutput>; // jest.MockedObject<DriveOutput> is working too
+
+            const mockGetDocument = mockedDriveOutput.getDocument.mockResolvedValue([]);
+
+            const mockDriveOutputInstance = jest.spyOn(DriveOutput, "getInstance").mockReturnValue(mockedDriveOutput);
+
+            // when
+            const dataService: DataService = new (DataService as any)(); // even if the constructor is private, we can still instantiate it, it's to avoid retrieve the instance from the singleton
+            const result = await dataService.getChannels();
+
+            // then
+            expect(mockGetDocument).toHaveBeenCalledWith("channel.json");
+            expect(mockDriveOutputInstance).toHaveBeenCalledTimes(1);
+
+            expect(result).toHaveLength(0);
+        });
+
+        test(`given output that return two channels,
+        when calling getChannels() from data service,
+        then retrieve two channels`, async () => {
+            // given
+            /**
+             * Mock the private constructor and the `getInstance()` method of the DriveOutput class.
+             */
+            const mockedDriveOutput = new (DriveOutput as any)() as jest.Mocked<DriveOutput>; // jest.MockedObject<DriveOutput> is working too
+
+            const channels: ChannelInterface[] = channelJson;
+
+            const mockGetDocument = mockedDriveOutput.getDocument.mockResolvedValue(channels);
+
+            const mockDriveOutputInstance = jest.spyOn(DriveOutput, "getInstance").mockReturnValue(mockedDriveOutput);
+
+            // when
+            const dataService: DataService = new (DataService as any)(); // even if the constructor is private, we can still instantiate it, it's to avoid retrieve the instance from the singleton
+            const result = await dataService.getChannels();
+
+            // then
+            expect(mockGetDocument).toHaveBeenCalledWith("channel.json");
+            expect(mockDriveOutputInstance).toHaveBeenCalledTimes(1);
+
+            expect(result).not.toBeNull();
+            expect(result).toBeInstanceOf(Array);
+            expect(result).toHaveLength(2);
+
+            expect(result?.[0].server).toBe("Size Up");
+            expect(result?.[0].name).toBe("webhook-testing");
+            expect(result?.[0].id).toBe("some-id-0");
+            expect(result?.[0].token).toBe("some-token-0");
+
+            expect(result?.[1].server).toBe("BarberCrew");
+            expect(result?.[1].name).toBe("games");
+            expect(result?.[1].id).toBe("some-id-1");
+            expect(result?.[1].token).toBe("some-token-1");
         });
     });
 });

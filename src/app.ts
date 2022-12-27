@@ -28,7 +28,7 @@ class Application {
 
     private welcome(): void {
         console.info(readFileSync("src/assets/banner.txt", { encoding: "utf8" }));
-        logger.info(packageJson.displayName);
+        logger.info(`🎮 ${packageJson.displayName}`);
         logger.info(`🔖 Application version: [${version()}]`);
         logger.info(packageJson.description);
     }

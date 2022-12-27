@@ -12,11 +12,11 @@ To run Free Games Catcher locally, you need to
 
 This application **needs** some environment variables to provide all its features.
 
-> If you are usind Visual Studio Code, the application provide launch configuration contained into `.vscode` directory, that automatically scrap a `.env` file in the root application directory.
+> If you are using Visual Studio Code, the application provide launch configuration contained into `.vscode` directory, that automatically scrap a `.env` file in the root application directory.
 
 `.env` example:
 
-```sh
+```bash
 # Application version
 VERSION="1.0.0"
 API_KEY="api-key-value" # API key to access to the API, checked by default on all routes
@@ -64,7 +64,15 @@ This command generates static content into the `build` directory and can be serv
 yarn run start
 ```
 
-# Extra
+# Documentation
+
+## Discord webhook
+
+Free Games Catcher is using Discord webhook to send notifications.
+To use the webhook, you need to create a webhook in your Discord server, then a `POST` to the webhook URL will send a message to the Discord channel.
+
+-   [Webhook documentation](https://discord.com/developers/docs/resources/webhook#execute-webhook).
+-   [Embed object documentation](https://discord.com/developers/docs/resources/channel#embed-object) (the `embeds` field of the webhook request body, to create some embedded rich message content).
 
 ## Application versionning
 
