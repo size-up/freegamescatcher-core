@@ -41,11 +41,7 @@ export class EmailService {
      *
      * @author Francisco Fernandez <francisco59553@gmail.com>
      */
-    public async sendEmails(
-        subject: string,
-        receivers: ReceiverInterface[],
-        datas: GameInterface[]
-    ): Promise<void> {
+    public async sendEmails(subject: string, receivers: ReceiverInterface[], datas: GameInterface[]): Promise<void> {
         try {
             this.datas = datas;
             const emailList = receivers?.map((receiver) => receiver.email);
@@ -126,9 +122,12 @@ export class EmailService {
         const template = handlebars.compile(templateRead);
         const templateToSend = template(datasToCompile);
 
+        // Used to custom the "from" field, to retrieve the application name instead of the email address
+        const from = `${packageJson.displayName} <${packageJson.author.email}>`;
+
         const mailOptions: EmailOptionsInterface = {
             sender: packageJson.displayName,
-            from: packageJson.author.email,
+            from: from,
             to: [],
             subject: subject,
             html: templateToSend,
