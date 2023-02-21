@@ -1,3 +1,8 @@
+# [v1.5.11](https://github.com/size-up/freegamescatcher-core/compare/v1.5.10...v1.5.11) (2023-02-21)
+
+## 🔧 Add or update configuration files
+- [`05c58a9`](https://github.com/size-up/freegamescatcher-core/commit/05c58a9)  Add &#x60;dependabot.yaml&#x60; config. with commit prefix
+
 # [v1.5.10](https://github.com/size-up/freegamescatcher-core/compare/v1.5.9...v1.5.10) (2023-02-21)
 
 # [v1.5.9](https://github.com/size-up/freegamescatcher-core/compare/v1.5.8...v1.5.9) (2023-02-21)
