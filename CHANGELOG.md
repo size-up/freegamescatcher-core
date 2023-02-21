@@ -1,3 +1,5 @@
+# [v1.5.10](https://github.com/size-up/freegamescatcher-core/compare/v1.5.9...v1.5.10) (2023-02-21)
+
 # [v1.5.9](https://github.com/size-up/freegamescatcher-core/compare/v1.5.8...v1.5.9) (2023-02-21)
 
 ## 💄 Add or update the UI and style files
