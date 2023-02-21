@@ -1,3 +1,8 @@
+# [v1.5.9](https://github.com/size-up/freegamescatcher-core/compare/v1.5.8...v1.5.9) (2023-02-21)
+
+## 💄 Add or update the UI and style files
+- [`f90f9ac`](https://github.com/size-up/freegamescatcher-core/commit/f90f9ac)  Change the &#x60;from&#x60; value in email to the app. name
+
 # [v1.5.8](https://github.com/size-up/freegamescatcher-core/compare/v1.5.7...v1.5.8) (2022-12-26)
 
 ## 🐛 Bug fixes
