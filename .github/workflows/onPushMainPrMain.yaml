@@ -94,6 +94,8 @@ jobs:
 
         needs: [build, test-unit]
 
+        if: ${{ github.event_name != 'merge_group' }} # skip this job if the event is a merge_group
+
         steps:
             - name: 📥 Checkout repository
               uses: actions/checkout@v3
