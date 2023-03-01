@@ -1,3 +1,8 @@
+# [v1.5.17](https://github.com/size-up/freegamescatcher-core/compare/v1.5.16...v1.5.17) (2023-03-01)
+
+## ⚡️ Improve performance
+- [`c7c4c33`](https://github.com/size-up/freegamescatcher-core/commit/c7c4c33) ️ &#x60;DKIM&#x60; email signature mecanism
+
 # [v1.5.16](https://github.com/size-up/freegamescatcher-core/compare/v1.5.15...v1.5.16) (2023-03-01)
 
 # [v1.5.15](https://github.com/size-up/freegamescatcher-core/compare/v1.5.14...v1.5.15) (2023-03-01)
