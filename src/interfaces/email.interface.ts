@@ -1,17 +1,21 @@
-///////// EMAIL CONFIGURATION /////////
 export interface EmailConfigInterface {
-    host?: string;
+    host: string;
     port: number;
     auth: {
-        user?: string;
-        pass?: string;
+        user: string;
+        pass: string;
     };
+    secure: boolean;
     tls: {
         rejectUnauthorized: boolean;
     };
+    dkim?: {
+        domainName: string;
+        keySelector: string;
+        privateKey: string;
+    };
 }
 
-//////////// EMAIL OPTIONS ////////////
 export interface EmailOptionsInterface {
     sender: string;
     from: string;
@@ -20,13 +24,11 @@ export interface EmailOptionsInterface {
     html: string;
 }
 
-//////////// EMAIL RESPONSE ////////////
 export interface EmailResponseInterface {
     failed: Error | null;
     receiver: string[];
 }
 
-//////////// EMAIL CHECK TRANSPORTER ////////////
 export interface EmailCheckTransporterInterface {
     failed: Error | null;
     success: string;

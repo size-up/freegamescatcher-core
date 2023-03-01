@@ -19,15 +19,23 @@ export class EmailService {
     private datas: GameInterface[] = [];
 
     constructor() {
+        checkEnvVariables(); // check if all env variables are set
+
         this.config = {
-            host: process.env.SMTP_HOST,
-            port: Number(process.env.SMTP_PORT),
+            host: process.env.SMTP_HOST as string,
+            port: Number(process.env.SMTP_PORT) as number,
+            secure: false, // true for 465, false for other ports ; see https://stackoverflow.com/questions/55167741/nodemailer-ms-exchaneg-server-error-unable-to-verify-the-first-certificate
             auth: {
-                user: process.env.SMTP_USER,
-                pass: process.env.SMTP_PASSWORD,
+                user: process.env.SMTP_USER as string,
+                pass: process.env.SMTP_PASSWORD as string,
             },
             tls: {
-                rejectUnauthorized: false, // see https://stackoverflow.com/questions/55167741/nodemailer-ms-exchaneg-server-error-unable-to-verify-the-first-certificate
+                rejectUnauthorized: false, // do not fail on invalid certs ; see https://stackoverflow.com/questions/55167741/nodemailer-ms-exchaneg-server-error-unable-to-verify-the-first-certificate
+            },
+            dkim: {
+                domainName: process.env.DOMAIN_NAME as string,
+                keySelector: process.env.DKIM_SELECTOR as string,
+                privateKey: process.env.DKIM_PRIVATE_KEY as string,
             },
         };
         this.emailer = new EmailerOutput(this.config);
@@ -194,4 +202,27 @@ export class EmailService {
             throw sendingStatus;
         }
     }
+}
+
+/**
+ * Function to check if all necessary environment variables are set.
+ * @throws Error if one of the environment variable is missing.
+ * @returns void
+ */
+function checkEnvVariables() {
+    const envVariables = [
+        "SMTP_HOST",
+        "SMTP_PORT",
+        "SMTP_USER",
+        "SMTP_PASSWORD",
+        "DOMAIN_NAME",
+        "DKIM_SELECTOR",
+        "DKIM_PRIVATE_KEY",
+    ];
+
+    envVariables.forEach((variable) => {
+        if (!process.env[variable]) {
+            throw new Error(`Missing [${variable}] environment variable`);
+        }
+    });
 }
