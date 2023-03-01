@@ -28,6 +28,12 @@ SMTP_PORT="smtp_port"
 SMTP_USER="smtp_email"
 SMTP_PASSWORD="smtp_password"
 
+# DKIM
+# Used to sign email notification
+DOMAIN_NAME="sizeup.cloud" # Domain name of the application
+DKIM_SELECTOR="xxx.sizeup"
+DKIM_PRIVATE_KEY="-----BEGIN RSA PRIVATE KEY----- ***"
+
 # GOOGLE CREDENTIALS
 # Used to store and retrieve application information
 GOOGLE_USERNAME="noreply@sizeup.cloud"
