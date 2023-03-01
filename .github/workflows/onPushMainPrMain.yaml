@@ -8,6 +8,9 @@ on:
         branches: ["main"]
     pull_request:
         branches: ["main"]
+
+    workflow_dispatch: # allow manual trigger
+
     # Used by the GitHub merge queue feature.
     # Documentation: https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/configuring-pull-request-merges/managing-a-merge-queue
     merge_group:
