@@ -28,6 +28,8 @@ export class EmailerOutput {
     }
 
     public sendEmail(mailOptions: EmailOptionsInterface) {
+        mailOptions = this.checkEnvironment(mailOptions);
+
         return new Promise<EmailResponseInterface>((resolve, reject) => {
             this.transporter.sendMail(mailOptions, (error, data) => {
                 return resolve({
@@ -36,5 +38,15 @@ export class EmailerOutput {
                 });
             });
         });
+    }
+
+    /**
+     * Verify if the application is running in production mode or not, if not,
+     */
+    private checkEnvironment(mailOptions: EmailOptionsInterface): EmailOptionsInterface {
+        if (process.env.NODE_ENV !== "production") {
+            mailOptions.subject = `[TEST] ${mailOptions.subject}`;
+        }
+        return mailOptions;
     }
 }
