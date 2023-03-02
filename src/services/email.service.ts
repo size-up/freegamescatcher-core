@@ -67,8 +67,8 @@ export class EmailService {
                 const $emailsToSend = emailList.map((element) => {
                     // Create email template
                     datasToCompile.uuid = receivers?.find((el) => (el.email = element))?.uuid;
-                    const emailOptions: EmailOptionsInterface = this.prepareTemplate(subject, datasToCompile);
-                    return this.emailer.sendEmail({ ...emailOptions, to: [element] });
+                    const mailOptions: EmailOptionsInterface = this.prepareTemplate(subject, datasToCompile);
+                    return this.emailer.sendEmail({ ...mailOptions, to: [element] });
                 });
 
                 // Send all emails
