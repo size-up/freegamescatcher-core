@@ -50,8 +50,8 @@ describe("GameService", () => {
                 (game) =>
                     game.promotions?.promotionalOffers[0]?.promotionalOffers[0]?.discountSetting?.discountPercentage ===
                         0 ||
-                    game.promotions?.upcomingPromotionalOffers[0]?.promotionalOffers.some(element => {
-                        return element.discountSetting?.discountPercentage === 0
+                    game.promotions?.upcomingPromotionalOffers[0]?.promotionalOffers.some((element) => {
+                        return element.discountSetting?.discountPercentage === 0;
                     })
             )
         ).toHaveLength(12);
@@ -67,11 +67,10 @@ describe("GameService", () => {
 
         // Upcoming free games.
         expect(
-            games.filter(
-                (game) =>
-                    game.promotions?.upcomingPromotionalOffers[0]?.promotionalOffers.some(element => {
-                        return element.discountSetting?.discountPercentage === 0
-                    })
+            games.filter((game) =>
+                game.promotions?.upcomingPromotionalOffers[0]?.promotionalOffers.some((element) => {
+                    return element.discountSetting?.discountPercentage === 0;
+                })
             )
         ).toHaveLength(5);
 

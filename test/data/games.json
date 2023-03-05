@@ -1630,6 +1630,30 @@
                             "startDate": "2022-11-17T16:00:00.000Z",
                             "endDate": "2022-11-24T16:00:00.000Z",
                             "discountSetting": { "discountType": "PERCENTAGE", "discountPercentage": 0 }
+                        },
+                        {
+                            "startDate": "2022-10-27T15:00:00.000Z",
+                            "endDate": "2022-11-03T15:00:00.000Z",
+                            "discountSetting": {
+                                "discountType": "PERCENTAGE",
+                                "discountPercentage": 60
+                            }
+                        },
+                        {
+                            "startDate": "2022-10-27T15:00:00.000Z",
+                            "endDate": "2022-11-01T15:00:00.000Z",
+                            "discountSetting": {
+                                "discountType": "PERCENTAGE",
+                                "discountPercentage": 33
+                            }
+                        },
+                        {
+                            "startDate": "2022-10-27T15:00:00.000Z",
+                            "endDate": "2022-11-01T15:00:00.000Z",
+                            "discountSetting": {
+                                "discountType": "PERCENTAGE",
+                                "discountPercentage": 0
+                            }
                         }
                     ]
                 }
@@ -2471,9 +2495,28 @@
                 {
                     "promotionalOffers": [
                         {
-                            "startDate": "2022-11-24T16:00:00.000Z",
-                            "endDate": "2022-12-01T16:00:00.000Z",
-                            "discountSetting": { "discountType": "PERCENTAGE", "discountPercentage": 0 }
+                            "startDate": "2022-10-27T15:00:00.000Z",
+                            "endDate": "2022-11-03T15:00:00.000Z",
+                            "discountSetting": {
+                                "discountType": "PERCENTAGE",
+                                "discountPercentage": 60
+                            }
+                        },
+                        {
+                            "startDate": "2022-10-27T15:00:00.000Z",
+                            "endDate": "2022-11-01T15:00:00.000Z",
+                            "discountSetting": {
+                                "discountType": "PERCENTAGE",
+                                "discountPercentage": 33
+                            }
+                        },
+                        {
+                            "startDate": "2022-10-27T15:00:00.000Z",
+                            "endDate": "2022-11-01T15:00:00.000Z",
+                            "discountSetting": {
+                                "discountType": "PERCENTAGE",
+                                "discountPercentage": 0
+                            }
                         }
                     ]
                 }
