@@ -1,3 +1,11 @@
+# [v1.5.18](https://github.com/size-up/freegamescatcher-core/compare/v1.5.17...v1.5.18) (2023-03-05)
+
+## 🐛 Bug fixes
+- [`3900f17`](https://github.com/size-up/freegamescatcher-core/commit/3900f17)  Iterate on &#x60;upcomingPromotionalOffers&#x60; field to find future free games 
+
+## ♻️ Refactor code
+- [`e90c1e1`](https://github.com/size-up/freegamescatcher-core/commit/e90c1e1)  Lint, enhance and update comments
+
 # [v1.5.17](https://github.com/size-up/freegamescatcher-core/compare/v1.5.16...v1.5.17) (2023-03-01)
 
 ## ⚡️ Improve performance
