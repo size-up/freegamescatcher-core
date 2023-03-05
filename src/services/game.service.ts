@@ -57,8 +57,9 @@ export class GameService {
         }
 
         const isUpcomingFree =
-            filteredGame.promotions?.upcomingPromotionalOffers[0]?.promotionalOffers[0]?.discountSetting
-                ?.discountPercentage === 0;
+            filteredGame.promotions?.upcomingPromotionalOffers[0]?.promotionalOffers.some(element => {
+                return element.discountSetting?.discountPercentage === 0;
+            })
 
         // The game is upcoming free ? return "upcoming"
         if (isUpcomingFree) {
