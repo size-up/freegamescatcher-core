@@ -51,17 +51,18 @@ export class GameService {
             filteredGame.promotions?.promotionalOffers[0]?.promotionalOffers[0]?.discountSetting?.discountPercentage ===
             0;
 
-        // The game is free now ? return "now"
+        // If the game is free now, return "now"
         if (isCurrentlyFree) {
             return (state = "now");
         }
 
-        const isUpcomingFree =
-            filteredGame.promotions?.upcomingPromotionalOffers[0]?.promotionalOffers.some(element => {
+        const isUpcomingFree = filteredGame.promotions?.upcomingPromotionalOffers[0]?.promotionalOffers.some(
+            (element) => {
                 return element.discountSetting?.discountPercentage === 0;
-            })
+            }
+        );
 
-        // The game is upcoming free ? return "upcoming"
+        // If the game will be free, return "upcoming"
         if (isUpcomingFree) {
             return (state = "upcoming");
         }
