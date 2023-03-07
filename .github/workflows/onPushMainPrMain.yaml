@@ -144,20 +144,25 @@ jobs:
               shell: bash
               run: |
                   current_branch=$(echo ${{ github.ref }} | cut -d'/' -f 3)
-                  echo Current reference branch name: $current_branch
-                  echo Default branch name: ${{ github.event.repository.default_branch }}
-                  echo Head reference branch name: ${{ github.head_ref }}
+                  default_branch=${{ github.event.repository.default_branch }}
+                  head_ref=${{ github.head_ref }}
 
+                  echo Current branch: $current_branch
+                  echo Default branch: $default_branch
+                  echo Head ref: $head_ref
 
-                  if [ "${{ github.head_ref }}" = "" ]; then
+                  if [ -z $head_ref ]; then
                   echo "No head reference branch name found, using current branch name"
                   branch_name=$current_branch
+                  else
+                  echo "Head reference branch name found, using it"
+                  branch_name=$head_ref
                   fi
 
-                  branch_name=${{ github.head_ref }} && branch_name_sanitized=${branch_name//\//-}
+                  branch_name_sanitized=${branch_name//\//-}
                   echo Sanitized branch name: $branch_name_sanitized
 
-                  if [ "$branch_name_sanitized" = ${{ github.event.repository.default_branch }} ]; then
+                  if [ "$branch_name_sanitized" = $default_branch ]; then
                   echo "Branch name is the default repository branch name, using 'latest' as tag"
                   branch_name_sanitized="latest"
                   fi
