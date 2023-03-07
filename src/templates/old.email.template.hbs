@@ -1,0 +1,158 @@
+<html lang="fr">
+
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Jeux Epic Games disponibles</title>
+    </head>
+
+    <body style="color: whitesmoke; font-family: sans-serif;">
+        <center>
+            <table style="background-color: #1e1e1e; width: 600px;" role="presentation">
+                <tr>
+                    <td align="center">
+                        <h1>Des jeux Epic Games sont disponibles 😉</h1>
+                        <a
+                            href="https://store.epicgames.com/fr/free-games"
+                            style="color: whitesmoke; text-decoration: none;"
+                        >
+                            <p>Clique ici pour consulter la page des jeux disponibles ou sur les images pour aller directement les récupérer !</p>
+                        </a>
+                    </td>
+                </tr>
+                <tr>
+                    <td align="center">
+                        <a
+                            href="https://fgc.api.sizeup.cloud/receivers/delete/{{this.uuid}}"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                        >
+                            <button>Se désabonner de la newsletter</button>
+                        </a>
+                    </td>
+                </tr>
+                <br />
+                <tr>
+                    <td>
+                        <hr />
+                    </td>
+                </tr>
+            </table>
+            <table style="background-color: #1e1e1e; width: 600px;" role="presentation">
+                <tbody>
+                    {{#each availableGames}}
+                        <tr>
+                            <td style="padding: 20px;">
+                                <table role="presentation">
+                                    <tbody>
+                                        <td>
+                                            <tr>
+                                                <td align="center">
+                                                    <a href="{{this.urlSlug}}">
+                                                        <img width="500px" src="{{this.imageUrl}}" alt="available game" />
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <p>
+                                                        <b>{{this.title}}</b>
+                                                    </p>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <p style="text-align: justify;">
+                                                        {{this.description}}
+                                                    </p>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <div style="display: table; height: 110px;">
+                                                        <p
+                                                            style="display: table-cell; vertical-align: bottom;"
+                                                        >Disponible jusqu'au :
+                                                            <b>{{this.promotion.endDate}}</b>
+                                                        </p>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <hr />
+                                                </td>
+                                            </tr>
+                                        </td>
+                                    </tbody>
+                                </table>
+                            </td>
+                        </tr>
+                    {{/each}}
+                </tbody>
+            </table>
+            <table style="background-color: #1e1e1e; width: 600px;" role="presentation">
+                <tr>
+                    <td align="center">
+                        <h1>Prochainement</h1>
+                    </td>
+                </tr>
+            </table>
+            <table style="background-color: #1e1e1e; width: 600px;" role="presentation">
+                <tbody>
+                    {{#each nextGames}}
+                        <tr>
+                            <td style="padding: 20px;">
+                                <table role="presentation">
+                                    <tbody>
+                                        <td>
+                                            <tr>
+                                                <td align="center">
+                                                    <a href="{{this.urlSlug}}">
+                                                        <img width="500px" src="{{this.imageUrl}}" alt="upcoming game" />
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <p>
+                                                        <b>{{this.title}}</b>
+                                                    </p>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <p style="text-align: justify;">
+                                                        {{this.description}}
+                                                    </p>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <div style="display: table; height: 110px;">
+                                                        <p
+                                                            style="display: table-cell; vertical-align: bottom;"
+                                                        >Disponible à partir du :
+                                                            <b>{{this.promotion.startDate}}</b>
+                                                        </p>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <hr />
+                                                </td>
+                                            </tr>
+                                        </td>
+                                    </tbody>
+                                </table>
+                            </td>
+                        </tr>
+                    {{/each}}
+                </tbody>
+            </table>
+        </center>
+    </body>
+
+</html>
