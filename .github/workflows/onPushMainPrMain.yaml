@@ -143,16 +143,26 @@ jobs:
               id: branch_name
               shell: bash
               run: |
+                  current_branch=$(echo ${{ github.ref }} | cut -d'/' -f 3)
+                  echo Current reference branch name: $current_branch
                   echo Default branch name: ${{ github.event.repository.default_branch }}
-                  echo Current branch name: ${{ github.head_ref }}
+                  echo Head reference branch name: ${{ github.head_ref }}
+
+
+                  if [ "${{ github.head_ref }}" = "" ]; then
+                  echo "No head reference branch name found, using current branch name"
+                  branch_name=$current_branch
+                  fi
 
                   branch_name=${{ github.head_ref }} && branch_name_sanitized=${branch_name//\//-}
                   echo Sanitized branch name: $branch_name_sanitized
 
                   if [ "$branch_name_sanitized" = ${{ github.event.repository.default_branch }} ]; then
+                  echo "Branch name is the default repository branch name, using 'latest' as tag"
                   branch_name_sanitized="latest"
                   fi
 
+                  echo Extract branch name used: $branch_name_sanitized
                   echo value=$branch_name_sanitized >> $GITHUB_OUTPUT
 
             - name: ⚙️ Set up QEMU
@@ -167,7 +177,7 @@ jobs:
                   username: ${{ secrets.DOCKERHUB_USERNAME }}
                   password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-            - name: 🐳 Build and push image ${{ steps.branch_name.outputs.value }}
+            - name: 🐳 Build and push image [${{ steps.branch_name.outputs.value }}]
               uses: docker/build-push-action@v3
               with:
                   context: . # https://github.com/marketplace/actions/build-and-push-docker-images#git-context
@@ -178,7 +188,7 @@ jobs:
                       NODE_ENV=pre-production
                       VERSION=${{ steps.branch_name.outputs.value }}
 
-            - name: 🐳 Build and push image ${{ needs.release.outputs.version }}
+            - name: 🐳 Build and push image [${{ needs.release.outputs.version }}]
               uses: docker/build-push-action@v3
               if: needs.release.outputs.version # deploy only if there is a new published version
               with:
