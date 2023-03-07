@@ -1,3 +1,5 @@
+# [v1.5.19](https://github.com/size-up/freegamescatcher-core/compare/v1.5.18...v1.5.19) (2023-03-07)
+
 # [v1.5.18](https://github.com/size-up/freegamescatcher-core/compare/v1.5.17...v1.5.18) (2023-03-05)
 
 ## 🐛 Bug fixes
