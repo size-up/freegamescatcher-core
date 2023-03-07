@@ -135,6 +135,8 @@ jobs:
 
         needs: release
 
+        if: ${{ github.actor != 'dependabot[bot]' }} # skip this job if the actor is dependabot
+
         steps:
             - name: 📥 Checkout repository
               uses: actions/checkout@v3
