@@ -8,6 +8,7 @@ import { ReceiverInterface } from "../interfaces/receiver.interface";
 import { EmailerOutput } from "../outputs/emailer/emailer.output";
 
 interface DatasToCompileInterface {
+    url: string | undefined;
     uuid: string | undefined;
     availableGames: GameInterface[];
     nextGames: GameInterface[];
@@ -19,7 +20,7 @@ export class EmailService {
     private datas: GameInterface[] = [];
 
     constructor() {
-        checkEnvVariables(); // check if all env variables are set
+        checkEnvVariables(); // check if all needed env variables are set
 
         this.config = {
             host: process.env.SMTP_HOST as string,
@@ -64,11 +65,16 @@ export class EmailService {
                 // Prepare receiver list with options
                 const datasToCompile = this.buildDatasForTemplate();
 
-                const $emailsToSend = emailList.map((element) => {
-                    // Create email template
-                    datasToCompile.uuid = receivers?.find((el) => (el.email = element))?.uuid;
-                    const mailOptions: EmailOptionsInterface = this.prepareTemplate(subject, datasToCompile);
-                    return this.emailer.sendEmail({ ...mailOptions, to: [element] });
+                const $emailsToSend = emailList.map((email) => {
+                    datasToCompile.uuid = receivers?.find((el) => (el.email = email))?.uuid;
+
+                    if (datasToCompile.uuid) {
+                        // Create email template
+                        const mailOptions: EmailOptionsInterface = this.prepareTemplate(subject, datasToCompile);
+                        return this.emailer.sendEmail({ ...mailOptions, to: [email] });
+                    } else {
+                        throw new Error(`No uuid found for this email for: ${email}`);
+                    }
                 });
 
                 // Send all emails
@@ -149,9 +155,10 @@ export class EmailService {
      *
      * @author Francisco Fernandez <francisco59553@gmail.com>
      */
-    private buildDatasForTemplate() {
+    private buildDatasForTemplate(): DatasToCompileInterface {
         const datasToCompile: DatasToCompileInterface = {
-            uuid: "",
+            url: process.env.API_URL as string,
+            uuid: undefined,
             availableGames: [],
             nextGames: [],
         };
@@ -211,6 +218,7 @@ export class EmailService {
  */
 function checkEnvVariables() {
     const envVariables = [
+        "API_URL",
         "SMTP_HOST",
         "SMTP_PORT",
         "SMTP_USER",

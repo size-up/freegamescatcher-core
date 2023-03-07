@@ -42,7 +42,11 @@ export default class CoreFacade {
             // Send game list to receivers.
             if (receivers) {
                 try {
-                    await this.email.sendEmails("Epic Games Store - Nouveaux jeux", receivers, games);
+                    await this.email.sendEmails(
+                        "Les nouveaux jeux de la semaine sur l'Epic Games Store",
+                        receivers,
+                        games
+                    );
 
                     logger.info("Core application process finished successfully");
                     executed = true;
