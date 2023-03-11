@@ -1,3 +1,11 @@
+# [v1.5.21](https://github.com/size-up/freegamescatcher-core/compare/v1.5.20...v1.5.21) (2023-03-11)
+
+## ⚡️ Improve performance
+- [`a92d248`](https://github.com/size-up/freegamescatcher-core/commit/a92d248) ️ Prefix with &#x60;[TEST]&#x60; in email subject if not in prod. mode 
+
+## 🐛 Bug fixes
+- [`6b899e9`](https://github.com/size-up/freegamescatcher-core/commit/6b899e9)  Iterate on &#x60;promotionalOffers&#x60; field to find current free games
+
 # [v1.5.20](https://github.com/size-up/freegamescatcher-core/compare/v1.5.19...v1.5.20) (2023-03-07)
 
 # [v1.5.19](https://github.com/size-up/freegamescatcher-core/compare/v1.5.18...v1.5.19) (2023-03-07)
