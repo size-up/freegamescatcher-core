@@ -1,3 +1,5 @@
+# [v1.5.23](https://github.com/size-up/freegamescatcher-core/compare/v1.5.22...v1.5.23) (2023-03-13)
+
 # [v1.5.22](https://github.com/size-up/freegamescatcher-core/compare/v1.5.21...v1.5.22) (2023-03-13)
 
 # [v1.5.21](https://github.com/size-up/freegamescatcher-core/compare/v1.5.20...v1.5.21) (2023-03-11)
