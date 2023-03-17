@@ -1,3 +1,11 @@
+# [v1.6.0](https://github.com/size-up/freegamescatcher-core/compare/v1.5.23...v1.6.0) (2023-03-17)
+
+## ✨ Introduce new features
+- [`c275916`](https://github.com/size-up/freegamescatcher-core/commit/c275916)  New email template, update email subject and dynamic URL for unsubscribe button 
+
+## 🚚 Move or rename resources (e.g.: files, paths, routes)
+- [`8a46846`](https://github.com/size-up/freegamescatcher-core/commit/8a46846)  Move &#x60;release-template.hbs&#x60;
+
 # [v1.5.23](https://github.com/size-up/freegamescatcher-core/compare/v1.5.22...v1.5.23) (2023-03-13)
 
 # [v1.5.22](https://github.com/size-up/freegamescatcher-core/compare/v1.5.21...v1.5.22) (2023-03-13)
