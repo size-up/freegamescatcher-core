@@ -250,7 +250,7 @@ jobs:
               run: kubectl get deployments -n ${{ env.NAMESPACE_NAME }} ${{ env.IMAGE_NAME }}-prep -o=wide
 
     deploy-prod:
-        name: 🚀 Deploy prod. v${{ needs.release.outputs.version }}
+        name: 🚀 Deploy prod. [v${{ needs.release.outputs.version }}]
 
         runs-on: ubuntu-latest
 
@@ -266,5 +266,5 @@ jobs:
               with:
                   base64-kube-config: ${{ secrets.OCI_KUBE_CONFIG }}
 
-            - name: 🚀 Deploy to production v${{ needs.release.outputs.version }}
+            - name: 🚀 Deploy to production [v${{ needs.release.outputs.version }}]
               run: kubectl set image -n ${{ env.NAMESPACE_NAME }} deployment/${{ env.IMAGE_NAME }}-prod ${{ env.IMAGE_NAME }}-prod=${{ secrets.DOCKERHUB_USERNAME }}/${{ env.IMAGE_NAME }}:${{ needs.release.outputs.version }}
