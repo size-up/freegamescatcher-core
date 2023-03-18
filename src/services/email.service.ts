@@ -20,8 +20,6 @@ export class EmailService {
     private datas: GameInterface[] = [];
 
     constructor() {
-        checkEnvVariables(); // check if all needed env variables are set
-
         this.config = {
             host: process.env.SMTP_HOST as string,
             port: Number(process.env.SMTP_PORT) as number,
@@ -209,28 +207,4 @@ export class EmailService {
             throw sendingStatus;
         }
     }
-}
-
-/**
- * Function to check if all necessary environment variables are set.
- * @throws Error if one of the environment variable is missing.
- * @returns void
- */
-function checkEnvVariables() {
-    const envVariables = [
-        "API_URL",
-        "SMTP_HOST",
-        "SMTP_PORT",
-        "SMTP_USER",
-        "SMTP_PASSWORD",
-        "DOMAIN_NAME",
-        "DKIM_SELECTOR",
-        "DKIM_PRIVATE_KEY",
-    ];
-
-    envVariables.forEach((variable) => {
-        if (!process.env[variable]) {
-            throw new Error(`Missing [${variable}] environment variable`);
-        }
-    });
 }
