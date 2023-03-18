@@ -2,11 +2,11 @@
 
 [![CI/CD and release](https://github.com/size-up/freegamescatcher-core/actions/workflows/onPushMainPrMain.yaml/badge.svg)](https://github.com/size-up/freegamescatcher-core/actions/workflows/onPushMainPrMain.yaml)
 
-Free Games Catcher is an application that aims to search for game sites, trigger an alert and send it to users to notify them when a free game is available.
+**Free Games Catcher** is an application that aims to search for game sites, trigger an alert and send it to users to notify them when a free game is available.
 
 # Prerequisite
 
-To run Free Games Catcher locally, you need to
+To run the **Free Games Catcher** application locally, you need to:
 
 ## Environnements variables
 
@@ -18,26 +18,32 @@ This application **needs** some environment variables to provide all its feature
 
 ```sh
 # Application version
-VERSION="1.0.0"
-API_KEY="api-key-value" # API key to access to the API, checked by default on all routes
+VERSION="development"
+API_URL="https://XXX.XXX.XXX"   # URL of the API
+API_KEY="XXX-XXX-XXX"           # API key to access to the API, checked by default on all routes
 
 # SMTP
 # Used to send email notification
-SMTP_HOST="smtp_host"
-SMTP_PORT="smtp_port"
-SMTP_USER="smtp_email"
-SMTP_PASSWORD="smtp_password"
+SMTP_HOST="XXX.XXX.XXX"
+SMTP_PORT="XXX"
+SMTP_USER="XXX@XXX.XXX"
+SMTP_PASSWORD="XXX"
 
 # DKIM
 # Used to sign email notification
-DOMAIN_NAME="sizeup.cloud" # Domain name of the application
-DKIM_SELECTOR="xxx.sizeup"
-DKIM_PRIVATE_KEY="-----BEGIN RSA PRIVATE KEY----- ***"
+DOMAIN_NAME="XXX.XXX"   # Domain name of the application
+DKIM_SELECTOR="XXX.XXX"
+DKIM_PRIVATE_KEY="-----BEGIN RSA PRIVATE KEY-----\n XXX \n-----END RSA PRIVATE KEY-----"
 
 # GOOGLE CREDENTIALS
 # Used to store and retrieve application information
-GOOGLE_USERNAME="noreply@sizeup.cloud"
-GOOGLE_PRIVATE_KEY="-----BEGIN PRIVATE KEY----- ***"
+GOOGLE_USERNAME="XXX@XXX.XXX"
+GOOGLE_PRIVATE_KEY="-----BEGIN PRIVATE KEY-----\n XXX \n-----END PRIVATE KEY-----"
+
+# ELASTIC APM
+# Used to use the Elastic APM service
+ELASTIC_APM_SERVER_URL="https://XXX.XXX.XXX"
+ELASTIC_APM_AGENT_KEY="XXX"
 ```
 
 # Installation
