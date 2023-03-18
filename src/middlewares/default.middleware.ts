@@ -41,7 +41,7 @@ export default class DefaultMiddleware {
              * Check body presence in `POST` and `PUT` methods
              */
             if (["POST", "PUT"].includes(request.method) && !Object.entries(request.body).length) {
-                logger.error("Bad request");
+                logger.warn("Bad request: body is missing");
                 return response.status(400).json({ error: "Bad request", message: "Body is missing" });
             }
 
@@ -58,7 +58,7 @@ export default class DefaultMiddleware {
              * Check if the request is authorized.
              */
             if (!request.headers["x-api-key"]) {
-                logger.error("Unauthorized request, missing [x-api-key] header");
+                logger.warn("Unauthorized request: missing [x-api-key] header");
                 throw new UnauthorizedError();
             }
 
@@ -66,7 +66,7 @@ export default class DefaultMiddleware {
              * Check if the API key is valid.
              */
             if (request.headers["x-api-key"] && request.headers["x-api-key"] !== api.key) {
-                logger.error(`Forbidden request, [x-api-key] header [${request.headers["x-api-key"]}] is not valid`);
+                logger.warn(`Forbidden request: [${request.headers["x-api-key"]}] is not valid`);
                 throw new ForbiddenError();
             }
 

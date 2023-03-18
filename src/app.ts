@@ -29,12 +29,13 @@ class Application {
     private http: Express = express();
     private port = 8080;
 
-    constructor() {
+    public start() {
+        this.check(); // check if all needed environment variables are set
         this.welcome(); // print welcome message
         this.default(); // define default middleware
         this.routes(); // define all routes
         this.error(); // define error middleware
-        this.start(this.port); // start the application
+        this.application(this.port); // start the application
     }
 
     private welcome(): void {
@@ -42,6 +43,40 @@ class Application {
         logger.info(packageJson.displayName);
         logger.info(`🔖 Application version: [${version()}]`);
         logger.info(packageJson.description);
+    }
+
+    /**
+     * Function to check if all necessary environment variables are set.
+     * @throws Error if one of the environment variable is missing.
+     * @returns void
+     */
+    private check(): void {
+        const envs = [
+            "VERSION",
+            "API_URL",
+            "API_KEY",
+
+            "SMTP_HOST",
+            "SMTP_PORT",
+            "SMTP_USER",
+            "SMTP_PASSWORD",
+
+            "DOMAIN_NAME",
+            "DKIM_SELECTOR",
+            "DKIM_PRIVATE_KEY",
+
+            "GOOGLE_USERNAME",
+            "GOOGLE_PRIVATE_KEY",
+
+            "ELASTIC_APM_SERVER_URL",
+            "ELASTIC_APM_AGENT_KEY",
+        ];
+
+        envs.forEach((variable) => {
+            if (!process.env[variable]) {
+                throw new Error(`Missing [${variable}] environment variable`);
+            }
+        });
     }
 
     /**
@@ -82,7 +117,7 @@ class Application {
     /**
      * Init input express HTTP controller.
      */
-    private start(port: number): void {
+    private application(port: number): void {
         this.http.listen(port, () => {
             logger.info(`Application listening on port [${port}]`);
         });
@@ -92,8 +127,7 @@ class Application {
 /**
  * Start the application.
  */
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-const app = new Application();
+new Application().start();
 
 const hrend = process.hrtime(hrstart); // Used to calculate the time it takes to run the application
 logger.info(`Application started in [${hrend[0]}s ${hrend[1] / 1000000}ms]`);
