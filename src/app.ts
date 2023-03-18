@@ -1,5 +1,16 @@
 const hrstart = process.hrtime(); // Used to calculate the time it takes to run the application
 
+/*
+ * APM initialization must be the first thing required in the application.
+ */
+import apm from "elastic-apm-node";
+apm.start({
+    serverUrl: process.env.ELASTIC_APM_SERVER_URL,
+    secretToken: process.env.ELASTIC_APM_AGENT_KEY,
+    environment: process.env.NODE_ENV,
+    logLevel: "off",
+});
+
 import express, { Request, Response } from "express";
 import { Express } from "express-serve-static-core";
 import { readFileSync } from "fs";
