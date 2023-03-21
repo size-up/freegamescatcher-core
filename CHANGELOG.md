@@ -1,3 +1,14 @@
+# [v1.6.1](https://github.com/size-up/freegamescatcher-core/compare/v1.6.0...v1.6.1) (2023-03-21)
+
+## ⚡️ Improve performance
+- [`3ead118`](https://github.com/size-up/freegamescatcher-core/commit/3ead118) ️ Elastic APM integration 
+
+## 📝 Add or update documentation
+- [`3e54178`](https://github.com/size-up/freegamescatcher-core/commit/3e54178)  Update &#x60;README.md&#x60; with APM env. instructions 
+
+## ♻️ Refactor code
+- [`80aa02d`](https://github.com/size-up/freegamescatcher-core/commit/80aa02d)  Enhance application launch, env. check and logging
+
 # [v1.6.0](https://github.com/size-up/freegamescatcher-core/compare/v1.5.23...v1.6.0) (2023-03-17)
 
 ## ✨ Introduce new features
