@@ -51,6 +51,8 @@ class Application {
      * @returns void
      */
     private check(): void {
+        logger.debug("Checking environment variables...");
+
         const envs = [
             "VERSION",
             "API_URL",
@@ -72,11 +74,17 @@ class Application {
             "ELASTIC_APM_AGENT_KEY",
         ];
 
-        envs.forEach((variable) => {
-            if (!process.env[variable]) {
-                throw new Error(`Missing [${variable}] environment variable`);
-            }
+        const missing: string[] = envs.filter((variable) => {
+            return !process.env[variable];
         });
+
+        if (missing.length) {
+            const message = `Missing environment variables: [${missing.join(", ")}]`;
+            logger.error(message);
+            throw new Error(message);
+        } else {
+            logger.debug("All environment variables are set.");
+        }
     }
 
     /**

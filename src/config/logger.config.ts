@@ -19,7 +19,7 @@ function setupLogger(): winston.Logger {
         };
 
         return winston.createLogger({
-            level: "info",
+            level: process.env.NODE_ENV === "production" ? "info" : "debug", // if production, only log info and above
             format: winston.format.json(),
             defaultMeta: metadata,
             transports: [new winston.transports.Console({})],
