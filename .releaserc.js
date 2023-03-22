@@ -4,7 +4,16 @@ const path = require("path");
 const releaseTemplate = readFileSync(path.join(".github/release-template.hbs"));
 
 module.exports = {
-    branches: ["main"],
+    branches: [
+        "main",
+        // used to release beta tags
+        {
+            name: "beta",
+            prerelease: true,
+        },
+        // used to release maintenance branches
+        "+([0-9])?(.{+([0-9]),x}).x",
+    ],
     plugins: [
         [
             "semantic-release-gitmoji",
