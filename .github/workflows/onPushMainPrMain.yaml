@@ -5,9 +5,9 @@ name: CI/CD and release
 
 on:
     push:
-        branches: ["main"]
+        branches: ["main", "beta", "*.*.*"]
     pull_request:
-        branches: ["main"]
+        branches: ["main", "beta", "*.*.*"]
 
     workflow_dispatch: # allow manual trigger
 
@@ -256,7 +256,8 @@ jobs:
 
         needs: [release, push]
 
-        if: ${{ needs.release.outputs.version }} # deploy only if there is a new published version
+        # deploy only if there is a new published version and if the branch is main
+        if: ${{ needs.release.outputs.version && needs.push.outputs.branch_name == github.event.repository.default_branch }}
 
         environment: production # refer to https://github.com/size-up/freegamescatcher-core/settings/environments
 
