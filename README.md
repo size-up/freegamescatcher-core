@@ -1,6 +1,6 @@
 # 🎮 Free Games Catcher
 
-[![CI/CD and release](https://github.com/size-up/freegamescatcher-core/actions/workflows/onPushMainPrMain.yaml/badge.svg)](https://github.com/size-up/freegamescatcher-core/actions/workflows/onPushMainPrMain.yaml)
+[![🔄 CI/CD](https://github.com/size-up/freegamescatcher-core/actions/workflows/ci-cd.yaml/badge.svg)](https://github.com/size-up/freegamescatcher-core/actions/workflows/ci-cd.yaml)
 
 **Free Games Catcher** is an application that aims to search for game sites, trigger an alert and send it to users to notify them when a free game is available.
 
