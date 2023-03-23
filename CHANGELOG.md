@@ -1,3 +1,17 @@
+# [v1.6.2](https://github.com/size-up/freegamescatcher-core/compare/v1.6.1...v1.6.2) (2023-03-23)
+
+## 🐛 Bug fixes
+- [`90e4b72`](https://github.com/size-up/freegamescatcher-core/commit/90e4b72)  Prefer use PNG instead of SVG cause of Gmail image display 
+
+## 🔧 Add or update configuration files
+- [`3f2238c`](https://github.com/size-up/freegamescatcher-core/commit/3f2238c)  TypeScript and nodemon config. enhancement 
+
+## ♿️ Improve accessibility
+- [`470ddff`](https://github.com/size-up/freegamescatcher-core/commit/470ddff) ️ Change &#x60;alt&#x60; and &#x60;title&#x60; to Free Games Catcher logo 
+
+## 🚚 Move or rename resources (e.g.: files, paths, routes)
+- [`2b06446`](https://github.com/size-up/freegamescatcher-core/commit/2b06446)  Rename workflow to &#x60;🔄 CI/CD&#x60;
+
 # [v1.6.1](https://github.com/size-up/freegamescatcher-core/compare/v1.6.0...v1.6.1) (2023-03-21)
 
 ## ⚡️ Improve performance
