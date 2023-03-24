@@ -161,12 +161,11 @@ jobs:
                       branch_name=$head_ref
                   fi
 
+                  # replace all '/' with '-'
                   branch_name_sanitized=${branch_name//\//-}
-                  if [ "$branch_name_sanitized" = "$default_branch" ] && [ "$git_ref" = "$default_branch" ]; then
-                      echo "Branch name [$branch_name_sanitized] is the default repository branch name [$default_branch] and git reference is [$git_ref], using 'main' as tag"
-                      branch_name_sanitized="main"
-                  elif [ "$branch_name_sanitized" = "$default_branch" ]; then
-                      echo "Branch name [$branch_name_sanitized] is the default repository branch name [$default_branch] but git reference is not 'main', so using 'latest' as tag"
+
+                  if [ "$branch_name_sanitized" = "$default_branch" ]; then
+                      echo "Branch name [$branch_name_sanitized] is the default repository branch name [$default_branch], so using 'latest' as branch_name_sanitized"
                       branch_name_sanitized="latest"
                   fi
 
@@ -257,8 +256,9 @@ jobs:
 
         needs: [release, push]
 
-        # deploy only if there is a new published version and if the branch is main
-        if: ${{ needs.release.outputs.version && needs.push.outputs.branch_name == github.event.repository.default_branch }}
+        # deploy to production job is only available if there is a new published version
+        # as "1.0.0" and or "1.0.0-beta.1"
+        if: ${{ needs.release.outputs.version }}
 
         environment: production # refer to https://github.com/size-up/freegamescatcher-core/settings/environments
 
