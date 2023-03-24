@@ -1,3 +1,8 @@
+# [v1.6.4](https://github.com/size-up/freegamescatcher-core/compare/v1.6.3...v1.6.4) (2023-03-24)
+
+## 🐛 Bug fixes
+- [`4300d7a`](https://github.com/size-up/freegamescatcher-core/commit/4300d7a)  Use &#x60;latest&#x60; if &#x60;git_ref&#x60; is the default repository branch
+
 # [v1.6.3](https://github.com/size-up/freegamescatcher-core/compare/v1.6.2...v1.6.3) (2023-03-24)
 
 ## 🐛 Bug fixes
