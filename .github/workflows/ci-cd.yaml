@@ -145,28 +145,29 @@ jobs:
               id: branch_name
               shell: bash
               run: |
-                  current_branch=$(echo ${{ github.ref }} | cut -d'/' -f 3)
+                  git_ref=$(echo ${{ github.ref }} | cut -d'/' -f 3)
                   default_branch=${{ github.event.repository.default_branch }}
                   head_ref=${{ github.head_ref }}
 
-                  echo Current branch: $current_branch
+                  echo Git reference: $git_ref
                   echo Default branch: $default_branch
                   echo Head ref: $head_ref
 
                   if [ -z $head_ref ]; then
-                  echo "No head reference branch name found, using current branch name"
-                  branch_name=$current_branch
+                      echo "No head reference branch name found, so using git reference name as [$git_ref]"
+                      branch_name=$git_ref
                   else
-                  echo "Head reference branch name found, using it"
-                  branch_name=$head_ref
+                      echo "Head reference branch name found, using it as [$head_ref]"
+                      branch_name=$head_ref
                   fi
 
                   branch_name_sanitized=${branch_name//\//-}
-                  echo Sanitized branch name: $branch_name_sanitized
-
-                  if [ "$branch_name_sanitized" = $default_branch ]; then
-                  echo "Branch name is the default repository branch name, using 'latest' as tag"
-                  branch_name_sanitized="latest"
+                  if [ "$branch_name_sanitized" = "$default_branch" ] && [ "$git_ref" = "$default_branch" ]; then
+                      echo "Branch name [$branch_name_sanitized] is the default repository branch name [$default_branch] and git reference is [$git_ref], using 'main' as tag"
+                      branch_name_sanitized="main"
+                  elif [ "$branch_name_sanitized" = "$default_branch" ]; then
+                      echo "Branch name [$branch_name_sanitized] is the default repository branch name [$default_branch] but git reference is not 'main', so using 'latest' as tag"
+                      branch_name_sanitized="latest"
                   fi
 
                   echo Extract branch name used: $branch_name_sanitized
