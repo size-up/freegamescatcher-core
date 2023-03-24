@@ -1,3 +1,8 @@
+# [v1.6.3](https://github.com/size-up/freegamescatcher-core/compare/v1.6.2...v1.6.3) (2023-03-24)
+
+## 🐛 Bug fixes
+- [`f7ccbbd`](https://github.com/size-up/freegamescatcher-core/commit/f7ccbbd)  Be aware about &#x60;main&#x60; branch in bash script extract branch name
+
 # [v1.6.2](https://github.com/size-up/freegamescatcher-core/compare/v1.6.1...v1.6.2) (2023-03-23)
 
 ## 🐛 Bug fixes
