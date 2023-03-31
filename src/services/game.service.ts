@@ -47,12 +47,9 @@ export class GameService {
     private isFreeGame(filteredGame: Element): string {
         let state = "none";
 
-        const isCurrentlyFree =
-            filteredGame.promotions?.promotionalOffers[0]?.promotionalOffers.some(
-            (element) => {
-                return element.discountSetting?.discountPercentage === 0;
-            }    
-        );
+        const isCurrentlyFree = filteredGame.promotions?.promotionalOffers[0]?.promotionalOffers.some((element) => {
+            return element.discountSetting?.discountPercentage === 0;
+        });
 
         // If the game is free now, return "now"
         if (isCurrentlyFree) {
