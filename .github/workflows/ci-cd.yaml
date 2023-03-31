@@ -4,269 +4,269 @@
 name: 🔄 CI/CD
 
 on:
-    push:
-        branches: ["main", "beta", "*.*.*"]
-    pull_request:
-        branches: ["main", "beta", "*.*.*"]
+  push:
+    branches: ["main", "beta", "*.*.*"]
+  pull_request:
+    branches: ["main", "beta", "*.*.*"]
 
-    workflow_dispatch: # allow manual trigger
+  workflow_dispatch: # allow manual trigger
 
-    # Used by the GitHub merge queue feature.
-    # Documentation: https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/configuring-pull-request-merges/managing-a-merge-queue
-    merge_group:
+  # Used by the GitHub merge queue feature.
+  # Documentation: https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/configuring-pull-request-merges/managing-a-merge-queue
+  merge_group:
 
 env:
-    NAMESPACE_NAME: "freegamescatcher"
-    IMAGE_NAME: "freegamescatcher-core"
+  NAMESPACE_NAME: "freegamescatcher"
+  IMAGE_NAME: "freegamescatcher-core"
 
 jobs:
-    build:
-        name: ⚙️ Build
+  build:
+    name: ⚙️ Build
 
-        runs-on: ubuntu-latest
+    runs-on: ubuntu-latest
 
-        steps:
-            - name: 📥 Checkout repository
-              uses: actions/checkout@v3
+    steps:
+      - name: 📥 Checkout repository
+        uses: actions/checkout@v3
 
-            - name: 🌐 Use Node.js LTS
-              uses: actions/setup-node@v3
-              with:
-                  node-version: lts/*
+      - name: 🌐 Use Node.js LTS
+        uses: actions/setup-node@v3
+        with:
+          node-version: lts/*
 
-            - name: 🗂 Cache "node_modules"
-              uses: actions/cache@v3
-              id: yarn-cache # use this to check for `cache-hit` (`steps.yarn-cache.outputs.cache-hit != 'true'`)
-              with:
-                  path: "**/node_modules"
-                  key: ${{ runner.arch }}-${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
-                  restore-keys: |
-                      ${{ runner.arch }}-${{ runner.os }}-yarn-
+      - name: 🗂 Cache "node_modules"
+        uses: actions/cache@v3
+        id: yarn-cache # use this to check for `cache-hit` (`steps.yarn-cache.outputs.cache-hit != 'true'`)
+        with:
+          path: "**/node_modules"
+          key: ${{ runner.arch }}-${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.arch }}-${{ runner.os }}-yarn-
 
-            - name: 📦 Install dependencies
-              if: steps.yarn-cache.outputs.cache-hit != 'true'
-              run: yarn install --frozen-lockfile
+      - name: 📦 Install dependencies
+        if: steps.yarn-cache.outputs.cache-hit != 'true'
+        run: yarn install --frozen-lockfile
 
-            - name: ⚙️ Build application
-              run: yarn run build
+      - name: ⚙️ Build application
+        run: yarn run build
 
-            - name: 🗃 List the state of node modules
-              if: steps.yarn-cache.outputs.cache-hit != 'true'
-              continue-on-error: true
-              run: yarn list
+      - name: 🗃 List the state of node modules
+        if: steps.yarn-cache.outputs.cache-hit != 'true'
+        continue-on-error: true
+        run: yarn list
 
-    test-unit:
-        name: 🧪 Unit tests
+  test-unit:
+    name: 🧪 Unit tests
 
-        runs-on: ubuntu-latest
+    runs-on: ubuntu-latest
 
-        steps:
-            - name: 📥 Checkout repository
-              uses: actions/checkout@v3
+    steps:
+      - name: 📥 Checkout repository
+        uses: actions/checkout@v3
 
-            - name: 🌐 Use Node.js LTS
-              uses: actions/setup-node@v3
-              with:
-                  node-version: lts/*
+      - name: 🌐 Use Node.js LTS
+        uses: actions/setup-node@v3
+        with:
+          node-version: lts/*
 
-            - name: 🗂 Cache "node_modules"
-              uses: actions/cache@v3
-              id: yarn-cache # use this to check for `cache-hit` (`steps.yarn-cache.outputs.cache-hit != 'true'`)
-              with:
-                  path: "**/node_modules"
-                  key: ${{ runner.arch }}-${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
-                  restore-keys: |
-                      ${{ runner.arch }}-${{ runner.os }}-yarn-
+      - name: 🗂 Cache "node_modules"
+        uses: actions/cache@v3
+        id: yarn-cache # use this to check for `cache-hit` (`steps.yarn-cache.outputs.cache-hit != 'true'`)
+        with:
+          path: "**/node_modules"
+          key: ${{ runner.arch }}-${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.arch }}-${{ runner.os }}-yarn-
 
-            - name: 📦 Install dependencies
-              if: steps.yarn-cache.outputs.cache-hit != 'true'
-              run: yarn install --frozen-lockfile
+      - name: 📦 Install dependencies
+        if: steps.yarn-cache.outputs.cache-hit != 'true'
+        run: yarn install --frozen-lockfile
 
-            - name: 🧪 Run unit tests
-              run: yarn run test:unit
+      - name: 🧪 Run unit tests
+        run: yarn run test:unit
 
-            - name: 🗃 List the state of node modules
-              if: steps.yarn-cache.outputs.cache-hit != 'true'
-              continue-on-error: true
-              run: yarn list
+      - name: 🗃 List the state of node modules
+        if: steps.yarn-cache.outputs.cache-hit != 'true'
+        continue-on-error: true
+        run: yarn list
 
-    release:
-        name: 🔖 Release
+  release:
+    name: 🔖 Release
 
-        runs-on: ubuntu-latest
+    runs-on: ubuntu-latest
 
-        needs: [build, test-unit]
+    needs: [build, test-unit]
 
-        if: ${{ github.event_name != 'merge_group' }} # skip this job if the event is a merge_group
+    if: ${{ github.event_name != 'merge_group' }} # skip this job if the event is a merge_group
 
-        steps:
-            - name: 📥 Checkout repository
-              uses: actions/checkout@v3
-              with:
-                  # used by semantic-release to bypass the branch protection rules
-                  token: ${{ secrets.GH_TOKEN }}
+    steps:
+      - name: 📥 Checkout repository
+        uses: actions/checkout@v3
+        with:
+          # used by semantic-release to bypass the branch protection rules
+          token: ${{ secrets.GH_TOKEN }}
 
-            - name: 🌐 Use Node.js LTS
-              uses: actions/setup-node@v3
-              with:
-                  node-version: lts/*
+      - name: 🌐 Use Node.js LTS
+        uses: actions/setup-node@v3
+        with:
+          node-version: lts/*
 
-            - name: 🗂 Cache "node_modules"
-              uses: actions/cache@v3
-              with:
-                  path: "**/node_modules"
-                  key: ${{ runner.arch }}-${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
-                  restore-keys: |
-                      ${{ runner.arch }}-${{ runner.os }}-yarn-
+      - name: 🗂 Cache "node_modules"
+        uses: actions/cache@v3
+        with:
+          path: "**/node_modules"
+          key: ${{ runner.arch }}-${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.arch }}-${{ runner.os }}-yarn-
 
-            - name: 🔖 Release application
-              run: yarn run release
-              env:
-                  GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
-                  # NPM_TOKEN: ${{ secrets.NPM_TOKEN }} # optional, needed to publish packages on npm
-              id: version # save the version to use in an other step/job
-        outputs:
-            version: ${{ steps.version.outputs.nextVersion }}
+      - name: 🔖 Release application
+        run: yarn run release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+          # NPM_TOKEN: ${{ secrets.NPM_TOKEN }} # optional, needed to publish packages on npm
+        id: version # save the version to use in an other step/job
+    outputs:
+      version: ${{ steps.version.outputs.nextVersion }}
 
-    push:
-        name: 🐳 Build and push image
+  push:
+    name: 🐳 Build and push image
 
-        runs-on: ubuntu-latest
+    runs-on: ubuntu-latest
 
-        needs: release
+    needs: release
 
-        if: ${{ github.actor != 'dependabot[bot]' }} # skip this job if the actor is dependabot
+    if: ${{ github.actor != 'dependabot[bot]' }} # skip this job if the actor is dependabot
 
-        steps:
-            - name: 📥 Checkout repository
-              uses: actions/checkout@v3
+    steps:
+      - name: 📥 Checkout repository
+        uses: actions/checkout@v3
 
-            - name: 🌳 Extract branch name
-              id: branch_name
-              shell: bash
-              run: |
-                  git_ref=$(echo ${{ github.ref }} | cut -d'/' -f 3)
-                  default_branch=${{ github.event.repository.default_branch }}
-                  head_ref=${{ github.head_ref }}
+      - name: 🌳 Extract branch name
+        id: branch_name
+        shell: bash
+        run: |
+          git_ref=$(echo ${{ github.ref }} | cut -d'/' -f 3)
+          default_branch=${{ github.event.repository.default_branch }}
+          head_ref=${{ github.head_ref }}
 
-                  echo Git reference: $git_ref
-                  echo Default branch: $default_branch
-                  echo Head ref: $head_ref
+          echo Git reference: $git_ref
+          echo Default branch: $default_branch
+          echo Head ref: $head_ref
 
-                  if [ -z $head_ref ]; then
-                      echo "No head reference branch name found, so using git reference name as [$git_ref]"
-                      branch_name=$git_ref
-                  else
-                      echo "Head reference branch name found, using it as [$head_ref]"
-                      branch_name=$head_ref
-                  fi
+          if [ -z $head_ref ]; then
+              echo "No head reference branch name found, so using git reference name as [$git_ref]"
+              branch_name=$git_ref
+          else
+              echo "Head reference branch name found, using it as [$head_ref]"
+              branch_name=$head_ref
+          fi
 
-                  # replace all '/' with '-'
-                  branch_name_sanitized=${branch_name//\//-}
+          # replace all '/' with '-'
+          branch_name_sanitized=${branch_name//\//-}
 
-                  if [ "$branch_name_sanitized" = "$default_branch" ]; then
-                      echo "Branch name [$branch_name_sanitized] is the default repository branch name [$default_branch], so using 'latest' as branch_name_sanitized"
-                      branch_name_sanitized="latest"
-                  fi
+          if [ "$branch_name_sanitized" = "$default_branch" ]; then
+              echo "Branch name [$branch_name_sanitized] is the default repository branch name [$default_branch], so using 'latest' as branch_name_sanitized"
+              branch_name_sanitized="latest"
+          fi
 
-                  echo Extract branch name used: $branch_name_sanitized
-                  echo value=$branch_name_sanitized >> $GITHUB_OUTPUT
+          echo Extract branch name used: $branch_name_sanitized
+          echo value=$branch_name_sanitized >> $GITHUB_OUTPUT
 
-            - name: ⚙️ Set up QEMU
-              uses: docker/setup-qemu-action@v2
+      - name: ⚙️ Set up QEMU
+        uses: docker/setup-qemu-action@v2
 
-            - name: 🛠 Set up Docker Buildx
-              uses: docker/setup-buildx-action@v2
+      - name: 🛠 Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
 
-            - name: 📲 Login to DockerHub
-              uses: docker/login-action@v2
-              with:
-                  username: ${{ secrets.DOCKERHUB_USERNAME }}
-                  password: ${{ secrets.DOCKERHUB_TOKEN }}
+      - name: 📲 Login to DockerHub
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-            - name: 🐳 Build and push image [${{ steps.branch_name.outputs.value }}]
-              uses: docker/build-push-action@v3
-              with:
-                  context: . # https://github.com/marketplace/actions/build-and-push-docker-images#git-context
-                  platforms: linux/amd64,linux/arm64
-                  push: true
-                  tags: ${{ secrets.DOCKERHUB_USERNAME }}/${{ env.IMAGE_NAME }}:${{ steps.branch_name.outputs.value }}
-                  build-args: |
-                      NODE_ENV=pre-production
-                      VERSION=${{ steps.branch_name.outputs.value }}
+      - name: 🐳 Build and push image [${{ steps.branch_name.outputs.value }}]
+        uses: docker/build-push-action@v3
+        with:
+          context: . # https://github.com/marketplace/actions/build-and-push-docker-images#git-context
+          platforms: linux/amd64,linux/arm64
+          push: true
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/${{ env.IMAGE_NAME }}:${{ steps.branch_name.outputs.value }}
+          build-args: |
+            NODE_ENV=pre-production
+            VERSION=${{ steps.branch_name.outputs.value }}
 
-            - name: 🐳 Build and push image [${{ needs.release.outputs.version }}]
-              uses: docker/build-push-action@v3
-              if: needs.release.outputs.version # deploy only if there is a new published version
-              with:
-                  context: . # https://github.com/marketplace/actions/build-and-push-docker-images#git-context
-                  platforms: linux/amd64,linux/arm64
-                  push: true
-                  tags: ${{ secrets.DOCKERHUB_USERNAME }}/${{ env.IMAGE_NAME }}:${{ needs.release.outputs.version }}
-                  build-args: |
-                      VERSION=${{ needs.release.outputs.version }}
+      - name: 🐳 Build and push image [${{ needs.release.outputs.version }}]
+        uses: docker/build-push-action@v3
+        if: needs.release.outputs.version # deploy only if there is a new published version
+        with:
+          context: . # https://github.com/marketplace/actions/build-and-push-docker-images#git-context
+          platforms: linux/amd64,linux/arm64
+          push: true
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/${{ env.IMAGE_NAME }}:${{ needs.release.outputs.version }}
+          build-args: |
+            VERSION=${{ needs.release.outputs.version }}
 
-        outputs:
-            branch_name: ${{ steps.branch_name.outputs.value }}
+    outputs:
+      branch_name: ${{ steps.branch_name.outputs.value }}
 
-    deploy-prep:
-        name: 🚀 Deploy prep. [${{ needs.push.outputs.branch_name }}]
+  deploy-prep:
+    name: 🚀 Deploy prep. [${{ needs.push.outputs.branch_name }}]
 
-        runs-on: ubuntu-latest
+    runs-on: ubuntu-latest
 
-        needs: [release, push]
+    needs: [release, push]
 
-        environment: pre-production # refer to https://github.com/size-up/freegamescatcher-core/settings/environments
+    environment: pre-production # refer to https://github.com/size-up/freegamescatcher-core/settings/environments
 
-        steps:
-            - name: ⚙️ Set up kubectl
-              uses: tale/kubectl-action@v1
-              with:
-                  base64-kube-config: ${{ secrets.OCI_KUBE_CONFIG }}
+    steps:
+      - name: ⚙️ Set up kubectl
+        uses: tale/kubectl-action@v1
+        with:
+          base64-kube-config: ${{ secrets.OCI_KUBE_CONFIG }}
 
-            - name: 🔊 Display deployment image before update
-              run: kubectl get deployments -n ${{ env.NAMESPACE_NAME }} ${{ env.IMAGE_NAME }}-prep -o=wide
+      - name: 🔊 Display deployment image before update
+        run: kubectl get deployments -n ${{ env.NAMESPACE_NAME }} ${{ env.IMAGE_NAME }}-prep -o=wide
 
-            - name: 🚀 Set image [${{ needs.push.outputs.branch_name }}] to pre-production
-              id: image_updated
-              run: |
-                  echo value=$(kubectl set image -n ${{ env.NAMESPACE_NAME }} deployment/${{ env.IMAGE_NAME }}-prep ${{ env.IMAGE_NAME }}-prep=${{ secrets.DOCKERHUB_USERNAME }}/${{ env.IMAGE_NAME }}:${{ needs.push.outputs.branch_name }}) >> $GITHUB_OUTPUT
+      - name: 🚀 Set image [${{ needs.push.outputs.branch_name }}] to pre-production
+        id: image_updated
+        run: |
+          echo value=$(kubectl set image -n ${{ env.NAMESPACE_NAME }} deployment/${{ env.IMAGE_NAME }}-prep ${{ env.IMAGE_NAME }}-prep=${{ secrets.DOCKERHUB_USERNAME }}/${{ env.IMAGE_NAME }}:${{ needs.push.outputs.branch_name }}) >> $GITHUB_OUTPUT
 
-            - name: 🔊 Display "set_image" step output
-              run: echo ${{ steps.image_updated.outputs.value }}
+      - name: 🔊 Display "set_image" step output
+        run: echo ${{ steps.image_updated.outputs.value }}
 
-            # Rollout the deployment only if the image hasn't been updated, to avoid unnecessary restarts.
-            - name: 🚀 Rollout pre-production deployment
-              id: rollout
-              if: steps.image_updated.outputs.value == '' # rollout only if the image hasn't been updated
-              run: |
-                  echo value=$(kubectl rollout -n ${{ env.NAMESPACE_NAME }} restart deployment ${{ env.IMAGE_NAME }}-prep) >> $GITHUB_OUTPUT
+      # Rollout the deployment only if the image hasn't been updated, to avoid unnecessary restarts.
+      - name: 🚀 Rollout pre-production deployment
+        id: rollout
+        if: steps.image_updated.outputs.value == '' # rollout only if the image hasn't been updated
+        run: |
+          echo value=$(kubectl rollout -n ${{ env.NAMESPACE_NAME }} restart deployment ${{ env.IMAGE_NAME }}-prep) >> $GITHUB_OUTPUT
 
-            - name: 🔊 Display "rollout" step output
-              if: steps.rollout.outputs.value
-              run: echo ${{ steps.rollout.outputs.value }}
+      - name: 🔊 Display "rollout" step output
+        if: steps.rollout.outputs.value
+        run: echo ${{ steps.rollout.outputs.value }}
 
-            - name: 🔊 Display deployment image after update
-              run: kubectl get deployments -n ${{ env.NAMESPACE_NAME }} ${{ env.IMAGE_NAME }}-prep -o=wide
+      - name: 🔊 Display deployment image after update
+        run: kubectl get deployments -n ${{ env.NAMESPACE_NAME }} ${{ env.IMAGE_NAME }}-prep -o=wide
 
-    deploy-prod:
-        name: 🚀 Deploy prod. [v${{ needs.release.outputs.version }}]
+  deploy-prod:
+    name: 🚀 Deploy prod. [v${{ needs.release.outputs.version }}]
 
-        runs-on: ubuntu-latest
+    runs-on: ubuntu-latest
 
-        needs: [release, push]
+    needs: [release, push]
 
-        # deploy to production job is only available if there is a new published version
-        # as "1.0.0" and or "1.0.0-beta.1"
-        if: ${{ needs.release.outputs.version }}
+    # deploy to production job is only available if there is a new published version
+    # as "1.0.0" and or "1.0.0-beta.1"
+    if: ${{ needs.release.outputs.version }}
 
-        environment: production # refer to https://github.com/size-up/freegamescatcher-core/settings/environments
+    environment: production # refer to https://github.com/size-up/freegamescatcher-core/settings/environments
 
-        steps:
-            - name: ⚙️ Set up kubectl
-              uses: tale/kubectl-action@v1
-              with:
-                  base64-kube-config: ${{ secrets.OCI_KUBE_CONFIG }}
+    steps:
+      - name: ⚙️ Set up kubectl
+        uses: tale/kubectl-action@v1
+        with:
+          base64-kube-config: ${{ secrets.OCI_KUBE_CONFIG }}
 
-            - name: 🚀 Deploy to production [v${{ needs.release.outputs.version }}]
-              run: kubectl set image -n ${{ env.NAMESPACE_NAME }} deployment/${{ env.IMAGE_NAME }}-prod ${{ env.IMAGE_NAME }}-prod=${{ secrets.DOCKERHUB_USERNAME }}/${{ env.IMAGE_NAME }}:${{ needs.release.outputs.version }}
+      - name: 🚀 Deploy to production [v${{ needs.release.outputs.version }}]
+        run: kubectl set image -n ${{ env.NAMESPACE_NAME }} deployment/${{ env.IMAGE_NAME }}-prod ${{ env.IMAGE_NAME }}-prod=${{ secrets.DOCKERHUB_USERNAME }}/${{ env.IMAGE_NAME }}:${{ needs.release.outputs.version }}
