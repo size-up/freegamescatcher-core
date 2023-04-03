@@ -12,6 +12,22 @@ export default class ReceiverController {
 
     private initRoutes(): void {
         /**
+         * Get all receivers.
+         */
+        this.router.get("/", async (request: Request, response: Response, next: NextFunction) => {
+            try {
+                const receivers: ReceiverInterface[] | null = await this.receiverService.getAll();
+                if (receivers) {
+                    return response.status(200).json({ receivers: receivers });
+                } else {
+                    return response.status(404);
+                }
+            } catch (error) {
+                next(error);
+            }
+        });
+
+        /**
          * Create one receiver.
          */
         this.router.post("/", async (request: Request, response: Response, next: NextFunction) => {
