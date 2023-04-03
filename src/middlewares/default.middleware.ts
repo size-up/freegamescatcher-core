@@ -50,7 +50,8 @@ export default class DefaultMiddleware {
              * It's a GET to avoid blocked popup from the email.
              */
             if (request.method === "GET" && request.originalUrl.startsWith("/receivers/delete")) {
-                next(); // call next middleware
+                logger.debug("GET request authorized to /receivers/delete");
+                next();
                 return; // break the execution and do not check API key
             }
 

@@ -30,7 +30,7 @@ export class DataService {
             const cache: GameInterface[] = await Object(this.drive.getDocument(this.file.cache.name));
             return cache;
         } catch (error) {
-            logger.error(error);
+            logger.error("Error while getting cache", error);
             return null;
         }
     }
@@ -55,19 +55,21 @@ export class DataService {
             const receivers: ReceiverInterface[] = await Object(this.drive.getDocument(this.file.receiver.name));
             return receivers;
         } catch (error) {
-            logger.error(error);
+            logger.error("Error while getting receivers", error);
             return null;
         }
     }
 
-    public async updateReceiver(receiver: ReceiverInterface) {
+    public async createReceiver(receiver: ReceiverInterface): Promise<ReceiverInterface> {
         try {
             const receivers = await this.getReceivers();
             receivers?.push(receiver);
             await this.drive.updateDocument(this.file.receiver.name, JSON.stringify(receivers, null, 4));
             return receiver;
         } catch (error) {
-            throw new Error("Error during updating receivers list");
+            const message = "Error while creating receiver";
+            logger.error(message, error);
+            throw new Error(message);
         }
     }
 
@@ -80,7 +82,8 @@ export class DataService {
                 if (index >= 0) {
                     receivers?.splice(index, 1);
                 } else {
-                    throw new Error("UUID doesn't exist");
+                    logger.warn(`Receiver with uuid [${uuid}] not found`);
+                    return false;
                 }
             }
             await this.drive.updateDocument(this.file.receiver.name, JSON.stringify(receivers, null, 4));
