@@ -1,5 +1,6 @@
 import { NextFunction, Request, Response, Router } from "express";
 import ReceiverService from "../../services/receiver.service";
+import { ReceiverInterface } from "../../interfaces/receiver.interface";
 
 export default class ReceiverController {
     private router = Router();
@@ -15,8 +16,8 @@ export default class ReceiverController {
          */
         this.router.post("/", async (request: Request, response: Response, next: NextFunction) => {
             try {
-                const res = await this.receiverService.create(request.body);
-                return response.status(200).json({ status: "Receiver created.", receiver: res });
+                const receiver: ReceiverInterface = await this.receiverService.create(request.body);
+                return response.status(201).json({ receiver: receiver });
             } catch (error) {
                 next(error);
             }
@@ -31,11 +32,16 @@ export default class ReceiverController {
             try {
                 const deleted: boolean = await this.receiverService.delete(request.params.uuid);
                 if (deleted) {
-                    return response
-                        .status(200)
-                        .send("<h2>Votre email ne figurera plus dans la liste des notifiés.</h2>");
+                    return response.status(200).send(
+                        `<h1>Désinscription réussie.</h1>
+                        <h2>Votre demande de désinscription a bien été prise en compte.</h2>`
+                    );
+                } else {
+                    return response.status(404).send(
+                        `<h1>Désinscription impossible.</h1>
+                        <h2>La désinscription n'a pas pu être effectuée.</h2>`
+                    );
                 }
-                throw new Error("Error during deleting receiver from subscribers list");
             } catch (error) {
                 next(error);
             }
