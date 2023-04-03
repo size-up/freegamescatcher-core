@@ -1,3 +1,11 @@
+# [v1.6.6](https://github.com/size-up/freegamescatcher-core/compare/v1.6.5...v1.6.6) (2023-04-03)
+
+## 🎨 Improve structure / format of the code
+- [`135ae9b`](https://github.com/size-up/freegamescatcher-core/commit/135ae9b)  Run &#x60;yarn format&#x60; 
+
+## ♻️ Refactor code
+- [`6f6d403`](https://github.com/size-up/freegamescatcher-core/commit/6f6d403)  Misc. enhancements around clean code
+
 # [v1.6.5](https://github.com/size-up/freegamescatcher-core/compare/v1.6.4...v1.6.5) (2023-03-29)
 
 # [v1.6.4](https://github.com/size-up/freegamescatcher-core/compare/v1.6.3...v1.6.4) (2023-03-24)
