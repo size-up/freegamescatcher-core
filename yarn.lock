@@ -949,7 +949,7 @@
   dependencies:
     "@octokit/openapi-types" "^13.9.1"
 
-"@opentelemetry/api@^1.1.0":
+"@opentelemetry/api@^1.4.1":
   version "1.4.1"
   resolved "https://registry.yarnpkg.com/@opentelemetry/api/-/api-1.4.1.tgz#ff22eb2e5d476fbc2450a196e40dd243cc20c28f"
   integrity sha512-O2yRJce1GOc6PAy3QxFM4NzFiWzvScDC1/5ihYBL6BUEVdq0XMWN01sppE+H6bBXbaFYipjwFLEWLg5PaSOThA==
@@ -2559,10 +2559,10 @@ ee-first@1.1.1:
   resolved "https://registry.yarnpkg.com/ee-first/-/ee-first-1.1.1.tgz#590c61156b0ae2f4f0255732a158b266bc56b21d"
   integrity sha512-WMwm9LhRUo+WUaRN+vRuETqG89IgZphVSNkdFgeb6sS/E4OrDIN7t48CAewSHXc6C8lefD8KKfr5vY61brQlow==
 
-elastic-apm-http-client@11.2.0:
-  version "11.2.0"
-  resolved "https://registry.yarnpkg.com/elastic-apm-http-client/-/elastic-apm-http-client-11.2.0.tgz#4da8b975ca326c1e5beb59746ab1124c4feddad3"
-  integrity sha512-XHXK+gQmd34eRN/ffrml7AN4h1VwujB79WEO2C/J59ufvEk+mT1OGBhl6pntHPUWn4Um52C5m84O6jIXzaQwfw==
+elastic-apm-http-client@11.3.1:
+  version "11.3.1"
+  resolved "https://registry.yarnpkg.com/elastic-apm-http-client/-/elastic-apm-http-client-11.3.1.tgz#cf2c73f973e0400812c443812a0d5a8a08e5a4b2"
+  integrity sha512-AicMDPJYmO4tGTRcZQZFS7nhyGAQ6f4hUTKQVxiM/6mHo6F895JsJoPVwOE2yCathKDnD9LVS9zWdT2wvG8gxA==
   dependencies:
     agentkeepalive "^4.2.1"
     breadth-filter "^2.0.0"
@@ -2574,13 +2574,13 @@ elastic-apm-http-client@11.2.0:
     semver "^6.3.0"
     stream-chopper "^3.0.1"
 
-elastic-apm-node@^3.43.0:
-  version "3.43.0"
-  resolved "https://registry.yarnpkg.com/elastic-apm-node/-/elastic-apm-node-3.43.0.tgz#3d644cdb403c8230f5db7b6a3796d19e38faa2b7"
-  integrity sha512-iFuP8pXkfQst1LOFq6F86EjHhkvUL+pigpmbw2KL8rs+9i7Fn5pkxf8RP1G3oqwqydwUSdvw5+DPhO0lDO+LtA==
+elastic-apm-node@^3.44.1:
+  version "3.44.1"
+  resolved "https://registry.yarnpkg.com/elastic-apm-node/-/elastic-apm-node-3.44.1.tgz#8a6e88fa9f3401455dddb87f9d5559f6d894964d"
+  integrity sha512-hSf+S6GtQ+Ff5ueyQ1n2BAgAdiDOZ+XmHKFurzpB5/rvRFz6JbXLq+pcI11HMlK3ImiMVG9LQxHWMN6gqkqzYQ==
   dependencies:
     "@elastic/ecs-pino-format" "^1.2.0"
-    "@opentelemetry/api" "^1.1.0"
+    "@opentelemetry/api" "^1.4.1"
     after-all-results "^2.0.0"
     async-cache "^1.1.0"
     async-value-promise "^1.1.1"
@@ -2588,7 +2588,7 @@ elastic-apm-node@^3.43.0:
     cookie "^0.5.0"
     core-util-is "^1.0.2"
     debug "^4.1.1"
-    elastic-apm-http-client "11.2.0"
+    elastic-apm-http-client "11.3.1"
     end-of-stream "^1.4.4"
     error-callsites "^2.0.4"
     error-stack-parser "^2.0.6"
@@ -5002,15 +5002,10 @@ lru-cache@^6.0.0:
   dependencies:
     yallist "^4.0.0"
 
-lru-cache@^7.14.1:
+lru-cache@^7.14.1, lru-cache@^7.4.4, lru-cache@^7.5.1, lru-cache@^7.7.1:
   version "7.18.3"
   resolved "https://registry.yarnpkg.com/lru-cache/-/lru-cache-7.18.3.tgz#f793896e0fd0e954a59dfdd82f0773808df6aa89"
   integrity sha512-jumlc0BIUrS3qJGgIkWZsyfAM7NCWiBcCDhnd+3NNM5KbBmLTgHVfWBcg6W+rLUsIpzpERPsvwUP7CckAQSOoA==
-
-lru-cache@^7.4.4, lru-cache@^7.5.1, lru-cache@^7.7.1:
-  version "7.14.0"
-  resolved "https://registry.yarnpkg.com/lru-cache/-/lru-cache-7.14.0.tgz#21be64954a4680e303a09e9468f880b98a0b3c7f"
-  integrity sha512-EIRtP1GrSJny0dqb50QXRUNBxHJhcpxHC++M5tD7RYbvLLn5KVWKsbyswSSqDuU15UFi3bgTQIY8nhDMeF6aDQ==
 
 make-dir@^3.0.0:
   version "3.1.0"
@@ -7234,15 +7229,10 @@ tr46@~0.0.3:
   resolved "https://registry.yarnpkg.com/tr46/-/tr46-0.0.3.tgz#8184fd347dac9cdc185992f3a6622e14b9d9ab6a"
   integrity sha512-N3WMsuqV66lT30CrXNbEjx4GEwlow3v6rr4mCcv6prnfwhS01rkgyFdjPNBYd9br7LpXV1+Emh01fHnq2Gdgrw==
 
-traverse@^0.6.6:
+traverse@^0.6.6, traverse@~0.6.6:
   version "0.6.7"
   resolved "https://registry.yarnpkg.com/traverse/-/traverse-0.6.7.tgz#46961cd2d57dd8706c36664acde06a248f1173fe"
   integrity sha512-/y956gpUo9ZNCb99YjxG7OaslxZWHfCHAUUfshwqOXmxUIvqLjVO581BT+gM59+QV9tFe6/CGG53tsA1Y7RSdg==
-
-traverse@~0.6.6:
-  version "0.6.6"
-  resolved "https://registry.yarnpkg.com/traverse/-/traverse-0.6.6.tgz#cbdf560fd7b9af632502fed40f918c157ea97137"
-  integrity sha512-kdf4JKs8lbARxWdp7RKdNzoJBhGUcIalSYibuGyHJbmk40pOysQ0+QPvlkCOICOivDWU2IJo2rkrxyTK2AH4fw==
 
 treeverse@^3.0.0:
   version "3.0.0"
