@@ -1,3 +1,5 @@
+# [v1.6.7](https://github.com/size-up/freegamescatcher-core/compare/v1.6.6...v1.6.7) (2023-04-10)
+
 # [v1.6.6](https://github.com/size-up/freegamescatcher-core/compare/v1.6.5...v1.6.6) (2023-04-03)
 
 ## 🎨 Improve structure / format of the code
