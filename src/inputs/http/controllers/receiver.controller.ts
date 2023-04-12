@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response, Router } from "express";
-import ReceiverService from "../../services/receiver.service";
-import { ReceiverInterface } from "../../interfaces/receiver.interface";
+import ReceiverService from "../../../services/receiver.service";
+import { ReceiverInterface } from "../../../interfaces/receiver.interface";
 
 export default class ReceiverController {
     private router = Router();

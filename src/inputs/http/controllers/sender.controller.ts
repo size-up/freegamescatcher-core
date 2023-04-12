@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response, Router } from "express";
-import { logger } from "../../config/logger.config";
-import SenderFacade from "../../facade/sender.facade";
+import { logger } from "../../../config/logger.config";
+import SenderFacade from "../../../facade/sender.facade";
 
 export default class SenderController {
     private router = Router();
