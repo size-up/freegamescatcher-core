@@ -15,7 +15,7 @@ import express, { Request, Response } from "express";
 import { Express } from "express-serve-static-core";
 import { readFileSync } from "fs";
 
-import ApplicationController from "./inputs/controllers/application.controller";
+import SenderController from "./inputs/controllers/sender.controller";
 import ReceiverController from "./inputs/controllers/receiver.controller";
 import DefaultMiddleware from "./middlewares/default.middleware";
 import ErrorMiddleware from "./middlewares/error.middleware";
@@ -109,7 +109,7 @@ class Application {
             response.status(200).json(application);
         });
 
-        this.http.use("/", new ApplicationController().get());
+        this.http.use("/", new SenderController().get());
         this.http.use("/receivers", new ReceiverController().get());
     }
 
