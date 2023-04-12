@@ -7,11 +7,7 @@ import ForbiddenError from "../errors/forbidden.error";
 import UnauthorizedError from "../errors/unauthorized.error";
 
 export default class ErrorMiddleware {
-    constructor(http: Express) {
-        this.errorMiddleware(http);
-    }
-
-    private errorMiddleware(http: Express) {
+    public static init(http: Express): Express {
         /**
          * Catch all not found route.
          * See this https://stackoverflow.com/questions/11500204/how-can-i-get-express-js-to-404-only-on-missing-routes.
@@ -74,5 +70,7 @@ export default class ErrorMiddleware {
 
             next(); // call next middleware
         });
+
+        return http;
     }
 }

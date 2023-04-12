@@ -11,36 +11,21 @@ apm.start({
     logLevel: "off",
 });
 
-import express, { Request, Response } from "express";
-import { Express } from "express-serve-static-core";
 import { readFileSync } from "fs";
-
-import SenderController from "./inputs/http/controllers/sender.controller";
-import ReceiverController from "./inputs/http/controllers/receiver.controller";
-import DefaultMiddleware from "./inputs/http/middlewares/default.middleware";
-import ErrorMiddleware from "./inputs/http/middlewares/error.middleware";
-
-import packageJson from "../package.json";
 import { version } from "./config/application.config";
-
 import { logger } from "./config/logger.config";
 
-class Application {
-    private http: Express = express();
-    private port = 8080;
+import Router from "./inputs/http/router";
 
-    public start() {
+class Application {
+    /**
+     * Check, print welcome message and start the application with all inputs.
+     * @returns void
+     */
+    public static start(): void {
         this.check(); // check if all needed environment variables are set
         this.welcome(); // print welcome message
-        this.default(); // define default middleware
-        this.routes(); // define all routes
-        this.error(); // define error middleware
-        this.application(this.port); // start the application
-    }
-
-    private welcome(): void {
-        logger.info(readFileSync("src/assets/banner.txt", { encoding: "utf8" }));
-        logger.info(`Application is starting with version: [${version()}]`);
+        this.inputs(); // define all inputs
     }
 
     /**
@@ -48,7 +33,7 @@ class Application {
      * @throws Error if one of the environment variable is missing.
      * @returns void
      */
-    private check(): void {
+    private static check(): void {
         logger.debug("Checking environment variables...");
 
         const envs = [
@@ -85,55 +70,20 @@ class Application {
         }
     }
 
-    /**
-     * Define default middlewares.
-     */
-    private default(): void {
-        new DefaultMiddleware(this.http);
+    private static welcome(): void {
+        logger.info(readFileSync("src/assets/banner.txt", { encoding: "utf8" }));
+        logger.info(`Application is starting with version: [${version()}]`);
     }
 
-    /**
-     * Define all available routes.
-     */
-    private routes(): void {
-        /**
-         * Default application message response.
-         */
-        this.http.get("/", (request: Request, response: Response) => {
-            const application = {
-                name: packageJson.displayName,
-                version: version(),
-                description: packageJson.description,
-                repository: packageJson.repository.url,
-            };
-            response.status(200).json(application);
-        });
-
-        this.http.use("/", new SenderController().get());
-        this.http.use("/receivers", new ReceiverController().get());
-    }
-
-    /**
-     * Define error middlewares.
-     */
-    private error(): void {
-        new ErrorMiddleware(this.http);
-    }
-
-    /**
-     * Init input express HTTP controller.
-     */
-    private application(port: number): void {
-        this.http.listen(port, () => {
-            logger.info(`Application is listening on port [${port}]`);
-        });
+    private static inputs(): void {
+        Router.listen(8080); // start and listen to the HTTP input
     }
 }
 
 /**
  * Start the application.
  */
-new Application().start();
+Application.start();
 
 const hrend = process.hrtime(hrstart); // Used to calculate the time it takes to run the application
 logger.info(`Application started in [${hrend[0]}s ${hrend[1] / 1000000}ms]`);
