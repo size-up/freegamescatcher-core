@@ -1,12 +1,12 @@
+import cors from "cors";
 import { json, NextFunction, Request, Response, urlencoded } from "express";
 import { Express } from "express-serve-static-core";
-import cors from "cors";
 
-import { api } from "../config/security.config";
-import { logger } from "../config/logger.config";
+import { logger } from "../../../config/logger.config";
+import { api } from "../../../config/security.config";
 
-import UnauthorizedError from "../inputs/errors/unauthorized.error";
-import ForbiddenError from "../inputs/errors/forbidden.error";
+import ForbiddenError from "../errors/forbidden.error";
+import UnauthorizedError from "../errors/unauthorized.error";
 
 export default class DefaultMiddleware {
     constructor(http: Express) {

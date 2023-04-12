@@ -15,10 +15,10 @@ import express, { Request, Response } from "express";
 import { Express } from "express-serve-static-core";
 import { readFileSync } from "fs";
 
-import SenderController from "./inputs/controllers/sender.controller";
-import ReceiverController from "./inputs/controllers/receiver.controller";
-import DefaultMiddleware from "./middlewares/default.middleware";
-import ErrorMiddleware from "./middlewares/error.middleware";
+import SenderController from "./inputs/http/controllers/sender.controller";
+import ReceiverController from "./inputs/http/controllers/receiver.controller";
+import DefaultMiddleware from "./inputs/http/middlewares/default.middleware";
+import ErrorMiddleware from "./inputs/http/middlewares/error.middleware";
 
 import packageJson from "../package.json";
 import { version } from "./config/application.config";

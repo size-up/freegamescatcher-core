@@ -1,9 +1,10 @@
 import { NextFunction, Request, Response } from "express";
 import { Express } from "express-serve-static-core";
 
-import { logger } from "../config/logger.config";
-import ForbiddenError from "../inputs/errors/forbidden.error";
-import UnauthorizedError from "../inputs/errors/unauthorized.error";
+import { logger } from "../../../config/logger.config";
+
+import ForbiddenError from "../errors/forbidden.error";
+import UnauthorizedError from "../errors/unauthorized.error";
 
 export default class ErrorMiddleware {
     constructor(http: Express) {
