@@ -1,3 +1,8 @@
+# [v1.7.0](https://github.com/size-up/freegamescatcher-core/compare/v1.6.8...v1.7.0) (2023-04-12)
+
+## ✨ Introduce new features
+- [`20f12aa`](https://github.com/size-up/freegamescatcher-core/commit/20f12aa)  Get all receivers route
+
 # [v1.6.8](https://github.com/size-up/freegamescatcher-core/compare/v1.6.7...v1.6.8) (2023-04-10)
 
 # [v1.6.7](https://github.com/size-up/freegamescatcher-core/compare/v1.6.6...v1.6.7) (2023-04-10)
