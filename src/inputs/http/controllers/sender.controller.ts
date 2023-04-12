@@ -13,7 +13,7 @@ export default class SenderController {
         /**
          * Execute the full application process.
          */
-        this.router.get("/send", async (request: Request, response: Response, next: NextFunction) => {
+        this.router.get("/", async (request: Request, response: Response, next: NextFunction) => {
             try {
                 const sender = new SenderFacade();
                 const isOk = await sender.send();

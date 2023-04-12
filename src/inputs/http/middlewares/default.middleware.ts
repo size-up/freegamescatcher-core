@@ -9,11 +9,7 @@ import ForbiddenError from "../errors/forbidden.error";
 import UnauthorizedError from "../errors/unauthorized.error";
 
 export default class DefaultMiddleware {
-    constructor(http: Express) {
-        this.defaultMiddleware(http);
-    }
-
-    private defaultMiddleware(http: Express): void {
+    public static init(http: Express): Express {
         /**
          * Use CORS and Body config for `post` requests
          */
@@ -49,8 +45,8 @@ export default class DefaultMiddleware {
              * Authorize a GET request to /receivers used by email link.
              * It's a GET to avoid blocked popup from the email.
              */
-            if (request.method === "GET" && request.originalUrl.startsWith("/receivers/delete")) {
-                logger.debug("GET request authorized to /receivers/delete");
+            if (request.method === "GET" && request.originalUrl.startsWith("/v1/receivers/delete")) {
+                logger.debug("GET request authorized to /v1/receivers/delete");
                 next();
                 return; // break the execution and do not check API key
             }
@@ -73,5 +69,7 @@ export default class DefaultMiddleware {
 
             next(); // call next middleware
         });
+
+        return http;
     }
 }
