@@ -1,8 +1,8 @@
 import { NextFunction, Request, Response, Router } from "express";
 import { logger } from "../../config/logger.config";
-import CoreFacade from "../../facade/core.facade";
+import SenderFacade from "../../facade/sender.facade";
 
-export default class ApplicationController {
+export default class SenderController {
     private router = Router();
 
     constructor() {
@@ -13,10 +13,10 @@ export default class ApplicationController {
         /**
          * Execute the full application process.
          */
-        this.router.get("/execute", async (request: Request, response: Response, next: NextFunction) => {
+        this.router.get("/send", async (request: Request, response: Response, next: NextFunction) => {
             try {
-                const core = new CoreFacade();
-                const isOk = await core.execute();
+                const sender = new SenderFacade();
+                const isOk = await sender.send();
 
                 if (isOk) {
                     response.status(200).json({ status: "Core application process well executed" });

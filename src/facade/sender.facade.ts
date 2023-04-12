@@ -5,10 +5,13 @@ import { EmailService } from "../services/email.service";
 import { GameInterface } from "../interfaces/game.interface";
 
 /**
- * This facade class is responsible for get games data
- * from the API and send it to the receivers.
+ * This facade class is responsible for:
+ * - Retrieving the games list from the API.
+ * - Updating the cache.
+ * - Retrieving the receivers list.
+ * - Send the games list to the receivers.
  */
-export default class CoreFacade {
+export default class SenderFacade {
     private client: GameService;
     private data: DataService;
     private email: EmailService;
@@ -24,7 +27,7 @@ export default class CoreFacade {
      * It will get the games data from the API, filter it and send it to the receivers.
      * @returns If the process was successful or not.
      */
-    public async execute(): Promise<Boolean> {
+    public async send(): Promise<Boolean> {
         let executed = false;
 
         logger.info("Starting the core application process...");
