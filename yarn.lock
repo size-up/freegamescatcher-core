@@ -6553,10 +6553,10 @@ safe-stable-stringify@^2.3.1:
   resolved "https://registry.yarnpkg.com/safer-buffer/-/safer-buffer-2.1.2.tgz#44fa161b0187b9549dd84bb91802f9bd8385cd6a"
   integrity sha512-YZo3K82SD7Riyi0E1EQPojLz7kpepnSQI9IyPbHHg1XXXevb5dJI7tpyN2ADxGcQbHG7vcyRHk0cbwqcQriUtg==
 
-semantic-release-gitmoji@^1.6.3:
-  version "1.6.3"
-  resolved "https://registry.yarnpkg.com/semantic-release-gitmoji/-/semantic-release-gitmoji-1.6.3.tgz#bd7e4fc611f29dff34be8c0dd5b72abf8353de5a"
-  integrity sha512-EHEu0dtOytTIbPoYlKIDwnLD6CcgCT0fAcV350Mc8VZ943gPsSCHuyvoy0Wm7rtJhZ+MoJ47MIw3qLqp1G8HXQ==
+semantic-release-gitmoji@^1.6.4:
+  version "1.6.4"
+  resolved "https://registry.yarnpkg.com/semantic-release-gitmoji/-/semantic-release-gitmoji-1.6.4.tgz#4d9ac7293c4d67269468a426999912723b82b422"
+  integrity sha512-mPkeKGKXlqKhWrlzi3mgRogTKnzOJAakrCdfBrgpG7z7WiP8sZ6pZP5Su+IJbj1RWbNBier/isVzvwE5RhozbQ==
   dependencies:
     dateformat "^3.0.3"
     debug "^4.3.2"
