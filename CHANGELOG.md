@@ -1,3 +1,11 @@
+# [v1.8.0](https://github.com/size-up/freegamescatcher-core/compare/v1.7.2...v1.8.0) (2023-05-07)
+
+## ✨ Introduce new features
+- [`b8c8c31`](https://github.com/size-up/freegamescatcher-core/commit/b8c8c31)  Discord webhook message sender 
+
+## 📝 Add or update documentation
+- [`543a2cf`](https://github.com/size-up/freegamescatcher-core/commit/543a2cf)  Update &#x60;README.md&#x60;
+
 # [v1.7.2](https://github.com/size-up/freegamescatcher-core/compare/v1.7.1...v1.7.2) (2023-04-29)
 
 # [v1.7.1](https://github.com/size-up/freegamescatcher-core/compare/v1.7.0...v1.7.1) (2023-04-20)
