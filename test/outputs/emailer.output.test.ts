@@ -2,8 +2,9 @@ import { EmailerOutput } from "../../src/outputs/emailer/emailer.output";
 
 import nodemailer from "nodemailer";
 
+jest.mock("nodemailer");
+
 describe("EmailerOutput", () => {
-    jest.mock("nodemailer");
     nodemailer.createTransport = jest.fn().mockReturnValue({
         sendMail: jest.fn().mockImplementation((mailOptions, callback) => {
             callback(null, "any");
