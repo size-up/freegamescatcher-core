@@ -10,6 +10,10 @@ on:
     branches: ["main", "beta", "*.*.*"]
 
   workflow_dispatch: # allow manual trigger
+    inputs:
+      version:
+        description: "Specific version to release in production"
+        required: false
 
   # Used by the GitHub merge queue feature.
   # Documentation: https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/configuring-pull-request-merges/managing-a-merge-queue
@@ -250,7 +254,7 @@ jobs:
         run: kubectl get deployments -n ${{ env.NAMESPACE_NAME }} ${{ env.IMAGE_NAME }}-prep -o=wide
 
   deploy-prod:
-    name: 🚀 Deploy prod. [v${{ needs.release.outputs.version }}]
+    name: 🚀 Deploy prod.
 
     runs-on: ubuntu-latest
 
@@ -258,7 +262,8 @@ jobs:
 
     # deploy to production job is only available if there is a new published version
     # as "1.0.0" and or "1.0.0-beta.1"
-    if: ${{ needs.release.outputs.version }}
+    # or if the user manually triggers the workflow with a specific version
+    if: ${{ needs.release.outputs.version }} || ${{ github.event.inputs.version }}
 
     environment: production # refer to https://github.com/size-up/freegamescatcher-core/settings/environments
 
@@ -269,4 +274,9 @@ jobs:
           base64-kube-config: ${{ secrets.OCI_KUBE_CONFIG }}
 
       - name: 🚀 Deploy to production [v${{ needs.release.outputs.version }}]
+        if: ${{ needs.release.outputs.version }} # deploy only if there is a new published version
         run: kubectl set image -n ${{ env.NAMESPACE_NAME }} deployment/${{ env.IMAGE_NAME }}-prod ${{ env.IMAGE_NAME }}-prod=${{ secrets.DOCKERHUB_USERNAME }}/${{ env.IMAGE_NAME }}:${{ needs.release.outputs.version }}
+
+      - name: 🚀 Deploy to production [v${{ github.event.inputs.version }}]
+        if: ${{ github.event.inputs.version }} # deploy only if there is a input version using workflow_dispatch
+        run: kubectl set image -n ${{ env.NAMESPACE_NAME }} deployment/${{ env.IMAGE_NAME }}-prod ${{ env.IMAGE_NAME }}-prod=${{ secrets.DOCKERHUB_USERNAME }}/${{ env.IMAGE_NAME }}:${{ github.event.inputs.version }} # https://docs.github.com/en/actions/reference/events-that-trigger-workflows#workflow_dispatch
