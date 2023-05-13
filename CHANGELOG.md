@@ -1,3 +1,12 @@
+# [v1.8.1](https://github.com/size-up/freegamescatcher-core/compare/v1.8.0...v1.8.1) (2023-05-13)
+
+## ⚡️ Improve performance
+- [`92e7609`](https://github.com/size-up/freegamescatcher-core/commit/92e7609) ️ Get all Epic Games games route 
+
+## 🐛 Bug fixes
+- [`6930bdd`](https://github.com/size-up/freegamescatcher-core/commit/6930bdd)  When &quot;Mystery Game&quot; pick the second key image 
+- [`63c4001`](https://github.com/size-up/freegamescatcher-core/commit/63c4001)  Handle the &quot;Mystery Game&quot; from Epic Games use case
+
 # [v1.8.0](https://github.com/size-up/freegamescatcher-core/compare/v1.7.2...v1.8.0) (2023-05-07)
 
 ## ✨ Introduce new features
