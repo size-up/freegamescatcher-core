@@ -9,6 +9,7 @@ import ReceiverController from "./controllers/receiver.controller";
 import SenderController from "./controllers/sender.controller";
 import DefaultMiddleware from "./middlewares/default.middleware";
 import ErrorMiddleware from "./middlewares/error.middleware";
+import GameController from "./controllers/game.controller";
 
 export default class Router {
     public static listen(port: number): void {
@@ -56,6 +57,7 @@ class RouterV1 {
         const router: ExpressRouter = ExpressRouter();
         router.use("/send", new SenderController().get());
         router.use("/receivers", new ReceiverController().get());
+        router.use("/game", new GameController().get());
         return router;
     }
 }
