@@ -8,10 +8,11 @@ export class EpicGamesMapper {
             const newElementsToSave: GameInterface[] = data.map((game) => {
                 const newElement: GameInterface = {
                     title: game.title,
-                    description: game.description,
-                    urlSlug: `https://store.epicgames.com/fr/p/${
-                        game.productSlug || game.catalogNs.mappings[0]?.pageSlug
-                    }`,
+                    description:
+                        game.description === "Mystery Game"
+                            ? "Jeu mystère ! Celui-ci ne sera révélé que le jour de sa sortie. Rendez-vous le jour J pour le découvrir !"
+                            : game.description,
+                    urlSlug: constructUrl(game),
                     promotion: {
                         startDate: game.free
                             ? game.promotions.promotionalOffers[0].promotionalOffers[0].startDate.toString()
@@ -32,5 +33,20 @@ export class EpicGamesMapper {
             logger.error(message, error);
             throw new Error(message);
         }
+    }
+}
+
+function constructUrl(game: Element): string {
+    const productGamePage = "https://store.epicgames.com/fr/p";
+    const freeGamePage = "https://store.epicgames.com/fr/free-games";
+
+    // sometimes, productSlug is an empty array, so we need to check it,
+    // in the case of a "Mystery Game", for example
+    if (game.productSlug && game.productSlug != "[]") {
+        return `${productGamePage}/${game.productSlug}`;
+    } else if (game.catalogNs.mappings[0]?.pageSlug) {
+        return `${productGamePage}/${game.catalogNs.mappings[0]?.pageSlug}`;
+    } else {
+        return freeGamePage;
     }
 }
