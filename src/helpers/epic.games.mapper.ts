@@ -20,7 +20,9 @@ export class EpicGamesMapper {
                             ? game.promotions.promotionalOffers[0].promotionalOffers[0].endDate.toString()
                             : game.promotions?.upcomingPromotionalOffers[0]?.promotionalOffers[0].endDate.toString(),
                     },
-                    imageUrl: game.keyImages[1].url,
+                    // we're using the second keyImage because the first one is too small, we generally prefer the second one
+                    // when it's a "Mystery Game", the second keyImage is empty, so we take the first one
+                    imageUrl: game.keyImages[1]?.url || game.keyImages[0]?.url,
                 };
                 return newElement;
             });
