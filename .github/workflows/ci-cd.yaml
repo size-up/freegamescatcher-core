@@ -208,15 +208,30 @@ jobs:
     outputs:
       branch_name: ${{ steps.branch_name.outputs.value }}
 
-  deploy-prep:
-    name: 🚀 Deploy prep. [${{ needs.push.outputs.branch_name }}]
+  deploy:
+    name: 🚀 Deploy
 
     runs-on: ubuntu-latest
 
     needs: [release, push]
 
-    environment: pre-production # refer to https://github.com/size-up/freegamescatcher-core/settings/environments
-    concurrency: pre-production # refer to https://docs.github.com/en/actions/using-jobs/using-concurrency
+    strategy:
+      fail-fast: false
+      matrix:
+        environment: [pre-production, production]
+        deployment-suffix: [prep, prod]
+        ready-for-production: ["${{ github.event_name != 'pull_request' && needs.release.outputs.version }}"]
+        exclude:
+          - environment: production
+            ready-for-production: false
+
+          - environment: pre-production
+            deployment-suffix: prod
+          - environment: production
+            deployment-suffix: prep
+
+    environment: ${{ matrix.environment }} # refer to https://github.com/size-up/freegamescatcher-core/settings/environments
+    concurrency: ${{ matrix.environment }} # refer to https://docs.github.com/en/actions/using-jobs/using-concurrency
 
     steps:
       - name: ⚙️ Set up kubectl
@@ -224,49 +239,32 @@ jobs:
         with:
           base64-kube-config: ${{ secrets.OCI_KUBE_CONFIG }}
 
-      - name: 🔊 Display deployment image before update
-        run: kubectl get deployments -n ${{ env.NAMESPACE_NAME }} ${{ env.IMAGE_NAME }}-prep -o=wide
+      - name: 🔊 Display deployments before update
+        run: kubectl get deployments -n ${{ env.NAMESPACE_NAME }} ${{ env.IMAGE_NAME }}-${{ matrix.deployment-suffix }} -o=wide
 
       - name: 🚀 Set image [${{ needs.push.outputs.branch_name }}] to pre-production
+        if: matrix.environment == 'pre-production'
         id: image_updated
         run: |
           echo value=$(kubectl set image -n ${{ env.NAMESPACE_NAME }} deployment/${{ env.IMAGE_NAME }}-prep ${{ env.IMAGE_NAME }}-prep=${{ secrets.DOCKERHUB_USERNAME }}/${{ env.IMAGE_NAME }}:${{ needs.push.outputs.branch_name }}) >> $GITHUB_OUTPUT
 
       - name: 🔊 Display "set_image" step output
+        if: matrix.environment == 'pre-production'
         run: echo ${{ steps.image_updated.outputs.value }}
 
       # Rollout the deployment only if the image hasn't been updated, to avoid unnecessary restarts.
       - name: 🚀 Rollout pre-production deployment
         id: rollout
-        if: steps.image_updated.outputs.value == '' # rollout only if the image hasn't been updated
+        if: matrix.environment == 'pre-production' && steps.image_updated.outputs.value == '' # rollout only if the image hasn't been updated
         run: echo value=$(kubectl rollout -n ${{ env.NAMESPACE_NAME }} restart deployment ${{ env.IMAGE_NAME }}-prep) >> $GITHUB_OUTPUT
 
       - name: 🔊 Display "rollout" step output
-        if: steps.rollout.outputs.value
+        if: matrix.environment == 'pre-production' && steps.rollout.outputs.value
         run: echo ${{ steps.rollout.outputs.value }}
 
-      - name: 🔊 Display deployment image after update
-        run: kubectl get deployments -n ${{ env.NAMESPACE_NAME }} ${{ env.IMAGE_NAME }}-prep -o=wide
-
-  deploy-prod:
-    name: 🚀 Deploy prod. [v${{ needs.release.outputs.version }}]
-
-    runs-on: ubuntu-latest
-
-    needs: [release, push]
-
-    # Deploy to production job is only available if the event is not a pull request, and
-    # if there is a new published versionas "1.0.0" and or "1.0.0-beta.1".
-    if: github.event_name != 'pull_request' && needs.release.outputs.version
-
-    environment: production # refer to https://github.com/size-up/freegamescatcher-core/settings/environments
-    concurrency: production # refer to https://docs.github.com/en/actions/using-jobs/using-concurrency
-
-    steps:
-      - name: ⚙️ Set up kubectl
-        uses: tale/kubectl-action@v1
-        with:
-          base64-kube-config: ${{ secrets.OCI_KUBE_CONFIG }}
-
       - name: 🚀 Deploy to production [v${{ needs.release.outputs.version }}]
+        if: matrix.environment == 'production'
         run: kubectl set image -n ${{ env.NAMESPACE_NAME }} deployment/${{ env.IMAGE_NAME }}-prod ${{ env.IMAGE_NAME }}-prod=${{ secrets.DOCKERHUB_USERNAME }}/${{ env.IMAGE_NAME }}:${{ needs.release.outputs.version }}
+
+      - name: 🔊 Display deployments after update
+        run: kubectl get deployments -n ${{ env.NAMESPACE_NAME }} ${{ env.IMAGE_NAME }}-${{ matrix.deployment-suffix }} -o=wide
