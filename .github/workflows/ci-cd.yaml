@@ -255,9 +255,9 @@ jobs:
 
     needs: [release, push]
 
-    # Deploy to production job is only available if there is a new published version
-    # as "1.0.0" and or "1.0.0-beta.1"
-    if: needs.release.outputs.version
+    # Deploy to production job is only available if the event is not a pull request, and
+    # if there is a new published versionas "1.0.0" and or "1.0.0-beta.1".
+    if: github.event_name != 'pull_request' && needs.release.outputs.version
 
     environment: production # refer to https://github.com/size-up/freegamescatcher-core/settings/environments
 
