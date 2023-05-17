@@ -97,7 +97,7 @@ jobs:
 
     needs: [build, test-unit]
 
-    if: ${{ github.event_name != 'merge_group' }} # skip this job if the event is a merge_group
+    if: github.event_name != 'merge_group' # skip this job if the event is a merge_group
 
     steps:
       - name: 📥 Checkout repository
@@ -135,7 +135,7 @@ jobs:
 
     needs: release
 
-    if: ${{ github.actor != 'dependabot[bot]' }} # skip this job if the actor is dependabot
+    if: github.actor != 'dependabot[bot]' # skip this job if the actor is dependabot
 
     steps:
       - name: 📥 Checkout repository
@@ -239,8 +239,7 @@ jobs:
       - name: 🚀 Rollout pre-production deployment
         id: rollout
         if: steps.image_updated.outputs.value == '' # rollout only if the image hasn't been updated
-        run: |
-          echo value=$(kubectl rollout -n ${{ env.NAMESPACE_NAME }} restart deployment ${{ env.IMAGE_NAME }}-prep) >> $GITHUB_OUTPUT
+        run: echo value=$(kubectl rollout -n ${{ env.NAMESPACE_NAME }} restart deployment ${{ env.IMAGE_NAME }}-prep) >> $GITHUB_OUTPUT
 
       - name: 🔊 Display "rollout" step output
         if: steps.rollout.outputs.value
@@ -256,9 +255,9 @@ jobs:
 
     needs: [release, push]
 
-    # deploy to production job is only available if there is a new published version
+    # Deploy to production job is only available if there is a new published version
     # as "1.0.0" and or "1.0.0-beta.1"
-    if: ${{ needs.release.outputs.version }}
+    if: needs.release.outputs.version
 
     environment: production # refer to https://github.com/size-up/freegamescatcher-core/settings/environments
 
