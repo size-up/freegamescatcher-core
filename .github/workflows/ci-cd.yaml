@@ -216,6 +216,7 @@ jobs:
     needs: [release, push]
 
     environment: pre-production # refer to https://github.com/size-up/freegamescatcher-core/settings/environments
+    concurrency: pre-production # refer to https://docs.github.com/en/actions/using-jobs/using-concurrency
 
     steps:
       - name: ⚙️ Set up kubectl
@@ -259,6 +260,7 @@ jobs:
     if: github.event_name != 'pull_request' && needs.release.outputs.version
 
     environment: production # refer to https://github.com/size-up/freegamescatcher-core/settings/environments
+    concurrency: production # refer to https://docs.github.com/en/actions/using-jobs/using-concurrency
 
     steps:
       - name: ⚙️ Set up kubectl
