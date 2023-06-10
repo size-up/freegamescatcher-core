@@ -1,4 +1,4 @@
-interface KeyImage {
+export interface KeyImage {
     type: string;
     url: string;
 }
