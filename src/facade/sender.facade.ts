@@ -42,7 +42,7 @@ export default class SenderFacade {
         // Retrieve game list from games API.
         const games: GameInterface[] = await this.client.getEpicGamesData();
 
-        if (games) {
+        if (games && games.length > 0) {
             // Update games list in the cache asynchronously.
             this.data.updateCache(games);
 
@@ -94,6 +94,7 @@ export default class SenderFacade {
             executed = false;
             logger.error("No receivers found, core application process is aborted");
         }
+
         return executed;
     }
 
