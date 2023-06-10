@@ -20,10 +20,7 @@ export class WebhookService {
         games.forEach((game) => {
             // check if the promotion date is inferior to today
             // and if the promotion date is superior to today
-            if (
-                new Date(game.promotion.startDate).getTime() < today.getTime() &&
-                new Date(game.promotion.endDate).getTime() > today.getTime()
-            ) {
+            if (new Date(game.promotion.startDate) < today && new Date(game.promotion.endDate) > today) {
                 logger.debug(
                     `[${game.title}] with promotion start date (${new Date(game.promotion.startDate).toLocaleDateString(
                         "fr-FR"
@@ -71,7 +68,7 @@ export class WebhookService {
             }
         });
 
-        if (embeds != undefined && embeds.length > 0) {
+        if (embeds !== undefined && embeds.length > 0 && channels !== undefined && channels.length > 0) {
             try {
                 return await this.webhook.send(
                     channels,
@@ -83,7 +80,12 @@ export class WebhookService {
                 return false;
             }
         } else {
-            logger.info("No free games available for now, webhook not sent");
+            const message = "No free games available for now, webhook not sent";
+            if (embeds !== undefined && embeds.length === 0)
+                logger.info(`${message} because there is no embeds to send`);
+            if (channels !== undefined && channels.length === 0)
+                logger.info(`${message} because there is no channels to send`);
+
             return false;
         }
     }

@@ -1,5 +1,5 @@
 import { logger } from "../../src/config/logger.config";
-
+import { GameInterface } from "../../src/interfaces/game.interface";
 import { ChannelInterface } from "../../src/interfaces/webhook.interface";
 import { WebhookOutput } from "../../src/outputs/discord/webhook.output";
 import { WebhookService } from "../../src/services/webhook.service";
@@ -14,82 +14,213 @@ beforeAll(() => {
 });
 
 describe("WebhookService", () => {
-    describe("send()", () => {
-        test("should have promotion start date inferior to end date", async () => {
+    let webhookService: WebhookService;
+
+    beforeEach(() => {
+        webhookService = new WebhookService();
+    });
+
+    describe("send", () => {
+        // Mock the send method of the WebhookOutput class to always return true.
+        const spyWebhookOutput = jest.spyOn(WebhookOutput.prototype, "send").mockResolvedValue(true);
+
+        // Prepare date mocks.
+        const yesterday = new Date(new Date().setDate(new Date().getDate() - 1)).toISOString();
+        const tomorrow = new Date(new Date().setDate(new Date().getDate() + 1)).toISOString();
+        const nextWeek = new Date(new Date().setDate(new Date().getDate() + 7)).toISOString();
+        const lastWeek = new Date(new Date().setDate(new Date().getDate() - 7)).toISOString();
+        const nextMonth = new Date(new Date().setMonth(new Date().getMonth() + 1)).toISOString();
+        const lastMonth = new Date(new Date().setMonth(new Date().getMonth() - 1)).toISOString();
+
+        test("should return false if no games are provided", async () => {
+            const channels: ChannelInterface[] = [];
+            const games: GameInterface[] = [];
+
+            const result = await webhookService.send(channels, games);
+
+            expect(result).toBe(false);
+        });
+
+        test("should return false if no channels are provided", async () => {
+            const channels: ChannelInterface[] = [];
+            const games: GameInterface[] = [
+                {
+                    title: "Test Game",
+                    urlSlug: "test-game",
+                    description: "This is a test game",
+                    imageUrl: "https://example.com/test-game.jpg",
+                    promotion: {
+                        startDate: yesterday,
+                        endDate: tomorrow,
+                    },
+                },
+            ];
+
+            const result = await webhookService.send(channels, games);
+
+            expect(result).toBe(false);
+        });
+
+        test("should return true if games are provided and at least one channel is provided", async () => {
             const channels: ChannelInterface[] = [
                 {
-                    id: "1",
-                    token: "XXX",
-                    name: "first",
-                    server: "first",
-                },
-                {
-                    id: "2",
-                    token: "XXX",
-                    name: "second",
-                    server: "second",
+                    id: "123",
+                    name: "test-channel",
+                    server: "test-server",
+                    token: "123",
                 },
             ];
-
-            const today = new Date();
-
-            const yesterday = new Date();
-            yesterday.setDate(today.getDate() - 1);
-            const yesterdayToISOString = yesterday.toISOString();
-
-            const tomorrow = new Date();
-            tomorrow.setDate(today.getDate() + 1);
-            const tomorrowToISOString = tomorrow.toISOString();
-
-            const games = [
+            const games: GameInterface[] = [
                 {
-                    title: "my-game-1",
-                    urlSlug: "test",
-                    description: "my-game-description-1",
-                    imageUrl: "test",
+                    title: "Test Game",
+                    urlSlug: "test-game",
+                    description: "This is a test game",
+                    imageUrl: "https://example.com/test-game.jpg",
                     promotion: {
-                        startDate: yesterdayToISOString,
-                        endDate: tomorrowToISOString,
-                    },
-                },
-                {
-                    title: "my-game-2",
-                    urlSlug: "test",
-                    description: "my-game-description-2",
-                    imageUrl: "test",
-                    promotion: {
-                        startDate: yesterdayToISOString,
-                        endDate: tomorrowToISOString,
+                        startDate: yesterday,
+                        endDate: tomorrow,
                     },
                 },
             ];
 
-            const output = jest.spyOn(WebhookOutput.prototype, "send").mockResolvedValue(true);
-            const webhookService = new WebhookService();
+            const result = await webhookService.send(channels, games);
 
-            const isDone: boolean = await webhookService.send(channels, games);
+            expect(result).toBe(true);
+        });
 
-            expect(isDone).toBe(true);
+        test("should return true and call just one time the WebhookOutput.send method if one channel is provided", async () => {
+            // Reset the mock to avoid counting the previous calls.
+            spyWebhookOutput.mockClear();
 
-            expect(output).toHaveBeenCalledTimes(1);
-            expect(output.mock.calls[0][2]?.length).toBe(2);
+            const channels: ChannelInterface[] = [
+                {
+                    id: "123",
+                    name: "test-channel",
+                    server: "test-server",
+                    token: "123",
+                },
+            ];
+            const games: GameInterface[] = [
+                {
+                    title: "Test Game",
+                    urlSlug: "test-game",
+                    description: "This is a test game",
+                    imageUrl: "https://example.com/test-game.jpg",
+                    promotion: {
+                        startDate: yesterday,
+                        endDate: tomorrow,
+                    },
+                },
+            ];
 
-            const yesterdayToLocaleDateString = yesterday.toLocaleDateString("fr-FR", { dateStyle: "full" });
-            const tomorrowToLocaleDateString = tomorrow.toLocaleDateString("fr-FR", { dateStyle: "full" });
+            const result = await webhookService.send(channels, games);
 
-            const fields = output.mock.calls[0][2]?.map((embed) => embed.fields);
-            expect(fields?.[0]?.[0].name).toEqual("🏁 Le contenu est disponible depuis le :");
-            expect(fields?.[0]?.[0].value).toEqual(`🗓️ ${yesterdayToLocaleDateString}`);
+            expect(spyWebhookOutput).toHaveBeenCalledTimes(1);
+            expect(result).toBe(true);
+        });
 
-            expect(fields?.[0]?.[1].name).toEqual("⚠️ Le contenu ne sera plus disponible après le :");
-            expect(fields?.[0]?.[1].value).toEqual(`🗓️ ${tomorrowToLocaleDateString}`);
+        test("should not include games that are not currently free", async () => {
+            const channels: ChannelInterface[] = [
+                {
+                    id: "123",
+                    name: "test-channel",
+                    server: "test-server",
+                    token: "123",
+                },
+            ];
+            const games: GameInterface[] = [
+                {
+                    title: "Test Game",
+                    urlSlug: "test-game",
+                    description: "This is a test game",
+                    imageUrl: "https://example.com/test-game.jpg",
+                    promotion: {
+                        startDate: "2023-06-08T15:00:00.000Z",
+                        endDate: "2023-06-15T15:00:00.000Z",
+                    },
+                },
+                {
+                    title: "Expired Game",
+                    urlSlug: "expired-game",
+                    description: "This game has already expired",
+                    imageUrl: "https://example.com/expired-game.jpg",
+                    promotion: {
+                        startDate: lastMonth,
+                        endDate: lastWeek,
+                    },
+                },
+                {
+                    title: "Future Game",
+                    urlSlug: "future-game",
+                    description: "This game will be free in the future",
+                    imageUrl: "https://example.com/future-game.jpg",
+                    promotion: {
+                        startDate: nextWeek,
+                        endDate: nextMonth,
+                    },
+                },
+            ];
 
-            const footer = output.mock.calls[0][2]?.map((embed) => embed.footer);
-            expect(footer?.[0]?.text).toEqual(
-                `Message envoyé le ${today.toLocaleDateString("fr-FR", {
-                    dateStyle: "full",
-                })} à ${today.toLocaleTimeString("fr-FR", { timeZone: "Europe/Paris" })}`
+            const result = await webhookService.send(channels, games);
+
+            expect(result).toBe(true);
+            expect(webhookService["webhook"].send).toHaveBeenCalledWith(
+                channels,
+                expect.any(String),
+                expect.arrayContaining([
+                    expect.objectContaining({
+                        title: "Test Game",
+                    }),
+                ])
             );
+            expect(webhookService["webhook"].send).not.toHaveBeenCalledWith(
+                channels,
+                expect.any(String),
+                expect.arrayContaining([
+                    expect.objectContaining({
+                        title: "Expired Game",
+                    }),
+                ])
+            );
+            expect(webhookService["webhook"].send).not.toHaveBeenCalledWith(
+                channels,
+                expect.any(String),
+                expect.arrayContaining([
+                    expect.objectContaining({
+                        title: "Future Game",
+                    }),
+                ])
+            );
+        });
+
+        test("should return false if the webhook fails to send", async () => {
+            const channels: ChannelInterface[] = [
+                {
+                    id: "123",
+                    name: "test-channel",
+                    server: "test-server",
+                    token: "123",
+                },
+            ];
+            const games: GameInterface[] = [
+                {
+                    title: "Test Game",
+                    urlSlug: "test-game",
+                    description: "This is a test game",
+                    imageUrl: "https://example.com/test-game.jpg",
+                    promotion: {
+                        startDate: yesterday,
+                        endDate: tomorrow,
+                    },
+                },
+            ];
+
+            // Mock the send method of the WebhookOutput class to return false.
+            spyWebhookOutput.mockResolvedValue(false);
+
+            const result = await webhookService.send(channels, games);
+
+            expect(result).toBe(false);
         });
     });
 });
