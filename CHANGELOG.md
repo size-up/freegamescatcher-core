@@ -1,3 +1,13 @@
+# [v1.8.3](https://github.com/size-up/freegamescatcher-core/compare/v1.8.2...v1.8.3) (2023-06-11)
+
+## ⚡️ Improve performance
+- [`09dc87c`](https://github.com/size-up/freegamescatcher-core/commit/09dc87c) ️ Enhance how to get the game image URL 
+- [`795facd`](https://github.com/size-up/freegamescatcher-core/commit/795facd) ️ Enhance how to send webhook content and tests 
+
+## 🐛 Bug fixes
+- [`d4076c9`](https://github.com/size-up/freegamescatcher-core/commit/d4076c9)  Don&#x27;t update game cache if games length is 0 
+- [`8f78cbc`](https://github.com/size-up/freegamescatcher-core/commit/8f78cbc)  Clone &#x60;games&#x60; when used by the &#x60;EmailService&#x60;
+
 # [v1.8.2](https://github.com/size-up/freegamescatcher-core/compare/v1.8.1...v1.8.2) (2023-06-11)
 
 # [v1.8.1](https://github.com/size-up/freegamescatcher-core/compare/v1.8.0...v1.8.1) (2023-05-13)
