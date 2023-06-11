@@ -44,13 +44,14 @@ export class EmailService {
      * Method to call for sending notifications emails.
      * @param receivers List of emails.
      * @param subject Email object.
-     * @param datas Datas to compile in template.
+     * @param games Games to compile in template.
      *
      * @author Francisco Fernandez <francisco59553@gmail.com>
      */
-    public async sendEmails(subject: string, receivers: ReceiverInterface[], datas: GameInterface[]): Promise<void> {
+    public async sendEmails(subject: string, receivers: ReceiverInterface[], games: GameInterface[]): Promise<void> {
         try {
-            this.datas = datas;
+            this.datas = structuredClone(games);
+
             const emailList = receivers?.map((receiver) => receiver.email);
             if (emailList) {
                 logger.info("Preparing transporter...");
