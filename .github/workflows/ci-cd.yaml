@@ -97,8 +97,8 @@ jobs:
 
     needs: [build, test-unit]
 
-    # Skip this job if the event is a merge_group or if the actor is dependabot.
-    if: github.event_name != 'merge_group' || github.actor != 'dependabot[bot]'
+    # Skip this job if the event is a merge_group and if the actor is dependabot.
+    if: github.event_name != 'merge_group' && github.actor != 'dependabot[bot]'
 
     steps:
       - name: 📥 Checkout repository
