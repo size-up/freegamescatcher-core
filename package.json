@@ -44,7 +44,7 @@
         "axios": "^1.4.0",
         "cors": "^2.8.5",
         "express": "^4.18.2",
-        "googleapis": "^118.0.0",
+        "googleapis": "^122.0.0",
         "handlebars": "^4.7.7",
         "nodemailer": "^6.9.3",
         "winston": "^3.8.2"
