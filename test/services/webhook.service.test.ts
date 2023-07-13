@@ -135,8 +135,8 @@ describe("WebhookService", () => {
                     description: "This is a test game",
                     imageUrl: "https://example.com/test-game.jpg",
                     promotion: {
-                        startDate: "2023-06-08T15:00:00.000Z",
-                        endDate: "2023-06-15T15:00:00.000Z",
+                        startDate: yesterday,
+                        endDate: tomorrow,
                     },
                 },
                 {
