@@ -142,7 +142,7 @@ jobs:
 
       - name: 🌳 Extract branch name
         id: extract-branch-name
-        uses: size-up/helper/.github/actions/extract-branch-name@main
+        uses: size-up/actions/.github/actions/extract-branch-name@v1
 
       - name: ⚙️ Set up QEMU
         uses: docker/setup-qemu-action@v2
