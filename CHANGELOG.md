@@ -1,3 +1,11 @@
+# [v1.8.5](https://github.com/size-up/freegamescatcher-core/compare/v1.8.4...v1.8.5) (2023-11-22)
+
+## ⚡️ Improve performance
+- [`207b282`](https://github.com/size-up/freegamescatcher-core/commit/207b282) ️ Update Node.js version in CI/CD workflow and Dockerfile 
+
+## 📝 Add or update documentation
+- [`91c53d7`](https://github.com/size-up/freegamescatcher-core/commit/91c53d7)  Update &#x60;Dockerfile&#x60; docs
+
 # [v1.8.4](https://github.com/size-up/freegamescatcher-core/compare/v1.8.3...v1.8.4) (2023-07-13)
 
 # [v1.8.3](https://github.com/size-up/freegamescatcher-core/compare/v1.8.2...v1.8.3) (2023-06-11)
