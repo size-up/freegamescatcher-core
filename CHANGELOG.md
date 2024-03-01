@@ -1,3 +1,5 @@
+# [v1.8.6](https://github.com/size-up/freegamescatcher-core/compare/v1.8.5...v1.8.6) (2024-03-01)
+
 # [v1.8.5](https://github.com/size-up/freegamescatcher-core/compare/v1.8.4...v1.8.5) (2023-11-22)
 
 ## ⚡️ Improve performance
