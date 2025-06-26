@@ -39,11 +39,6 @@ DKIM_PRIVATE_KEY="-----BEGIN RSA PRIVATE KEY-----\n XXX \n-----END RSA PRIVATE K
 # Used to store and retrieve application information
 GOOGLE_USERNAME="XXX@XXX.XXX"
 GOOGLE_PRIVATE_KEY="-----BEGIN PRIVATE KEY-----\n XXX \n-----END PRIVATE KEY-----"
-
-# ELASTIC APM
-# Used to use the Elastic APM service
-ELASTIC_APM_SERVER_URL="https://XXX.XXX.XXX"
-ELASTIC_APM_AGENT_KEY="XXX"
 ```
 
 # Installation
