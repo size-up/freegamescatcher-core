@@ -1,16 +1,5 @@
 const hrstart = process.hrtime(); // Used to calculate the time it takes to run the application
 
-/*
- * APM initialization must be the first thing required in the application.
- */
-import apm from "elastic-apm-node";
-apm.start({
-    serverUrl: process.env.ELASTIC_APM_SERVER_URL,
-    secretToken: process.env.ELASTIC_APM_AGENT_KEY,
-    environment: process.env.NODE_ENV,
-    logLevel: "off",
-});
-
 import { readFileSync } from "fs";
 import { version } from "./config/application.config";
 import { logger } from "./config/logger.config";
@@ -52,9 +41,6 @@ class Application {
 
             "GOOGLE_USERNAME",
             "GOOGLE_PRIVATE_KEY",
-
-            "ELASTIC_APM_SERVER_URL",
-            "ELASTIC_APM_AGENT_KEY",
         ];
 
         const missing: string[] = envs.filter((variable) => {
