@@ -5,6 +5,7 @@ import { logger } from "../../../config/logger.config";
 
 import ForbiddenError from "../errors/forbidden.error";
 import UnauthorizedError from "../errors/unauthorized.error";
+import { httpLogContext } from "./http-log.context";
 
 export default class ErrorMiddleware {
     public static init(http: Express): Express {
@@ -14,18 +15,10 @@ export default class ErrorMiddleware {
          */
         http.use("*", (request: Request, response: Response, next: NextFunction) => {
             const message = `Requested route [${request.baseUrl}] not found.`;
-            const information = {
-                http: {
-                    method: request.method,
-                    url: request.originalUrl,
-                    host: request.hostname,
-                    ip: request.ip,
-                    headers: request.headers,
-                    code: 404,
-                },
-            };
+            const code = 404;
+            const information = httpLogContext(request, code);
 
-            response.status(information.http.code).send({ message });
+            response.status(code).send({ message });
             logger.warn(message, information);
 
             next(); // call next middleware
@@ -36,15 +29,9 @@ export default class ErrorMiddleware {
          */
         http.use((error: Error, request: Request, response: Response, next: NextFunction) => {
             const message = "Server side error. Please contact team support.";
+            const code = 500;
             const information = {
-                http: {
-                    method: request.method,
-                    url: request.originalUrl,
-                    host: request.hostname,
-                    ip: request.ip,
-                    headers: request.headers,
-                    code: 500,
-                },
+                ...httpLogContext(request, code),
                 error: {
                     name: error.name,
                     message: error.message,
@@ -61,7 +48,7 @@ export default class ErrorMiddleware {
                 /**
                  * Handle all other errors.
                  */
-                response.status(information.http.code).send({
+                response.status(code).send({
                     message: message,
                     error: error.message,
                 });

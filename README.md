@@ -39,11 +39,19 @@ DKIM_PRIVATE_KEY="-----BEGIN RSA PRIVATE KEY-----\n XXX \n-----END RSA PRIVATE K
 # Used to store and retrieve application information
 GOOGLE_USERNAME="XXX@XXX.XXX"
 GOOGLE_PRIVATE_KEY="-----BEGIN PRIVATE KEY-----\n XXX \n-----END PRIVATE KEY-----"
+```
 
-# ELASTIC APM
-# Used to use the Elastic APM service
-ELASTIC_APM_SERVER_URL="https://XXX.XXX.XXX"
-ELASTIC_APM_AGENT_KEY="XXX"
+OpenTelemetry auto-instrumentation is optional and configured at runtime. To export telemetry through an OpenTelemetry Collector:
+
+```bash
+OTEL_LOGS_EXPORTER="none"
+OTEL_TRACES_EXPORTER="otlp"
+OTEL_METRICS_EXPORTER="otlp"
+OTEL_EXPORTER_OTLP_PROTOCOL="grpc"
+OTEL_EXPORTER_OTLP_ENDPOINT="http://localhost:4317"
+OTEL_SERVICE_NAME="freegamescatcher-core"
+OTEL_NODE_RESOURCE_DETECTORS="env,host,os"
+NODE_OPTIONS="--require @opentelemetry/auto-instrumentations-node/register"
 ```
 
 # Installation

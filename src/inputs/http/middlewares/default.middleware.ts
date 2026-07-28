@@ -7,6 +7,7 @@ import { api } from "../../../config/security.config";
 
 import ForbiddenError from "../errors/forbidden.error";
 import UnauthorizedError from "../errors/unauthorized.error";
+import { httpLogContext } from "./http-log.context";
 
 export default class DefaultMiddleware {
     public static init(http: Express): Express {
@@ -21,17 +22,7 @@ export default class DefaultMiddleware {
          * Log all API calls.
          */
         http.use((request: Request, response: Response, next: NextFunction) => {
-            const information = {
-                http: {
-                    method: request.method,
-                    url: request.originalUrl,
-                    host: request.hostname,
-                    ip: request.ip,
-                    headers: request.headers,
-                },
-            };
-
-            logger.info("HTTP request received, see http object for details", information);
+            logger.info("HTTP request received, see http object for details", httpLogContext(request));
 
             /**
              * Check body presence in `POST` and `PUT` methods
@@ -63,7 +54,7 @@ export default class DefaultMiddleware {
              * Check if the API key is valid.
              */
             if (request.headers["x-api-key"] && request.headers["x-api-key"] !== api.key) {
-                logger.warn(`Forbidden request: [${request.headers["x-api-key"]}] is not valid`);
+                logger.warn("Forbidden request: invalid [x-api-key] header");
                 throw new ForbiddenError();
             }
 
