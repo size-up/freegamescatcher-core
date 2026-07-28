@@ -1,3 +1,8 @@
+# [v1.8.8](https://github.com/size-up/freegamescatcher-core/compare/v1.8.7...v1.8.8) (2026-07-28)
+
+## ⚡️ Improve performance
+- [`12bbdb5`](https://github.com/size-up/freegamescatcher-core/commit/12bbdb5) ️ Update Dockerfile to use Node.js 20-alpine for application stage
+
 # [v1.8.7](https://github.com/size-up/freegamescatcher-core/compare/v1.8.6...v1.8.7) (2026-07-28)
 
 ## ⚡️ Improve performance
