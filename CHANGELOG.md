@@ -1,3 +1,8 @@
+# [v1.8.9](https://github.com/size-up/freegamescatcher-core/compare/v1.8.8...v1.8.9) (2026-07-28)
+
+## ⚡️ Improve performance
+- [`d37581c`](https://github.com/size-up/freegamescatcher-core/commit/d37581c) ️ Update GitHub Actions to use latest versions of actions
+
 # [v1.8.8](https://github.com/size-up/freegamescatcher-core/compare/v1.8.7...v1.8.8) (2026-07-28)
 
 ## ⚡️ Improve performance
