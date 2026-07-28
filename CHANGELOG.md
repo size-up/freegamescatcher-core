@@ -1,3 +1,11 @@
+# [v1.8.7](https://github.com/size-up/freegamescatcher-core/compare/v1.8.6...v1.8.7) (2026-07-28)
+
+## ⚡️ Improve performance
+- [`2b96ec1`](https://github.com/size-up/freegamescatcher-core/commit/2b96ec1) ️ Migrate from Elastic to SigNoz 
+
+## 🔧 Add or update configuration files
+- [`8fc9388`](https://github.com/size-up/freegamescatcher-core/commit/8fc9388)  Update CI/CD workflow to use Node.js 20.x directly, removing matrix strategy
+
 # [v1.8.6](https://github.com/size-up/freegamescatcher-core/compare/v1.8.5...v1.8.6) (2024-03-01)
 
 # [v1.8.5](https://github.com/size-up/freegamescatcher-core/compare/v1.8.4...v1.8.5) (2023-11-22)
