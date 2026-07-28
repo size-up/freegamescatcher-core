@@ -14,7 +14,7 @@ RUN yarn install --frozen-lockfile
 RUN yarn run build
 
 # Second stage is to run the application
-FROM node:lts-alpine AS application
+FROM node:20-alpine AS application
 
 WORKDIR /app
 
